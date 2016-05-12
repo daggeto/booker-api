@@ -15,6 +15,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'dotenv-rails'
+gem 'unicorn'
+
 group :development, :test do
   gem 'pry-rails', '~> 0.3.4'
   gem 'pry-nav', '~> 0.2.4'
