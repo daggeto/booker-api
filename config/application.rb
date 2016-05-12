@@ -17,5 +17,7 @@ module BookerApi
         resource '*', :headers => :any, :methods => [:get, :put, :delete, :post, :options]
       end
     end
+
+    config.secret_key_base = Rails.application.secrets.secret_key_base
   end
 end

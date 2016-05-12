@@ -7,6 +7,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'json', '~> 1.8.3'
+gem 'rails-api', '~> 0.4.0'
+gem 'active_model_serializers', '0.9.2'
+
+gem 'devise', '~> 3.5.6'
+gem 'simple_token_authentication', '~> 1.0'
 
 gem 'jquery-rails'
 gem 'turbolinks'
