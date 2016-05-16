@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :services, only: [:index, :show, :update] do
-        resources :events, only: [:index, :create, :show, :update, :destroy]
+        scope module: :services do
+          resources :events, only: [:index]
+        end
       end
+
+      resources :events, only: [:create, :show, :update, :destroy]
     end
   end
 end
