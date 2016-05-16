@@ -11,7 +11,7 @@ class Api::V1::ServicesController < ApplicationController
   def show
     service = Service.find(params[:id])
 
-    render json: Api::V1::ServiceSerializer.new(service)
+    render json: Api::V1::ServiceSerializer.new(service), root: false
   end
 
   def update
