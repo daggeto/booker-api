@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518205446) do
+ActiveRecord::Schema.define(version: 20160518212629) do
 
   create_table "events", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(version: 20160518205446) do
     t.datetime "updated_at"
     t.integer  "phone",      limit: 4
     t.string   "address",    limit: 255
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "services", ["user_id"], name: "index_services_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -61,4 +64,5 @@ ActiveRecord::Schema.define(version: 20160518205446) do
 
   add_foreign_key "events", "services"
   add_foreign_key "events", "users"
+  add_foreign_key "services", "users"
 end
