@@ -4,7 +4,6 @@ class Api::V1::Services::ServicePhotosController < ApplicationController
   respond_to :json
 
   def create
-    binding.pry
     service.service_photos.build(image: uploaded_photo)
 
     if service.save
@@ -14,6 +13,11 @@ class Api::V1::Services::ServicePhotosController < ApplicationController
     end
 
     render json: result
+  end
+
+  def destroy
+    binding.pry
+    render json: { success: ServicePhoto.find(params[:id]).destroy }
   end
 
   private

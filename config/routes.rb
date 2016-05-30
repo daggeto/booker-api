@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
 
       resources :events, only: [:create, :show, :update, :destroy]
+      resources :service_photos, only: [:destroy]
     end
   end
 end
