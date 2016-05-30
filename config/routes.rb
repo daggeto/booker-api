@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :services, only: [:index, :show, :update] do
         scope module: :services do
           resources :events, only: [:index]
+          resources :service_photos, only: [:create]
         end
       end
 

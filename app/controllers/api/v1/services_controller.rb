@@ -5,26 +5,42 @@ class Api::V1::ServicesController < ApplicationController
   def index
     services = Service.all
 
-    render json: services, each_serializer: Api::V1::ServiceSerializer
+    render json: services, each_serializer: ServiceSerializer
   end
 
   def show
-    service = Service.find(params[:id])
-
-    render json: Api::V1::ServiceSerializer.new(service), root: false
+    respond_json(service)
   end
 
   def update
-    service = Service.find(params[:id])
-
     success = service.update_attributes(user_update_params)
 
     render json: { success: success }
+  end
+
+  def upload_photo
+    service.service_photos.build(image: uploaded_photo)
+
+    if service.save
+      result =  { success: true }
+    else
+      result = { success: false }
+    end
+
+    render json: result
   end
 
   private
 
   def user_update_params
     params.permit(:name, :duration, :price, :phone, :address)
+  end
+
+  def service
+    @service ||= Service.find(params[:id] || params[:service_id])
+  end
+
+  def uploaded_photo
+    @uploaded_photo ||= params[:file]
   end
 end

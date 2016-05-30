@@ -7,4 +7,10 @@ class ApplicationController < ActionController::API
         serializer_class.send(:new, item)
       end
   end
+
+  def respond_json(value, options = {})
+    default_options = { request: request}
+
+    respond_with value, default_options.merge(options)
+  end
 end

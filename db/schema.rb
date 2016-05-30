@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518212629) do
+ActiveRecord::Schema.define(version: 20160526184310) do
 
   create_table "events", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20160518212629) do
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "service_photos", force: :cascade do |t|
+    t.string   "title",              limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.integer  "service_id",         limit: 4
+  end
+
+  add_index "service_photos", ["service_id"], name: "index_service_photos_on_service_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -64,5 +77,6 @@ ActiveRecord::Schema.define(version: 20160518212629) do
 
   add_foreign_key "events", "services"
   add_foreign_key "events", "users"
+  add_foreign_key "service_photos", "services"
   add_foreign_key "services", "users"
 end
