@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526184310) do
+ActiveRecord::Schema.define(version: 20160608192404) do
 
   create_table "events", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160526184310) do
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
     t.integer  "service_id",         limit: 4
+    t.integer  "slot",               limit: 4,   null: false
   end
 
   add_index "service_photos", ["service_id"], name: "index_service_photos_on_service_id", using: :btree

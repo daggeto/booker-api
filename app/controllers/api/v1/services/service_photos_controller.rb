@@ -4,23 +4,18 @@ class Api::V1::Services::ServicePhotosController < ApplicationController
   respond_to :json
 
   def create
-    service.service_photos.build(image: uploaded_photo)
-
-    if service.save
-      result =  { success: true }
-    else
-      result = { success: false }
-    end
-
-    render json: result
+    render json: { success: ServicePhoto::Add.for(service, uploaded_photo) }
   end
 
-  def destroy
-    binding.pry
-    render json: { success: ServicePhoto.find(params[:id]).destroy }
+  def update
+    render json: { success: ServicePhoto::Replace.for(service, photo, uploaded_photo) }
   end
 
   private
+
+  def photo
+    @photo ||= ServicePhoto.find(params[:id])
+  end
 
   def service
     @service ||= Service.find(params[:service_id])

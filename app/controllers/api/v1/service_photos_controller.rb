@@ -4,7 +4,7 @@ class Api::V1::ServicePhotosController < ApplicationController
   respond_to :json
 
   def destroy
-    render json: { success: service_photo.destroy }
+    render json: { success: ServicePhoto::Destroy.for(service_photo, recalculate_slots: true) }
   end
 
   private

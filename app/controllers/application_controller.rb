@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   end
 
   def respond_json(value, options = {})
-    default_options = { request: request}
+    default_options = { request: request }
 
     respond_with value, default_options.merge(options)
   end
