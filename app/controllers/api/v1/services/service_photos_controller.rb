@@ -3,12 +3,22 @@ class Api::V1::Services::ServicePhotosController < ApplicationController
 
   respond_to :json
 
+  def index
+    render json: service.service_photos.order_by_slot,
+           each_serializer: ServicePhotoSerializer,
+           request: request
+  end
+
   def create
-    render json: { success: ServicePhoto::Add.for(service, uploaded_photo) }
+    new_photo = ServicePhoto::Add.for(service, uploaded_photo)
+
+    render json: new_photo, request: request
   end
 
   def update
-    render json: { success: ServicePhoto::Replace.for(service, photo, uploaded_photo) }
+    new_photo = ServicePhoto::Replace.for(service, photo, uploaded_photo)
+
+    render json: new_photo, request: request
   end
 
   private

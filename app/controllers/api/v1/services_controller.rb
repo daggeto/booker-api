@@ -2,14 +2,17 @@ class Api::V1::ServicesController < ApplicationController
   acts_as_token_authentication_handler_for User
 
   respond_to :json
+
   def index
     services = Service.all
 
-    render json: services, each_serializer: ServiceSerializer
+    render json: services,
+           each_serializer: ServiceSerializer,
+           request: request
   end
 
   def show
-    respond_json(service)
+    render json: service, request: request
   end
 
   def update

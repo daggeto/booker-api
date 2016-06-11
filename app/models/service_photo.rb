@@ -5,5 +5,7 @@ class ServicePhoto < ActiveRecord::Base
   validates_attachment_file_name :image, matches: [/jpe?g\Z/]
   validates_attachment_size :image, in: 0..5.megabyte
 
+  scope :order_by_slot, -> { order(:slot) }
+
   belongs_to :service
 end

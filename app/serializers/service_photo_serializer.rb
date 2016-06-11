@@ -8,8 +8,10 @@ class ServicePhotoSerializer < ActiveModel::Serializer
   private
 
   def url_prefix
-    request = @instance_options[:request]
-
     "#{request.protocol}#{request.host}:#{request.port}"
+  end
+
+  def request
+    @request_param ||= @instance_options[:request]
   end
 end

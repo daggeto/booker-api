@@ -4,6 +4,6 @@ class ServiceSerializer < ActiveModel::Serializer
   has_many :service_photos
 
   def service_photos
-    object.service_photos.order(:slot)
+    object.service_photos.order_by_slot
   end
 end
