@@ -1,5 +1,13 @@
 class ServicePhoto < ActiveRecord::Base
-  has_attached_file :image, styles: { preview: ['254x254#', :png] }
+  PHOTO_WIDTH = 350
+  PHOTO_HEIGHT = 450
+
+  has_attached_file :image,
+                    styles: {
+                      preview: ["#{PHOTO_WIDTH}x#{PHOTO_HEIGHT}#", :png],
+                    },
+                    url: "/images/:hash.:extension",
+                    hash_secret: "Wr793OkTRlyFjUXXzA6y"
 
   validates_attachment_content_type :image, content_type: ['image/jpeg']
   validates_attachment_file_name :image, matches: [/jpe?g\Z/]

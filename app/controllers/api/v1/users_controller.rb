@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
 
   def show
-    render json: Api::V1::UserSerializer.new(user), root: false
+    render json: user
   end
 
   def toggle_provider_settings
@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
       User::DisableService.new(user).run
     end
 
-    render json: { success: true, user: Api::V1::UserSerializer.new(user.reload)}, root: false
+    render json: user
   end
 
   private

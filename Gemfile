@@ -10,6 +10,7 @@ gem 'json', '~> 1.8.3'
 gem 'rails-api', '~> 0.4.0'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'paperclip', '~> 4.3'
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'devise', '~> 3.5.6'
 gem 'simple_token_authentication', '~> 1.0'
@@ -27,6 +28,9 @@ gem 'unicorn'
 group :development, :test do
   gem 'pry-rails', '~> 0.3.4'
   gem 'pry-nav', '~> 0.2.4'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'faker', '~> 1.4.3'
+  gem 'rspec-rails', '~> 3.4'
 end
 
 group :development do
