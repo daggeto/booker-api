@@ -8,7 +8,7 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def show
-    render json: Api::V1::EventSerializer.new(event), root: false
+    render json: event
   end
 
   def update
@@ -18,7 +18,23 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def destroy
-    render json: { success: Event.find(params[:id]).destroy }
+    render json: { success: Event::Delete.for(event) }
+  end
+
+  def book
+    code = Event::ValidateBooking.for(event, current_user)
+
+    Event::Book.for(event, current_user) if code == 0
+
+    render json: { response_code: code, service: event.service.to_dto }
+  end
+
+  def approve
+    render json: { success: Event::Approve.for(event), event: event.reload }
+  end
+
+  def disapprove
+    render json: { success: Event::Disapprove.for(event), event: event.reload}
   end
 
   private
@@ -28,6 +44,6 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def event
-    @event ||= Event.find(params[:id])
+    @event ||= Event.find(params[:id] || params[:event_id])
   end
 end

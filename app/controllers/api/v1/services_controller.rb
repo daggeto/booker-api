@@ -4,9 +4,11 @@ class Api::V1::ServicesController < ApplicationController
   respond_to :json
 
   def index
+    serialized = serialize_all(services(paginate_params), ServiceSerializer)
+
     render json:
              {
-               services: serialize_all(services(paginate_params), ServiceSerializer),
+               services: ServicePersonalizer.for_all(serialized.as_json),
                more: any_more?
              },
            each_serializer: ServiceSerializer

@@ -11,9 +11,13 @@ class Api::V1::Services::EventsController < ApplicationController
 
   def find_events
     Event
-      .where(service_id: params[:service_id])
+      .where(events_query_params)
       .where('start_at >= ? AND end_at <= ?', start_at, end_at)
       .order(:start_at)
+  end
+
+  def events_query_params
+    params.permit(:service_id, status: [])
   end
 
   def start_at
