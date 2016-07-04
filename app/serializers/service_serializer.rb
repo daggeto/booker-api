@@ -1,5 +1,5 @@
 class ServiceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :duration, :price, :phone, :address, :main_photo
+  attributes :id, :name, :duration, :price, :phone, :address, :main_photo, :published
 
   has_many :service_photos
 

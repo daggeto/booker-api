@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608192404) do
+ActiveRecord::Schema.define(version: 20160704094524) do
 
   create_table "events", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -43,14 +43,15 @@ ActiveRecord::Schema.define(version: 20160608192404) do
   add_index "service_photos", ["service_id"], name: "index_service_photos_on_service_id", using: :btree
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.integer  "duration",   limit: 4,   null: false
-    t.integer  "price",      limit: 4,   null: false
+    t.string   "name",       limit: 255,                 null: false
+    t.integer  "duration",   limit: 4,                   null: false
+    t.integer  "price",      limit: 4,                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "phone",      limit: 4
     t.string   "address",    limit: 255
     t.integer  "user_id",    limit: 4
+    t.boolean  "published",              default: false, null: false
   end
 
   add_index "services", ["user_id"], name: "index_services_on_user_id", using: :btree

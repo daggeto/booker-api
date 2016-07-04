@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         post :toggle_provider_settings
       end
 
-      resources :services, only: [:index, :show, :update] do
+      resources :services, only: [:index, :create, :show, :update] do
         scope module: :services do
           resources :events, only: [:index]
           resources :service_photos, only: [:index, :create, :update]

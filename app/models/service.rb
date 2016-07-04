@@ -6,6 +6,7 @@ class Service < ActiveRecord::Base
   has_many :service_photos
   has_many :events
 
+  scope :published, -> { where(published: true) }
 
   def to_dto
     serialized = ServiceSerializer.new(self).as_json

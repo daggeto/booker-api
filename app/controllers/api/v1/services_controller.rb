@@ -14,6 +14,12 @@ class Api::V1::ServicesController < ApplicationController
            each_serializer: ServiceSerializer
   end
 
+  def create
+    Service::Create.for(current_user)
+
+    render json: current_user.service.to_dto
+  end
+
   def show
     render json: service
   end
@@ -40,6 +46,7 @@ class Api::V1::ServicesController < ApplicationController
 
   def services(paginate_params)
     Service
+      .published
       .where.not(user: current_user)
       .order(updated_at: :desc)
       .paginate(paginate_params)
@@ -54,7 +61,7 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def update_params
-    params.permit(:name, :duration, :price, :phone, :address)
+    params.permit(:name, :duration, :price, :phone, :address, :published)
   end
 
   def service
