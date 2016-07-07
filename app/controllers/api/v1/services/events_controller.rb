@@ -1,8 +1,4 @@
-class Api::V1::Services::EventsController < ApplicationController
-  acts_as_token_authentication_handler_for User
-
-  respond_to :json
-
+class Api::V1::Services::EventsController < Api::V1::BaseController
   def index
     render json: find_events, root: false
   end

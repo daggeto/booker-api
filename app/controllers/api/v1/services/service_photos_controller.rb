@@ -1,8 +1,4 @@
-class Api::V1::Services::ServicePhotosController < ApplicationController
-  acts_as_token_authentication_handler_for User
-
-  respond_to :json
-
+class Api::V1::Services::ServicePhotosController < Api::V1::BaseController
   def index
     render json: service.service_photos.order_by_slot,
            each_serializer: ServicePhotoSerializer
@@ -18,6 +14,17 @@ class Api::V1::Services::ServicePhotosController < ApplicationController
     new_photo = ServicePhoto::Replace.for(service, photo, uploaded_photo)
 
     render json: new_photo
+  end
+
+  def update_auth_header
+    return unless @resource and @resource.valid? and @client_id
+
+    @client_id = nil unless @used_auth_by_token
+
+    @resource.with_lock do
+      @resource.extend_batch_buffer(@token, @client_id)
+    end # end lock
+
   end
 
   private

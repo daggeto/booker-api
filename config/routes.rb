@@ -1,18 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users,
-             controllers:
-               {
-                 sessions: 'api/v1/user/sessions',
-                 registrations: 'api/v1/user/registrations',
-                 passwords: 'api/v1/user/passwords'
-               }
-
+  mount_devise_token_auth_for 'User', at: 'user', controllers: {
+    sessions: 'overrides/sessions'
+  }
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:show] do
-        post :toggle_provider_settings
-      end
+      resources :users, only: [:show]
 
       resources :services, only: [:index, :create, :show, :update] do
         scope module: :services do

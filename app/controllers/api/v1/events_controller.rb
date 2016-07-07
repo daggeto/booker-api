@@ -1,8 +1,4 @@
-class Api::V1::EventsController < ApplicationController
-  acts_as_token_authentication_handler_for User
-
-  respond_to :json
-
+class Api::V1::EventsController < Api::V1::BaseController
   def create
     render json: { success: Event.create(events_params) }
   end

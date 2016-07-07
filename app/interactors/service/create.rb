@@ -17,8 +17,6 @@ class Service::Create
     return if user.service
 
     create_service
-
-    user.update_attributes(provider: true)
   end
 
   private

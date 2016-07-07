@@ -1,8 +1,4 @@
-class Api::V1::ServicesController < ApplicationController
-  acts_as_token_authentication_handler_for User
-
-  respond_to :json
-
+class Api::V1::ServicesController < Api::V1::BaseController
   def index
     serialized = serialize_all(services(paginate_params), ServiceSerializer)
 

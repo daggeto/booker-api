@@ -1,8 +1,4 @@
-class Api::V1::ServicePhotosController < ApplicationController
-  acts_as_token_authentication_handler_for User
-
-  respond_to :json
-
+class Api::V1::ServicePhotosController < Api::V1::BaseController
   def destroy
     render json: { success: ServicePhoto::Destroy.for(service_photo, recalculate_slots: true) }
   end

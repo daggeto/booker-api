@@ -12,8 +12,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'paperclip', '~> 4.3'
 gem 'will_paginate', '~> 3.1.0'
 
-gem 'devise', '~> 4.0.0'
-gem 'simple_token_authentication', '~> 1.13'
+gem 'devise_token_auth'
 
 gem 'jquery-rails'
 gem 'turbolinks'
