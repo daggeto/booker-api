@@ -12,14 +12,8 @@ class Event::Disapprove
   def run
     event.status = Event::Status::FREE
 
-    unassign
+    event.user = nil
 
     event.save
-  end
-
-  private
-
-  def unassign
-    event.user = nil
   end
 end
