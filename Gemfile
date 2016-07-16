@@ -8,11 +8,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'json', '~> 1.8.3'
 gem 'rails-api', '~> 0.4.0'
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model_serializers', '~> 0.10.2'
 gem 'paperclip', '~> 4.3'
 gem 'will_paginate', '~> 3.1.0'
 
-gem 'devise_token_auth'
+gem 'devise_token_auth', '~> 0.1.38'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -27,9 +27,11 @@ gem 'unicorn'
 group :development, :test do
   gem 'pry-rails', '~> 0.3.4'
   gem 'pry-nav', '~> 0.2.4'
+  gem 'pry-stack_explorer'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'faker', '~> 1.4.3'
   gem 'rspec-rails', '~> 3.4'
+  gem 'rspec-has', '~> 0.1.1'
 end
 
 group :development do

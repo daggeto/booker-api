@@ -1,8 +1,4 @@
 class ApplicationController < ActionController::API
-  include DeviseTokenAuth::Concerns::SetUserByToken
-  include ActionController::RequestForgeryProtection
-  include ActionController::Serialization
-
   before_filter :add_allow_credentials_headers
   skip_before_filter :verify_authenticity_token
   before_filter :cors_preflight_check
