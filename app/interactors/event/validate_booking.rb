@@ -15,6 +15,8 @@ class Event::ValidateBooking
 
     return Event::BookStatus::USER_EVENTS_OVERLAP if user_overlap_events.any?
 
+    return Event::BookStatus::SERVICE_EVENTS_OVERLAP if find_service_overlap_events.any?
+
     Event::BookStatus::SUCCESS
   end
 
@@ -28,7 +30,9 @@ class Event::ValidateBooking
     user.events.in_range(event.start_at, event.end_at)
   end
 
-  def any_service_events_overlap?
+  def find_service_overlap_events
+    return [] unless user.service
 
+    user.service.events.in_range(event.start_at, event.end_at)
   end
 end
