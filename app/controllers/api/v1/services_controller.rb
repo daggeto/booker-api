@@ -1,4 +1,6 @@
 class Api::V1::ServicesController < Api::V1::BaseController
+  before_action :check_service_owner, only: [:update]
+
   def index
     serialized = serialize_all(services(paginate_params), ServiceSerializer)
 
@@ -26,18 +28,6 @@ class Api::V1::ServicesController < Api::V1::BaseController
     render json: { success: success }
   end
 
-  def upload_photo
-    service.service_photos.build(image: uploaded_photo)
-
-    if service.save
-      result =  { success: true }
-    else
-      result = { success: false }
-    end
-
-    render json: result
-  end
-
   private
 
   def services(paginate_params)
@@ -62,9 +52,5 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def service
     @service ||= Service.find(params[:id] || params[:service_id])
-  end
-
-  def uploaded_photo
-    @uploaded_photo ||= params[:file]
   end
 end

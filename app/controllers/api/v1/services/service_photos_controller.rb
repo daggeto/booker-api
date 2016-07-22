@@ -1,4 +1,6 @@
 class Api::V1::Services::ServicePhotosController < Api::V1::BaseController
+  before_action :check_service_owner, only: [:create, :update]
+
   def index
     render json: service.service_photos.order_by_slot,
            each_serializer: ServicePhotoSerializer
@@ -16,6 +18,7 @@ class Api::V1::Services::ServicePhotosController < Api::V1::BaseController
     render json: new_photo
   end
 
+  # Need for file uploading
   def update_auth_header
     return unless @resource and @resource.valid? and @client_id
 
@@ -24,7 +27,6 @@ class Api::V1::Services::ServicePhotosController < Api::V1::BaseController
     @resource.with_lock do
       @resource.extend_batch_buffer(@token, @client_id)
     end # end lock
-
   end
 
   private
