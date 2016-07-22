@@ -19,7 +19,9 @@ Rails.application.routes.draw do
         post :approve
         post :disapprove
       end
+
       resources :service_photos, only: [:destroy]
+      resource :device, only: [:create, :destroy]
     end
   end
 end

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704094524) do
+ActiveRecord::Schema.define(version: 20160714194529) do
+
+  create_table "devices", force: :cascade do |t|
+    t.string  "token",     limit: 255
+    t.string  "platform",  limit: 255
+    t.string  "client_id", limit: 255
+    t.integer "user_id",   limit: 4
+  end
+
+  add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -85,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160704094524) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "devices", "users"
   add_foreign_key "events", "services"
   add_foreign_key "events", "users"
   add_foreign_key "service_photos", "services"

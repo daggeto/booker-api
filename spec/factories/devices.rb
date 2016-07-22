@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :device do
-    token 'MyString'
-    platform 'MyString'
+    token { Faker::Lorem.characters(10) }
+    platform 'ios'
   end
-
 end
