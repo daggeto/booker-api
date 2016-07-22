@@ -1,11 +1,11 @@
 module Overrides
   class SessionsController < DeviseTokenAuth::SessionsController
-    def new
-      super
-    end
+    before_action :destroy_device, only: [:destroy]
 
-    def create
-      super
+    private
+
+    def destroy_device
+      current_user.devices.where(client_id: @client_id).destroy_all
     end
   end
 end
