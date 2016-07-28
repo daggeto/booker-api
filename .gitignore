@@ -17,5 +17,5 @@
 /tmp
 /shared
 /public
-.env
-.env.local
+/.env
+/.env.local
