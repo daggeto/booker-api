@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'user', controllers: {
     sessions: 'overrides/sessions'
@@ -28,5 +30,13 @@ Rails.application.routes.draw do
       resources :service_photos, only: [:destroy]
       resource :device, only: [:create, :destroy]
     end
+  end
+
+  namespace :admin do
+    Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+      username == SIDEKIQ_USERNAME && password == SIDEKIQ_PASSWORD
+    end
+
+    mount Sidekiq::Web => '/sidekiq'
   end
 end
