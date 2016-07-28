@@ -16,6 +16,14 @@ class Api::V1::BaseController < ApplicationController
     raise Exceptions::AccessDenied if event.service.try(:user) != current_user
   end
 
+  def check_event_booker
+    raise Exceptions::AccessDenied if event.try(:user) != current_user
+  end
+
+  def check_owner
+    raise Exceptions::AccessDenied if user != current_user
+  end
+
   def current_user
     super
   end

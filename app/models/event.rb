@@ -23,6 +23,10 @@ class Event < ActiveRecord::Base
     where('start_at <= ? AND end_at >= ?', query_end_at, query_start_at)
   }
 
+  scope :after, lambda { |current_date|
+    where('start_at > ?', current_date)
+  }
+
   scope :free, -> { where(status: Event::Status::FREE) }
 
   def pending?

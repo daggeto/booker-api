@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:show]
+      resources :users, only: [:show] do
+        scope module: :users do
+          resources :events, only: [:index]
+        end
+      end
 
       resources :services, only: [:index, :create, :show, :update] do
         scope module: :services do
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
         post :book
         post :approve
         post :disapprove
+        post :cancel
       end
 
       resources :service_photos, only: [:destroy]

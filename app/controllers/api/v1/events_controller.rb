@@ -1,6 +1,7 @@
 class Api::V1::EventsController < Api::V1::BaseController
   before_action :check_service_owner, only: [:create]
-  before_action :check_event_owner, only: [:update, :destroy, :book, :approve, :disapprove]
+  before_action :check_event_owner, only: [:update, :destroy, :approve, :disapprove]
+  before_action :check_event_booker, only: [:cancel]
 
   def create
     render json: { success: Event.create(events_params) }
@@ -34,6 +35,10 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def disapprove
     render json: { success: Event::Disapprove.for(event), event: event.reload}
+  end
+
+  def cancel
+    render json: { success: Event::Cancel.for(event) }
   end
 
   private
