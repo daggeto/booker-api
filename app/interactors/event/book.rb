@@ -15,6 +15,10 @@ class Event::Book
 
     event.user = user
 
-    event.save
+    notify_provider if event.save
+  end
+
+  def notify_provider
+    Notifications::ConfirmEventBooking.for(user, event)
   end
 end

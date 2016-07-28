@@ -1,17 +1,15 @@
 class Event::Approve
-  attr_reader :event
+  include Interactor::Initializer
 
-  def self.for(event)
-    new(event).run
-  end
-
-  def initialize(event)
-    @event = event
-  end
+  initialize_with :event
 
   def run
     event.status = Event::Status::BOOKED
 
-    event.save
+    notify_user if event.save
+  end
+
+  def notify_user
+    Notifications::EventBookingConfirmed.for(event)
   end
 end

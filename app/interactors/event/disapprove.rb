@@ -1,19 +1,18 @@
 class Event::Disapprove
-  attr_reader :event
+  include Interactor::Initializer
 
-  def self.for(event)
-    new(event).run
-  end
-
-  def initialize(event)
-    @event = event
-  end
+  initialize_with :event
 
   def run
-    event.status = Event::Status::FREE
+    notify_user
 
+    event.status = Event::Status::FREE
     event.user = nil
 
     event.save
+  end
+
+  def notify_user
+    Notifications::EventBookingUnconfirmed.for(event)
   end
 end
