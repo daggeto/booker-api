@@ -1,6 +1,6 @@
 module Notifications::Sender
   def run
-    Notifications::Send.for(receivers, notification_params) if send?
+    Notifications::Send.for([receiver], notification_params) if send?
   end
 
   private
@@ -9,7 +9,7 @@ module Notifications::Sender
     true
   end
 
-  def receivers
+  def receiver
     raise StandardError, '#receivers should be implemented'
   end
 

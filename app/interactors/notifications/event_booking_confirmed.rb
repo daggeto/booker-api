@@ -6,8 +6,8 @@ class Notifications::EventBookingConfirmed
 
   private
 
-  def receivers
-    [event.user]
+  def receiver
+    event.user
   end
 
   def notification_params

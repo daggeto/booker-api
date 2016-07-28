@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_one :service
+
   has_many :events
+  has_many :devices
 
   # def valid_token?(token, client_id='default')
   #   super

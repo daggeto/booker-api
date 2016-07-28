@@ -7,7 +7,7 @@ describe Notifications::ConfirmEventBooking do
     subject { described_class.for(client, event) }
 
     it_behaves_like 'notification sender' do
-      let(:receivers) { [provider] }
+      let(:receiver) { provider }
       let(:notification_params) do
         hash_including(
           title: match('You have booking'),

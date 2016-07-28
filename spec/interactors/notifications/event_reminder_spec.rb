@@ -1,4 +1,4 @@
-describe Notifications::EventBookingUnconfirmed do
+describe Notifications::EventReminder do
   describe '.for' do
     let(:client) { create(:user) }
     let(:service) { create(:service) }
@@ -10,11 +10,10 @@ describe Notifications::EventBookingUnconfirmed do
       let(:receiver) { client }
       let(:notification_params) do
         hash_including(
-          title: event.service.name,
-          message: match('are not confirmed')
+          title: service.name,
+          message: include('You have reservation')
         )
       end
     end
   end
 end
-

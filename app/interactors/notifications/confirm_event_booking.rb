@@ -24,7 +24,7 @@ class Notifications::ConfirmEventBooking
     event.start_at.strftime('%B %d %H:%M')
   end
 
-  def receivers
-    @receivers ||= [event.service.user]
+  def receiver
+    event.service.user
   end
 end

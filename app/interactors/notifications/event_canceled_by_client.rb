@@ -1,19 +1,19 @@
-class Notifications::EventBookingUnconfirmed
+class Notifications::EventCanceledByClient
   include Interactor::Initializer
   include Notifications::Sender
 
-  initialize_with :event
+  initialize_with :user, :event
 
   private
 
   def receiver
-    event.user
+    event.service.user
   end
 
   def notification_params
     {
-      title: event.service.name,
-      message: "Your booking at #{booking_at} are not confirmed"
+      title: 'Event canceled',
+      message: "#{user.email} canceled registration at #{booking_at}"
     }
   end
 
