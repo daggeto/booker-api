@@ -23,6 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'sidekiq', '~> 4.1.4'
+gem 'sidekiq-cron', '~> 0.4.2'
 gem 'sinatra', '~> 1.4.7'
 gem 'dotenv-rails'
 gem 'unicorn'
