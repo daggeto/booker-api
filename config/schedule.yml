@@ -1,0 +1,4 @@
+event_reminder:
+  cron: '* * * * *'
+  class: EventReminder
+
