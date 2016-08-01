@@ -46,19 +46,4 @@ describe Api::V1::EventsController do
       it_behaves_like 'forbidden response'
     end
   end
-
-  describe '#cancel' do
-    let(:user) { create(:user) }
-    let(:event) { create(:event, user: user) }
-
-    subject { post :cancel, event_id: event.id }
-
-    before { allow(Event::Cancel).to receive(:for) }
-
-    it 'cancels event' do
-      expect(Event::Cancel).to receive(:for).with(event)
-
-      subject
-    end
-  end
 end

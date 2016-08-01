@@ -19,6 +19,7 @@ describe Api::V1::ReservationsController do
   end
 
   describe '#approve' do
+    let(:user) { reservation.event.service.user }
     let(:reservation) { create(:reservation) }
 
     subject { post :approve, reservation_id: reservation.id }
@@ -33,6 +34,7 @@ describe Api::V1::ReservationsController do
   end
 
   describe '#disapprove' do
+    let(:user) { reservation.event.service.user }
     let(:reservation) { create(:reservation) }
 
     subject { post :disapprove, reservation_id: reservation.id }
@@ -47,13 +49,14 @@ describe Api::V1::ReservationsController do
   end
 
   describe '#cancel' do
+    let(:user) { reservation.user }
     let(:reservation) { create(:reservation) }
 
     subject { post :cancel, reservation_id: reservation.id }
 
     before { allow(Reservation::Cancel).to receive(:for) }
 
-    it 'disapproves reservation' do
+    it 'cancel reservation' do
       expect(Reservation::Cancel).to receive(:for).with(reservation)
 
       subject

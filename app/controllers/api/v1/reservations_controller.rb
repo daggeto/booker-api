@@ -1,4 +1,7 @@
 class Api::V1::ReservationsController < Api::V1::BaseController
+  before_action :check_event_owner, only: [:approve, :disapprove]
+  before_action :check_reservation_owner, only: [:cancel]
+
   def create
     code = Event::ValidateBooking.for(event, current_user)
 
@@ -28,6 +31,14 @@ class Api::V1::ReservationsController < Api::V1::BaseController
   end
 
   private
+
+  def check_reservation_owner
+    raise Exceptions::AccessDenied if reservation.user != current_user
+  end
+
+  def check_event_owner
+    raise Exceptions::AccessDenied if reservation.event.service.user != current_user
+  end
 
   def event
     @event ||= Event.find(params[:event_id])
