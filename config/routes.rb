@@ -20,12 +20,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :events, only: [:create, :show, :update, :destroy] do
-        post :book
-        post :approve
-        post :disapprove
-        post :cancel
-      end
+      resources :events, only: [:create, :show, :update, :destroy]
 
       resources :reservations, only: [:create] do
         post :approve
