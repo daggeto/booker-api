@@ -1,13 +1,14 @@
-class Notifications::EventBookingUnconfirmed
+class Notifications::ReservationUnconfirmed
   include Interactor::Initializer
   include Notifications::Sender
+  include ReservationHelper
 
-  initialize_with :event
+  initialize_with :reservation
 
   private
 
   def receiver
-    event.user
+    reservation.user
   end
 
   def notification_params
@@ -15,9 +16,5 @@ class Notifications::EventBookingUnconfirmed
       title: event.service.name,
       message: "Your booking at #{booking_at} are not confirmed"
     }
-  end
-
-  def booking_at
-    event.start_at.strftime('%B %d %H:%M')
   end
 end

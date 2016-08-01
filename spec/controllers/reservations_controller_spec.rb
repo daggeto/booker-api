@@ -31,4 +31,18 @@ describe Api::V1::ReservationsController do
       subject
     end
   end
+
+  describe '#disapprove' do
+    let(:reservation) { create(:reservation) }
+
+    subject { post :disapprove, reservation_id: reservation.id }
+
+    before { allow(Reservation::Disapprove).to receive(:for) }
+
+    it 'disapproves reservation' do
+      expect(Reservation::Disapprove).to receive(:for).with(reservation)
+
+      subject
+    end
+  end
 end
