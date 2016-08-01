@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :reservations, only: [:create] do
         post :approve
         post :disapprove
+        post :cancel
       end
 
       resources :service_photos, only: [:destroy]

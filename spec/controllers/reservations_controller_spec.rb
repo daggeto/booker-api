@@ -45,4 +45,18 @@ describe Api::V1::ReservationsController do
       subject
     end
   end
+
+  describe '#cancel' do
+    let(:reservation) { create(:reservation) }
+
+    subject { post :cancel, reservation_id: reservation.id }
+
+    before { allow(Reservation::Cancel).to receive(:for) }
+
+    it 'disapproves reservation' do
+      expect(Reservation::Cancel).to receive(:for).with(reservation)
+
+      subject
+    end
+  end
 end
