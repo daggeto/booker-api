@@ -5,5 +5,7 @@ FactoryGirl.define do
     price { [0, Faker::Number.decimal(2)].sample }
     phone { Faker::PhoneNumber.cell_phone }
     address { Faker::Address.street_address }
+
+    user
   end
 end

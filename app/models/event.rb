@@ -19,6 +19,8 @@ class Event < ActiveRecord::Base
   belongs_to :service
   belongs_to :user
 
+  has_one :reservation
+
   scope :in_range, lambda { |query_start_at, query_end_at|
     where('start_at <= ? AND end_at >= ?', query_end_at, query_start_at)
   }

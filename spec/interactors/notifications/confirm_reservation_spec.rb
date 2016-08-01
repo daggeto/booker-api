@@ -1,10 +1,10 @@
-describe Notifications::ConfirmEventBooking do
+describe Notifications::ConfirmReservation do
   describe '.for' do
-    let(:client) { create(:user) }
-    let(:provider) { create(:user, :with_service) }
-    let(:event) { create(:event, service: provider.service, start_at: 1.hour.since) }
+    let(:reservation) { create(:reservation) }
+    let(:provider) { reservation.event.service.user }
+    let(:client) { reservation.user }
 
-    subject { described_class.for(client, event) }
+    subject { described_class.for(reservation) }
 
     it_behaves_like 'notification sender' do
       let(:receiver) { provider }

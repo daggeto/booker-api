@@ -1,15 +1,16 @@
-class Notifications::ConfirmEventBooking
+class Notifications::ConfirmReservation
   include Interactor::Initializer
   include Notifications::Sender
+  include ReservationHelper
 
-  initialize_with :client, :event
+  initialize_with :reservation
 
   private
 
   def notification_params
     {
       title: 'You have booking',
-      message: "#{client.email} want to book you service at #{booking_at}",
+      message: "#{reservation.user.email} want to book you service at #{booking_at}",
       payload: {
         state: 'service.calendar',
         stateParams: {
@@ -20,11 +21,7 @@ class Notifications::ConfirmEventBooking
     }
   end
 
-  def booking_at
-    event.start_at.strftime('%B %d %H:%M')
-  end
-
   def receiver
-    event.service.user
+    service.user
   end
 end
