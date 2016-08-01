@@ -17,4 +17,18 @@ describe Api::V1::ReservationsController do
       subject
     end
   end
+
+  describe '#approve' do
+    let(:reservation) { create(:reservation) }
+
+    subject { post :approve, reservation_id: reservation.id }
+
+    before { allow(Reservation::Approve).to receive(:for) }
+
+    it 'approves reservation' do
+      expect(Reservation::Approve).to receive(:for).with(reservation)
+
+      subject
+    end
+  end
 end

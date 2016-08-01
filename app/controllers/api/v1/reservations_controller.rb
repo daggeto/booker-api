@@ -7,9 +7,21 @@ class Api::V1::ReservationsController < Api::V1::BaseController
     render json: { response_code: code, service: event.service.to_dto }
   end
 
+  def approve
+    render json:
+             {
+               success: Reservation::Approve.for(reservation),
+               reservation: reservation.reload
+             }
+  end
+
   private
 
   def event
     @event ||= Event.find(params[:event_id])
+  end
+
+  def reservation
+    @reservation ||= Reservation.find(params[:reservation_id])
   end
 end

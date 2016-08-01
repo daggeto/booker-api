@@ -10,6 +10,6 @@ class Event::Approve
   end
 
   def notify_user
-    Notifications::EventBookingConfirmed.for(event)
+    Notifications::ReservationConfirmed.for(event)
   end
 end

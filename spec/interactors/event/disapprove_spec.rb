@@ -8,7 +8,7 @@ describe Event::Disapprove do
 
     before { allow(Notifications::EventBookingUnconfirmed).to receive(:for) }
 
-    it_behaves_like 'status changer' do
+    it_behaves_like 'event status changer' do
       let(:status) { Event::Status::FREE }
     end
 

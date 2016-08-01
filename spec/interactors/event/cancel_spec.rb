@@ -7,7 +7,7 @@ describe Event::Cancel do
 
     before { allow(Notifications::EventCanceledByClient).to receive(:for) }
 
-    it_behaves_like 'status changer' do
+    it_behaves_like 'event status changer' do
       let(:status) { Event::Status::FREE }
     end
 
