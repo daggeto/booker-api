@@ -7,7 +7,7 @@ class Api::V1::ReservationsController < Api::V1::BaseController
 
     Reservation::Create.for(event, current_user) if code == 0
 
-    render json: { response_code: code, service: event.service.to_dto }
+    render json: { response_code: code, service: event.service }
   end
 
   def approve
