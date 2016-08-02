@@ -1,4 +1,4 @@
-class Event::ValidateBooking
+class Event::ValidateReservation
   attr_reader :event, :user
 
   def self.for(event, user)

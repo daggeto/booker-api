@@ -1,4 +1,4 @@
-describe Event::ValidateBooking do
+describe Event::ValidateReservation do
   let(:start_at) { 30.minutes.since }
   let(:end_at) { start_at + 1.hour }
   let(:status) { Event::Status::FREE }

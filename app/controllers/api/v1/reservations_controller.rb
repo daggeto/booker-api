@@ -3,7 +3,7 @@ class Api::V1::ReservationsController < Api::V1::BaseController
   before_action :check_reservation_owner, only: [:cancel]
 
   def create
-    code = Event::ValidateBooking.for(event, current_user)
+    code = Event::ValidateReservation.for(event, current_user)
 
     Reservation::Create.for(event, current_user) if code == 0
 
