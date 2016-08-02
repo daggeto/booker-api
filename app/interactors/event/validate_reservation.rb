@@ -1,36 +1,28 @@
 class Event::ValidateReservation
-  attr_reader :event, :user
+  include Interactor::Initializer
 
-  def self.for(event, user)
-    new(event, user).run
-  end
-
-  def initialize(event, user)
-    @event = event
-    @user = user
-  end
+  initialize_with :event, :user
 
   def run
-    return Event::BookStatus::CANT_BOOK unless event.free?
+    return Reservation::Status::CANT_BOOK unless event.free?
 
-    return Event::BookStatus::USER_EVENTS_OVERLAP if user_overlap_events.any?
+    return Reservation::Status::RESERVED_OVERLAPS if find_user_reservations.any?
 
-    return Event::BookStatus::SERVICE_EVENTS_OVERLAP if find_service_overlap_events.any?
+    return Reservation::Status::OWNED_OVERLAPS if find_service_events.any?
 
-    Event::BookStatus::SUCCESS
+    Reservation::Status::SUCCESS
   end
 
   private
 
-  def user_overlap_events
-    @user_overlap_events ||= find_user_overlap_events
+  def find_user_reservations
+    Event
+      .in_range(event.start_at, event.end_at)
+      .joins(:reservation)
+      .where(reservations: { user_id: user.id })
   end
 
-  def find_user_overlap_events
-    user.events.in_range(event.start_at, event.end_at)
-  end
-
-  def find_service_overlap_events
+  def find_service_events
     return [] unless user.service
 
     user.service.events.in_range(event.start_at, event.end_at)

@@ -9,13 +9,6 @@ class Event < ActiveRecord::Base
     ALL = [FREE, PENDING, BOOKED]
   end
 
-  module BookStatus
-    SUCCESS = 0
-    CANT_BOOK = 1
-    USER_EVENTS_OVERLAP = 2
-    SERVICE_EVENTS_OVERLAP = 3
-  end
-
   belongs_to :service
 
   has_one :reservation, dependent: :destroy
