@@ -12,9 +12,7 @@ class ReservationReminder
   private
 
   def find_reservations
-    binding.pry
     Reservation
-      .active
       .joins(:event)
       .where(events: { status: Event::Status::BOOKED })
       .where(events: { start_at: REMINDER_THRESHOLD.since })

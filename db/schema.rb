@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802063657) do
+ActiveRecord::Schema.define(version: 20160802195004) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -36,15 +36,12 @@ ActiveRecord::Schema.define(version: 20160802063657) do
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
 
   create_table "reservations", force: :cascade do |t|
-    t.integer  "event_id",       limit: 4
-    t.integer  "user_id",        limit: 4
+    t.integer  "event_id",    limit: 4
+    t.integer  "user_id",     limit: 4
     t.datetime "approved_at"
-    t.datetime "disapproved_at"
-    t.datetime "canceled_at"
-    t.datetime "deleted_at"
     t.datetime "reminded_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "reservations", ["event_id"], name: "index_reservations_on_event_id", using: :btree

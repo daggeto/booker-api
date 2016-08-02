@@ -11,7 +11,7 @@ describe Reservation::Disapprove do
       let(:status) { Event::Status::FREE }
     end
 
-    it { has.to change { reservation.canceled_at } }
+    it { has.to change(Reservation, :count).by(1) }
 
     it 'sends notification' do
       expect(Notifications::ReservationUnconfirmed).to receive(:for).with(reservation)

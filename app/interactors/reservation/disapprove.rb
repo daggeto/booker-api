@@ -6,7 +6,7 @@ class Reservation::Disapprove
   def run
     update_event
 
-    reservation.touch(:canceled_at)
+    reservation.destroy
 
     notify_user
   end
