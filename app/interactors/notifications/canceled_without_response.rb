@@ -1,21 +1,18 @@
 class Notifications::CanceledWithoutResponse
   include Interactor::Initializer
   include Notifications::Sender
+  include ReservationHelper
 
-  initialize_with :event
+  initialize_with :reservation
 
   def receiver
-    event.user
+    reservation.user
   end
 
   def notification_params
     {
-      title: event.service.name,
+      title: service.name,
       message: "Booking at #{booking_at} canceled due to no response"
     }
-  end
-
-  def booking_at
-    event.start_at.strftime('%B %d %H:%M')
   end
 end
