@@ -17,7 +17,6 @@ class Event < ActiveRecord::Base
   end
 
   belongs_to :service
-  belongs_to :user
 
   has_one :reservation, dependent: :destroy
 

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_one :service
 
-  has_many :events
+  has_many :reservations
   has_many :devices
 
   # def valid_token?(token, client_id='default')

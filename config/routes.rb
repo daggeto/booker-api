@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:show] do
         scope module: :users do
-          resources :events, only: [:index]
+          resources :reservations, only: [:index]
         end
       end
 

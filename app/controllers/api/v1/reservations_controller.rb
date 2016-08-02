@@ -32,10 +32,6 @@ class Api::V1::ReservationsController < Api::V1::BaseController
 
   private
 
-  def check_reservation_owner
-    raise Exceptions::AccessDenied if reservation.user != current_user
-  end
-
   def check_event_owner
     raise Exceptions::AccessDenied if reservation.event.service.user != current_user
   end
