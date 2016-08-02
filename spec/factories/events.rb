@@ -7,13 +7,10 @@ FactoryGirl.define do
     service
 
     trait :booked do
-      user
-      reservation
       status { Event::Status::BOOKED }
     end
 
     trait :pending do
-      reservation
       status { Event::Status::PENDING }
     end
   end

@@ -1,15 +1,17 @@
 class Event::Delete
-  attr_reader :event
+  include Interactor::Initializer
 
-  def self.for(event)
-    new(event).run
-  end
-
-  def initialize(event)
-    @event = event
-  end
+  initialize_with :event
 
   def run
     event.destroy
+
+    notify_user unless event.free?
+  end
+
+  private
+
+  def notify_user
+    Notifications::ReservationCanceledByService.for(event.reservation)
   end
 end
