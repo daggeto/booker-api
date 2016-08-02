@@ -9,7 +9,10 @@ describe Api::V1::ReservationsController do
 
     subject { post :create, params }
 
-    before { allow(Reservation::Create).to receive(:for) }
+    before do
+      allow(Reservation::Create).to receive(:for)
+      allow(Event::ValidateReservation).to receive(:for).and_return(0)
+    end
 
     it 'creates reservation' do
       expect(Reservation::Create).to receive(:for).with(event, user)

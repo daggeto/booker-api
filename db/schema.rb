@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731121315) do
+ActiveRecord::Schema.define(version: 20160802063657) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 20160731121315) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer  "service_id",  limit: 4
-    t.integer  "user_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "event_id",       limit: 4
@@ -111,7 +109,6 @@ ActiveRecord::Schema.define(version: 20160731121315) do
 
   add_foreign_key "devices", "users"
   add_foreign_key "events", "services"
-  add_foreign_key "events", "users"
   add_foreign_key "reservations", "events"
   add_foreign_key "reservations", "users"
   add_foreign_key "service_photos", "services"
