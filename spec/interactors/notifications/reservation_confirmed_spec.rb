@@ -1,6 +1,6 @@
 describe Notifications::ReservationConfirmed do
   describe '.for' do
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
 
     subject { described_class.for(reservation) }
 

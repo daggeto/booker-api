@@ -1,4 +1,4 @@
-class EventReminder
+class ReservationReminder
   include Sidekiq::Worker
 
   REMINDER_THRESHOLD = 2.hours

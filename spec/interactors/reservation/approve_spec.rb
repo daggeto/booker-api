@@ -1,6 +1,6 @@
 describe Reservation::Approve do
   describe '.for' do
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
     let(:event) { reservation.event }
 
     subject { described_class.for(reservation) }

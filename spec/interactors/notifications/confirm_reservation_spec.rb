@@ -1,6 +1,6 @@
 describe Notifications::ConfirmReservation do
   describe '.for' do
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
     let(:provider) { reservation.event.service.user }
     let(:client) { reservation.user }
 

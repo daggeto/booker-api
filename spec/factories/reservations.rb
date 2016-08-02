@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :reservation do
-    event
-    user
+    factory :full_reservation do
+      event
+      user
+    end
   end
 end

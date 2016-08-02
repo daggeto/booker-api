@@ -23,7 +23,7 @@ describe Api::V1::ReservationsController do
 
   describe '#approve' do
     let(:user) { reservation.event.service.user }
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
 
     subject { post :approve, reservation_id: reservation.id }
 
@@ -38,7 +38,7 @@ describe Api::V1::ReservationsController do
 
   describe '#disapprove' do
     let(:user) { reservation.event.service.user }
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
 
     subject { post :disapprove, reservation_id: reservation.id }
 
@@ -53,7 +53,7 @@ describe Api::V1::ReservationsController do
 
   describe '#cancel' do
     let(:user) { reservation.user }
-    let(:reservation) { create(:reservation) }
+    let(:reservation) { create(:full_reservation) }
 
     subject { post :cancel, reservation_id: reservation.id }
 

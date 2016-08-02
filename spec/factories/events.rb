@@ -8,10 +8,12 @@ FactoryGirl.define do
 
     trait :booked do
       status { Event::Status::BOOKED }
+      reservation
     end
 
     trait :pending do
       status { Event::Status::PENDING }
+      reservation
     end
   end
 end

@@ -1,5 +1,5 @@
 describe Notifications::CanceledWithoutResponse do
-  let(:reservation) { create(:reservation) }
+  let(:reservation) { create(:full_reservation) }
 
   subject { described_class.for(reservation) }
 

@@ -1,5 +1,5 @@
 RSpec.describe ReservationSerializer do
-  let(:reservation) { create(:reservation) }
+  let(:reservation) { create(:full_reservation) }
 
   subject(:serialized) { described_class.new(reservation) }
 

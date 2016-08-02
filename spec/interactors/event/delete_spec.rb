@@ -21,14 +21,13 @@ describe Event::Delete do
     end
 
     context 'when event is booked' do
-      let(:reservation) { create(:reservation, event: event) }
       let!(:event) { create(:event, :booked) }
 
       it_behaves_like 'event destroyer'
 
       it 'reminds about cancellation' do
         expect(Notifications::ReservationCanceledByService)
-          .to receive(:for).with(reservation)
+          .to receive(:for).with(event.reservation)
 
         subject
       end
