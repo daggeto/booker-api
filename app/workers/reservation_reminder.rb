@@ -4,17 +4,19 @@ class ReservationReminder
   REMINDER_THRESHOLD = 2.hours
 
   def perform(*)
-    find_events.find_each do |event|
-      Event::Remind.for(event)
+    find_reservations.find_each do |reservation|
+      Reservation::Remind.for(reservation)
     end
   end
 
   private
 
-  def find_events
-    Event
-      .where.not(user: nil)
-      .where(status: Event::Status::BOOKED)
-      .where(start_at: REMINDER_THRESHOLD.since)
+  def find_reservations
+    binding.pry
+    Reservation
+      .active
+      .joins(:event)
+      .where(events: { status: Event::Status::BOOKED })
+      .where(events: { start_at: REMINDER_THRESHOLD.since })
   end
 end

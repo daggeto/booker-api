@@ -6,6 +6,10 @@ FactoryGirl.define do
 
     service
 
+    trait :free do
+      status { Event::Status::FREE }
+    end
+
     trait :booked do
       status { Event::Status::BOOKED }
       reservation

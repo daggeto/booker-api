@@ -8,4 +8,12 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :user
+
+  scope :active, lambda {
+    where(canceled_at: nil)
+  }
+
+  scope :not_reminded, lambda {
+    where(reminded_at: nil)
+  }
 end
