@@ -1,4 +1,4 @@
-event_reminder:
+reservation_reminder:
   cron: '* * * * *'
   class: ReservationReminder
 
