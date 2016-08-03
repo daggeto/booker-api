@@ -19,11 +19,7 @@ class Api::V1::ReservationsController < Api::V1::BaseController
   end
 
   def disapprove
-    render json:
-             {
-               success: Reservation::Disapprove.for(reservation),
-               reservation: reservation.reload
-             }
+    render json: { success: Reservation::Disapprove.for(reservation) }
   end
 
   def cancel
