@@ -1,13 +1,8 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :label, :description, :status, :start_at, :end_at, :past
+  attributes :id, :description, :status, :start_at, :end_at, :past
 
   has_one :service
-
-  def label
-    return object.user.email  if object.user
-
-    object.description
-  end
+  has_one :reservation
 
   def past
     object.start_at < Time.zone.now

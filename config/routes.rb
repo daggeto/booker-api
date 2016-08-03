@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:show] do
         scope module: :users do
-          resources :events, only: [:index]
+          resources :reservations, only: [:index]
         end
       end
 
@@ -20,8 +20,9 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :events, only: [:create, :show, :update, :destroy] do
-        post :book
+      resources :events, only: [:create, :show, :update, :destroy]
+
+      resources :reservations, only: [:create] do
         post :approve
         post :disapprove
         post :cancel

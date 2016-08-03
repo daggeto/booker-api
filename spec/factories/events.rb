@@ -4,9 +4,20 @@ FactoryGirl.define do
     status { Event::Status::FREE }
     start_at { Time.now + 1.hour }
 
+    service
+
+    trait :free do
+      status { Event::Status::FREE }
+    end
+
     trait :booked do
-      user
       status { Event::Status::BOOKED }
+      reservation
+    end
+
+    trait :pending do
+      status { Event::Status::PENDING }
+      reservation
     end
   end
 end

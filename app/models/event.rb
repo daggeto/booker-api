@@ -9,15 +9,9 @@ class Event < ActiveRecord::Base
     ALL = [FREE, PENDING, BOOKED]
   end
 
-  module BookStatus
-    SUCCESS = 0
-    CANT_BOOK = 1
-    USER_EVENTS_OVERLAP = 2
-    SERVICE_EVENTS_OVERLAP = 3
-  end
-
   belongs_to :service
-  belongs_to :user
+
+  has_one :reservation, dependent: :destroy
 
   scope :in_range, lambda { |query_start_at, query_end_at|
     where('start_at <= ? AND end_at >= ?', query_end_at, query_start_at)

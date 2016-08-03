@@ -1,4 +1,4 @@
-class Notifications::CanceledWithoutResponse
+class Notifications::ReservationCanceledByService
   include Interactor::Initializer
   include Notifications::Sender
   include ReservationHelper
@@ -11,8 +11,8 @@ class Notifications::CanceledWithoutResponse
 
   def notification_params
     {
-      title: service.name,
-      message: "Booking at #{booking_at} canceled due to no response"
+      title: 'Reservation canceled',
+      message: "#{reservation.event.service.name} canceled your registration at #{booking_at}"
     }
   end
 end

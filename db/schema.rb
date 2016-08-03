@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714194529) do
+ActiveRecord::Schema.define(version: 20160802195004) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -28,14 +28,24 @@ ActiveRecord::Schema.define(version: 20160714194529) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer  "service_id",  limit: 4
-    t.integer  "user_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "event_id",    limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "approved_at"
+    t.datetime "reminded_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "reservations", ["event_id"], name: "index_reservations_on_event_id", using: :btree
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "service_photos", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -96,7 +106,8 @@ ActiveRecord::Schema.define(version: 20160714194529) do
 
   add_foreign_key "devices", "users"
   add_foreign_key "events", "services"
-  add_foreign_key "events", "users"
+  add_foreign_key "reservations", "events"
+  add_foreign_key "reservations", "users"
   add_foreign_key "service_photos", "services"
   add_foreign_key "services", "users"
 end

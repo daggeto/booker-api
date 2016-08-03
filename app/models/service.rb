@@ -5,6 +5,7 @@ class Service < ActiveRecord::Base
 
   has_many :service_photos
   has_many :events
+  has_many :reservations
 
   scope :published, -> { where(published: true) }
 

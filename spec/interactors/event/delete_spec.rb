@@ -1,11 +1,36 @@
 describe Event::Delete do
-  let!(:event) { create(:event) }
+  describe '.for' do
+    subject { described_class.for(event) }
 
-  subject(:interactor) { described_class.new(event) }
+    shared_examples 'event destroyer' do
+      it { has.to change(Event, :count).to(0) }
+    end
 
-  describe '#run' do
-    subject { interactor.run }
+    before { allow(Notifications::ReservationCanceledByService).to receive(:for) }
 
-    it { has.to change(Event, :count).to(0) }
+    context 'when event is free' do
+      let!(:event) { create(:event) }
+
+      it_behaves_like 'event destroyer'
+
+      it 'dont reminds about cancellation' do
+        expect(Notifications::ReservationCanceledByService).not_to receive(:for)
+
+        subject
+      end
+    end
+
+    context 'when event is booked' do
+      let!(:event) { create(:event, :booked) }
+
+      it_behaves_like 'event destroyer'
+
+      it 'reminds about cancellation' do
+        expect(Notifications::ReservationCanceledByService)
+          .to receive(:for).with(event.reservation)
+
+        subject
+      end
+    end
   end
 end

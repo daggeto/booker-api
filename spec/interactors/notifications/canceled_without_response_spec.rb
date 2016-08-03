@@ -1,15 +1,13 @@
 describe Notifications::CanceledWithoutResponse do
-  let(:user) { create(:user) }
-  let(:service) { create(:service) }
-  let(:event) { create(:event, user: user, service: service, start_at: 1.hour.since) }
+  let(:reservation) { create(:full_reservation) }
 
-  subject { described_class.for(event) }
+  subject { described_class.for(reservation) }
 
   it_behaves_like 'notification sender' do
-    let(:receiver) { user }
+    let(:receiver) { reservation.user }
     let(:notification_params) do
       hash_including(
-        title: service.name,
+        title: reservation.event.service.name,
         message: match('canceled')
       )
     end
