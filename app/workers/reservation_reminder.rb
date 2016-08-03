@@ -5,6 +5,7 @@ class ReservationReminder
 
   def perform(*)
     find_reservations.find_each do |reservation|
+      puts 'Reservatoin job'
       Reservation::Remind.for(reservation)
     end
   end
