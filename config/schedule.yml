@@ -1,4 +1,4 @@
 event_reminder:
   cron: '* * * * *'
-  class: EventReminder
+  class: ReservationReminder
 
