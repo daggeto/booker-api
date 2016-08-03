@@ -20,8 +20,10 @@ class Notifications::Send
     req['Authorization'] = "Bearer #{IONIC_API_KEY}"
 
     req.body = request_params.to_json
+    resp = https.request(req)
+    Rails.logger.debug(resp.body.as_json)
 
-    https.request(req)
+    resp
   end
 
   def request_params

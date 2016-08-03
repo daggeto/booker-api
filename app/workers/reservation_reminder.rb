@@ -5,7 +5,6 @@ class ReservationReminder
 
   def perform(*)
     find_reservations.find_each do |reservation|
-      puts 'Reservatoin job'
       Reservation::Remind.for(reservation)
     end
   end
@@ -16,6 +15,6 @@ class ReservationReminder
     Reservation
       .joins(:event)
       .where(events: { status: Event::Status::BOOKED })
-      .where(events: { start_at: REMINDER_THRESHOLD.since })
+      .where(events: { start_at: REMINDER_THRESHOLD.since.beginning_of_minute })
   end
 end

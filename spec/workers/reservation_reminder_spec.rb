@@ -1,7 +1,6 @@
 describe ReservationReminder do
   let(:user) { create(:user) }
-  let(:current_date) { Time.now }
-
+  let(:current_date) { Time.now.beginning_of_minute }
 
   let!(:future_pending_event) { create(:event, :pending, start_at: current_date + 3.hours) }
   let!(:past_booked_event) { create(:event, :booked, start_at: current_date - 1.minute) }
