@@ -6,10 +6,13 @@ describe ReservationReminder do
   let!(:past_booked_event) { create(:event, :booked, start_at: current_date - 1.minute) }
   let!(:future_free_event) { create(:event, :free, start_at: current_date + 1.hours) }
   let!(:remindable_free_event) do
-    create(:event, :free, start_at: current_date + ReservationReminder::REMINDER_THRESHOLD)
+    create(:event, :free, start_at: current_date + ReservationReminder::REMINDERS.first)
   end
-  let!(:correct_event) do
-    create(:event, :booked, start_at: current_date + ReservationReminder::REMINDER_THRESHOLD)
+  let!(:correct_event_1) do
+    create(:event, :booked, start_at: current_date + ReservationReminder::REMINDERS.first)
+  end
+  let!(:correct_event_2) do
+    create(:event, :booked, start_at: current_date + ReservationReminder::REMINDERS.last)
   end
 
   subject { described_class.new.perform }
@@ -20,7 +23,7 @@ describe ReservationReminder do
   end
 
   it 'sends event reminders' do
-    expect(Reservation::Remind).to receive(:for).once
+    expect(Reservation::Remind).to receive(:for).twice
 
     subject
   end

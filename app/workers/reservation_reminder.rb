@@ -1,20 +1,26 @@
 class ReservationReminder
   include Sidekiq::Worker
 
-  REMINDER_THRESHOLD = 2.hours
+  REMINDERS = [2.hours, 30.minutes]
 
   def perform(*)
-    find_reservations.find_each do |reservation|
-      Reservation::Remind.for(reservation)
+    REMINDERS.each do |time|
+      remind(time)
     end
   end
 
   private
 
-  def find_reservations
+  def remind(time)
+    reservations(time).find_each do |reservation|
+      Reservation::Remind.for(reservation)
+    end
+  end
+
+  def reservations(time)
     Reservation
       .joins(:event)
       .where(events: { status: Event::Status::BOOKED })
-      .where(events: { start_at: REMINDER_THRESHOLD.since.beginning_of_minute })
+      .where(events: { start_at: time.since.beginning_of_minute })
   end
 end
