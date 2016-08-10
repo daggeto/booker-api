@@ -1,4 +1,6 @@
 reservation_reminder:
   cron: '* * * * *'
   class: ReservationReminder
-
+peding_reservation_canceller:
+  cron: '* * * * *'
+  class: Canceller
