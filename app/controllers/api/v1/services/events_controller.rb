@@ -3,10 +3,22 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
     render json: find_events, root: false
   end
 
+  def future
+    render json: future_events
+  end
+
   private
 
   def find_events
     Event
+      .where(events_query_params)
+      .where('start_at >= ? AND end_at <= ?', start_at, end_at)
+      .order(:start_at)
+  end
+
+  def future_events
+    Event
+      .after(Time.zone.now)
       .where(events_query_params)
       .where('start_at >= ? AND end_at <= ?', start_at, end_at)
       .order(:start_at)

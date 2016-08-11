@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
       resources :services, only: [:index, :create, :show, :update] do
         scope module: :services do
-          resources :events, only: [:index]
+          resources :events, only: [:index] do
+            collection do
+              get :future
+            end
+          end
           resources :service_photos, only: [:index, :create, :update]
         end
       end
