@@ -1,4 +1,6 @@
 class Api::V1::Services::EventsController < Api::V1::BaseController
+  before_action :check_service_owner, only: [:index]
+
   def index
     render json: find_events, root: false
   end
@@ -34,5 +36,9 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
 
   def end_at
     start_at + 1.day
+  end
+
+  def service
+    @service ||= Service.find(params[:service_id])
   end
 end
