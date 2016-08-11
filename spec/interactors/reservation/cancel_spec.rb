@@ -15,9 +15,8 @@ describe Reservation::Cancel do
 
     it 'sends notification' do
       expect(Notifications::ReservationCanceledByClient).to receive(:for).with(reservation)
-binding.pry
+
       subject
-      binding.pry
     end
   end
 end
