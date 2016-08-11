@@ -9,7 +9,8 @@ describe Notifications::ReservationReminder do
       let(:notification_params) do
         hash_including(
           title: reservation.event.service.name,
-          message: include('You have reservation')
+          message: include('You have reservation'),
+          payload: hash_including(state: AppStates::App::Main::RESERVATIONS)
         )
       end
     end

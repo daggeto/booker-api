@@ -15,13 +15,7 @@ class Notifications::ReservationConfirmed
     {
       title: event.service.name,
       message: "Booking confirmed. You are welcome at #{booking_at}",
-      payload: {
-        state: 'service.calendar',
-        stateParams: {
-          id: event.service.id,
-          selectedDate: event.start_at
-        }
-      }
+      payload: { state: AppStates::App::Main::RESERVATIONS }
     }
   end
 end
