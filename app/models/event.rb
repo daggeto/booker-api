@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
     PENDING = 'pending'
     BOOKED = 'booked'
 
+    VISIBLE = [FREE, PENDING]
+
     ALL = [FREE, PENDING, BOOKED]
   end
 
@@ -21,6 +23,7 @@ class Event < ActiveRecord::Base
     where('start_at > ?', current_date)
   }
 
+  scope :visible, -> { where(status: Status::VISIBLE) }
   scope :free, -> { where(status: Event::Status::FREE) }
 
   def pending?

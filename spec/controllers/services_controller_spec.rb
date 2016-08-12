@@ -27,4 +27,24 @@ describe Api::V1::ServicesController do
       end
     end
   end
+
+  describe '#publish' do
+    let(:check_result) { { valid: true } }
+    let(:service) { create(:service, user: user) }
+
+    subject { post :publish, service_id: service.id }
+
+    before do
+      allow(Service::CheckPublication).to receive(:for).with(service).and_return(check_result)
+      allow(Service::Publish).to receive(:for)
+    end
+
+    it_behaves_like 'success response'
+
+    context 'when conflict occurs' do
+      let(:check_result) { { valid: false } }
+
+      it_behaves_like 'conflict response'
+    end
+  end
 end

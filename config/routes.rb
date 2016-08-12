@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       end
 
       resources :services, only: [:index, :create, :show, :update] do
+        post :publish
+        post :unpublish
+
         scope module: :services do
           resources :events, only: [:index] do
             collection do

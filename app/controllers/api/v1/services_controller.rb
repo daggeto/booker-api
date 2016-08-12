@@ -1,5 +1,5 @@
 class Api::V1::ServicesController < Api::V1::BaseController
-  before_action :check_service_owner, only: [:update]
+  before_action :check_service_owner, only: [:update, :publish, :unpublish]
 
   def index
     serialized = serialize_all(services(paginate_params), ServiceSerializer)
@@ -28,6 +28,16 @@ class Api::V1::ServicesController < Api::V1::BaseController
     render json: { success: success }
   end
 
+  def publish
+    check_result = Service::CheckPublication.for(service)
+
+    return render_conflict(errors: check_result[:errors]) unless check_result[:valid]
+
+    Service::Publish.for(service)
+
+    render_success(service: service)
+  end
+
   private
 
   def services(paginate_params)
@@ -52,6 +62,8 @@ class Api::V1::ServicesController < Api::V1::BaseController
   def update_params
     params.permit(:name, :duration, :price, :phone, :address, :published)
   end
+
+
 
   def service
     @service ||= Service.find(params[:id] || params[:service_id])

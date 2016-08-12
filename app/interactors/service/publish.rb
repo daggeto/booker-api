@@ -1,13 +1,7 @@
 class Service::Publish
-  attr_reader :service
+  include Interactor::Initializer
 
-  def self.for(service)
-    new(service).run
-  end
-
-  def initialize(service)
-    @service = service
-  end
+  initialize_with :service
 
   def run
     service.update_attributes(published: true)
