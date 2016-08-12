@@ -41,10 +41,32 @@ describe Api::V1::ServicesController do
 
     it_behaves_like 'success response'
 
+    it 'publishes service' do
+      expect(Service::Publish).to receive(:for)
+
+      subject
+    end
+
     context 'when conflict occurs' do
       let(:check_result) { { valid: false } }
 
       it_behaves_like 'conflict response'
+    end
+  end
+
+  describe '#unpublish' do
+    let(:service) { create(:service, user: user) }
+
+    subject { post :unpublish, service_id: service.id }
+
+    before { allow(Service::Unpublish).to receive(:for) }
+
+    it_behaves_like 'success response'
+
+    it 'unpublishes service' do
+      expect(Service::Unpublish).to receive(:for)
+
+      subject
     end
   end
 end

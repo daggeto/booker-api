@@ -23,6 +23,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   def update
+    binding.pry
     success = service.update_attributes(update_params)
 
     render json: { success: success }
@@ -31,11 +32,15 @@ class Api::V1::ServicesController < Api::V1::BaseController
   def publish
     check_result = Service::CheckPublication.for(service)
 
-    return render_conflict(errors: check_result[:errors]) unless check_result[:valid]
+    return publish_error_response(check_result) unless check_result[:valid]
 
     Service::Publish.for(service)
 
     render_success(service: service)
+  end
+
+  def unpublish
+    Service::Unpublish.for(service)
   end
 
   private
@@ -60,10 +65,12 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   def update_params
-    params.permit(:name, :duration, :price, :phone, :address, :published)
+    params.permit(:name, :duration, :price, :phone, :address)
   end
 
-
+  def publish_error_response(check_result)
+    render_conflict(service: service, errors: check_result[:errors])
+  end
 
   def service
     @service ||= Service.find(params[:id] || params[:service_id])
