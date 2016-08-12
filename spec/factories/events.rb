@@ -5,7 +5,9 @@ FactoryGirl.define do
     start_at { Time.now + 1.hour }
     end_at { start_at + 1.hour }
 
-    service
+    trait :with_service do
+      service
+    end
 
     trait :tomorrow do
       start_at { Time.now + 1.day }

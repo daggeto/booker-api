@@ -1,6 +1,6 @@
 describe Reservation::Create do
   describe '.for' do
-    let(:event) { create(:event) }
+    let(:event) { create(:event, :with_service) }
     let(:user) { create(:user) }
 
     subject { described_class.for(event, user) }
