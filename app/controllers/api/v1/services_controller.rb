@@ -31,11 +31,14 @@ class Api::V1::ServicesController < Api::V1::BaseController
   private
 
   def services(paginate_params)
-    Service
-      .published
-      .where.not(user: current_user)
-      .order(updated_at: :desc)
-      .paginate(paginate_params)
+    search = ServicesSearch.new(
+      published: true,
+      with_future_events: true,
+      events_status: [Event::Status::FREE, Event::Status::PENDING],
+      without_user: current_user
+    )
+
+    search.results.order(updated_at: :desc).paginate(paginate_params)
   end
 
   def any_more?
