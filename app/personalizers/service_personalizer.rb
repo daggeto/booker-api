@@ -1,14 +1,4 @@
-class ServicePersonalizer
-  def self.for_all(services)
-    services.each do |service|
-      self.for(service)
-    end
-  end
-
-  def self.for(service)
-    new(service).personalize
-  end
-
+class ServicePersonalizer < Personalizer
   attr_reader :service
 
   def initialize(service)

@@ -9,8 +9,8 @@ RSpec.describe Api::V1::Users::ReservationsController do
     let(:start_at) { Time.now + 1.minute }
 
     let(:old_event) { create(:event, start_at: start_at - 1.hour) }
-    let(:today_event) { create(:event, start_at: start_at) }
-    let(:tomorrow_event) { create(:event, start_at: start_at + 1.day) }
+    let(:today_event) { create(:event, :with_service, start_at: start_at) }
+    let(:tomorrow_event) { create(:event, :with_service, start_at: start_at + 1.day) }
 
     let!(:old_reservation) { create(:reservation, user: user, event: old_event) }
     let!(:today_reservation) { create(:reservation, user: user , event: today_event) }
