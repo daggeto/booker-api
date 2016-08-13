@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
     ALL = [FREE, PENDING, BOOKED]
   end
 
+  VISIBLE_FROM_TIME = 15.minutes
+
   belongs_to :service
 
   has_one :reservation, dependent: :destroy

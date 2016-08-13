@@ -20,7 +20,7 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
 
   def future_events
     Event
-      .after(Time.zone.now)
+      .after(Event::VISIBLE_FROM_TIME.since)
       .where(events_query_params)
       .where('start_at >= ? AND end_at <= ?', start_at, end_at)
       .order(:start_at)

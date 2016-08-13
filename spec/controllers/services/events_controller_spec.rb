@@ -27,7 +27,7 @@ describe Api::V1::Services::EventsController do
 
   describe '#future' do
     let(:user) { create(:user) }
-    let(:start_at) { Time.zone.now + 10.minutes }
+    let(:start_at) { Event::VISIBLE_FROM_TIME.since + 1.minute }
     let(:event) do
       create(:event, :with_service, start_at: start_at, end_at: start_at + 10.minutes)
     end

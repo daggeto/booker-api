@@ -24,9 +24,9 @@ class ServicePersonalizer
   private
 
   def nearest_event
-    service_model.events
+    @nearest_event ||= service_model.events
       .free
-      .where('start_at > ?', Time.zone.now)
+      .where('start_at > ?', Event::VISIBLE_FROM_TIME.since)
       .order(:start_at).first
   end
 
