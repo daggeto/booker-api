@@ -3,11 +3,13 @@ class Api::V1::ReservationsController < Api::V1::BaseController
   before_action :check_reservation_owner, only: [:cancel]
 
   def create
-    code = Event::ValidateReservation.for(event, current_user)
+    result = Reservation::Validate.for(event, current_user)
 
-    Reservation::Create.for(event, current_user) if code == 0
+    return render_conflict(message: result[:message], service: event.service) unless result[:valid]
 
-    render json: { response_code: code, service: event.service }
+    Reservation::Create.for(event, current_user) if result[:valid]
+
+    render_success(message: result[:message], service: event.service)
   end
 
   def approve

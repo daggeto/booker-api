@@ -11,7 +11,7 @@ describe Api::V1::ReservationsController do
 
     before do
       allow(Reservation::Create).to receive(:for)
-      allow(Event::ValidateReservation).to receive(:for).and_return(0)
+      allow(Reservation::Validate).to receive(:for).and_return(valid: true, message: 'OK')
     end
 
     it 'creates reservation' do
