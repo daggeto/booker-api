@@ -23,7 +23,6 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   def update
-    binding.pry
     success = service.update_attributes(update_params)
 
     render json: { success: success }
