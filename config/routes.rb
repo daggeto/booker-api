@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       resources :users, only: [:show] do
         scope module: :users do
           resources :reservations, only: [:index]
+          collection do
+            resource :profile_image, only: [:create, :update]
+          end
         end
       end
 

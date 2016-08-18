@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_one :service
+  has_one :profile_image
 
   has_many :reservations
   has_many :devices

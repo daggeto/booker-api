@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802195004) do
+ActiveRecord::Schema.define(version: 20160817170244) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20160802195004) do
 
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
+
+  create_table "profile_images", force: :cascade do |t|
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id",            limit: 4
+  end
+
+  add_index "profile_images", ["user_id"], name: "index_profile_images_on_user_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "event_id",    limit: 4
@@ -106,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160802195004) do
 
   add_foreign_key "devices", "users"
   add_foreign_key "events", "services"
+  add_foreign_key "profile_images", "users"
   add_foreign_key "reservations", "events"
   add_foreign_key "reservations", "users"
   add_foreign_key "service_photos", "services"
