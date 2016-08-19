@@ -2,7 +2,9 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
   before_action :check_service_owner, only: [:index]
 
   def index
-    render json: find_events, root: false
+    events = serialize_all(find_events, EventSerializer).as_json
+
+    render json: EventPersonalizer.for_all(events), root: false
   end
 
   def future
