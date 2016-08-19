@@ -5,6 +5,6 @@ describe ReservationPersonalizer do
   subject { described_class.for(reservation_dto) }
 
   it 'personalizes reservation' do
-    expect(subject).to include(:service_photo_url)
+    expect(subject).to include(:service_photo_url, :event)
   end
 end

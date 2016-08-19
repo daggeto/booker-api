@@ -7,6 +7,7 @@ class ReservationPersonalizer < Personalizer
 
   def personalize
     reservation[:service_photo_url] = service_dto[:main_photo].preview_url
+    reservation[:event] = personlized_event
 
     reservation
   end
@@ -14,10 +15,18 @@ class ReservationPersonalizer < Personalizer
   private
 
   def service_dto
-    ServiceSerializer.new(event.service).as_json
+    service = Service.find(event_dto[:service_id])
+
+    @service_dto ||= ServiceSerializer.new(service).as_json
   end
 
-  def event
-    @event ||= Event.find(reservation[:event][:id])
+  def event_dto
+    event = Event.find(reservation[:event_id])
+
+    @event_dto ||= EventSerializer.new(event).as_json
+  end
+
+  def personlized_event
+    @personlized_event ||= EventPersonalizer.for(event_dto)
   end
 end

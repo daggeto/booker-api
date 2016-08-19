@@ -1,5 +1,5 @@
 class ReservationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :event_id
 
   has_one :event
   has_one :user
