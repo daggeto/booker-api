@@ -5,11 +5,10 @@ class Api::V1::Users::ReservationsController < Api::V1::BaseController
 
   def index
     reservations = serialize_all(find_reservations, ReservationSerializer).as_json
-    reservations_dto = ReservationPersonalizer.for_all(reservations)
 
-    reservations_dto = group_reservations(reservations_dto) if params[:group]
+    grouped = group_reservations(reservations) if params[:group]
 
-    render json: { reservations: reservations_dto }
+    render json: { reservations: grouped }
   end
 
   private

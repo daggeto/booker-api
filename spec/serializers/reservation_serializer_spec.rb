@@ -7,7 +7,7 @@ RSpec.describe ReservationSerializer do
     subject { serialized.as_json }
 
     it 'include serialized fields' do
-      expect(subject).to include(:event_id, :event, :user)
+      expect(subject).to include(:event_id, :event, :user, :service)
     end
   end
 end
