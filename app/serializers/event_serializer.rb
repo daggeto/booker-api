@@ -5,10 +5,16 @@ class EventSerializer < ActiveModel::Serializer
     Event::Status::BOOKED => 'Booked'
   }
 
-  attributes %i(id description status status_label start_at end_at past user service_id)
+  attributes %i(id label description status status_label start_at end_at past user service_id)
 
   has_one :service
   has_one :reservation
+
+  def label
+    return object.description unless object.reservation && object.reservation.user
+
+    object.reservation.user.email
+  end
 
   def past
     object.start_at < Time.zone.now
