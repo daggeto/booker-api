@@ -14,5 +14,16 @@ describe Notifications::ReservationCanceledByService do
         )
       end
     end
+
+    context 'when event is past' do
+      let(:event) { create(:event, start_at: 1.hour.ago) }
+      let(:reservation) { create(:reservation, event: event) }
+
+      it 'does not send notification' do
+        expect(Notifications::Send).not_to receive(:for)
+
+        subject
+      end
+    end
   end
 end

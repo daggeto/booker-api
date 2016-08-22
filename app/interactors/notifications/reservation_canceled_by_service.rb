@@ -5,6 +5,10 @@ class Notifications::ReservationCanceledByService
 
   initialize_with :reservation
 
+  def send?
+    !reservation.event.past?
+  end
+
   def receiver
     reservation.user
   end

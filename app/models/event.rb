@@ -41,4 +41,8 @@ class Event < ActiveRecord::Base
   def free?
     status == Status::FREE
   end
+
+  def past?
+    start_at < Time.zone.now
+  end
 end

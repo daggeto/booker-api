@@ -17,7 +17,7 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def past
-    object.start_at < Time.zone.now
+    object.past?
   end
 
   def status_label
