@@ -6,9 +6,13 @@ describe Api::V1::Users::ProfileImagesController do
   before { sign_in(user) }
 
   describe '#create' do
+    let(:profile_image) { create(:profile_image) }
+
     subject { post :create, params }
 
-    before { allow(ProfileImage::Add).to receive(:for) }
+    before { allow(ProfileImage::Add).to receive(:for).and_return(profile_image) }
+
+    it_behaves_like 'success response'
 
     it 'adds new profile picture for user' do
       expect(ProfileImage::Add).to receive(:for).with(user, file)
@@ -18,11 +22,13 @@ describe Api::V1::Users::ProfileImagesController do
   end
 
   describe '#update' do
+    let(:profile_image) { create(:profile_image) }
+
     subject { put :update, params }
 
     before do
       allow(ProfileImage::Destroy).to receive(:for)
-      allow(ProfileImage::Add).to receive(:for)
+      allow(ProfileImage::Add).to receive(:for).and_return(profile_image)
     end
 
     it 'replaces user profile picture with new' do
