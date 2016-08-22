@@ -1,6 +1,6 @@
 module Notifications::Sender
   def run
-    Notifications::Send.for([receiver], notification_params) if send?
+    Notifications::Send.for([receiver], notification_params) if send? && receiver
   end
 
   private

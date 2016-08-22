@@ -20,6 +20,12 @@ describe Api::V1::EventsController do
 
     it_behaves_like 'success response'
 
+    it 'creates event' do
+      expect(Event::Create).to receive(:for)
+
+      subject
+    end
+
     it { has.to change(Event, :count).by(1) }
 
     context 'when current user is not owner of service' do
@@ -39,6 +45,12 @@ describe Api::V1::EventsController do
     subject { put :update, params }
 
     it_behaves_like 'success response'
+
+    it 'creates event' do
+      expect(Event::Update).to receive(:for)
+
+      subject
+    end
 
     context 'when current use is not owner of service' do
       let!(:other_user) { create(:user, service: service) }

@@ -19,5 +19,17 @@ describe EventSerializer do
     it 'returns reservation user' do
       expect(subject[:id]).to eq(event.reservation.user.id)
     end
+
+    context 'when event is free' do
+      let(:event) { create(:event, :free) }
+
+      it { is_expected.to be_nil }
+    end
+
+    context 'when event have reservation without user' do
+      let(:reservation) { create(:reservation) }
+
+      it { is_expected.to be_nil }
+    end
   end
 end

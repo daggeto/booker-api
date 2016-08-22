@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
 
     VISIBLE = [FREE, PENDING]
 
+    NOT_FREE = [PENDING, BOOKED]
+
     ALL = [FREE, PENDING, BOOKED]
   end
 

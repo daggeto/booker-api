@@ -3,7 +3,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   before_action :check_event_owner, only: [:update, :destroy]
 
   def create
-    render json: { success: Event.create(events_params) }
+    render json: { success: Event::Create.for(events_params) }
   end
 
   def show
@@ -11,9 +11,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   end
 
   def update
-    success = event.update_attributes(events_params)
-
-    render json: { success: success }
+    render json: { success: Event::Update.for(event, events_params) }
   end
 
   def destroy

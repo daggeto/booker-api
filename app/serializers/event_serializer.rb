@@ -20,6 +20,7 @@ class EventSerializer < ActiveModel::Serializer
 
   def user
     return if object.free?
+    return unless object.reservation.user
 
     UserSerializer.new(object.reservation.user).as_json
   end
