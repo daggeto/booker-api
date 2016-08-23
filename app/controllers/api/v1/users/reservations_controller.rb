@@ -14,7 +14,10 @@ class Api::V1::Users::ReservationsController < Api::V1::BaseController
   private
 
   def find_reservations
-    user.reservations.joins(:event).where('events.start_at > ?', Time.zone.now)
+    user.reservations
+      .joins(:event)
+      .where('events.start_at > ?', Time.zone.now)
+      .order('events.start_at ASC')
   end
 
   def group_reservations(reservations)
