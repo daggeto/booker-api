@@ -48,7 +48,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
     search = ServicesSearch.new(
       published: true,
       with_future_events: true,
-      events_status: [Event::Status::FREE, Event::Status::PENDING],
+      with_events_status: [Event::Status::FREE, Event::Status::PENDING],
       without_user: current_user
     )
 

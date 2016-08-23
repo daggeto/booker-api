@@ -24,13 +24,15 @@ describe ServicesSearch do
   describe '#with_future_events' do
     let(:search_options) { { with_future_events: true } }
     let!(:event) { create(:event, start_at: Time.zone.now + 1.hour, service: service) }
+    let!(:event_2) { create(:event, start_at: Time.zone.now + 3.hour, service: service) }
 
     it_behaves_like 'service finder'
   end
 
-  describe '#search_events_status' do
-    let(:search_options) { { events_status: [Event::Status::FREE, Event::Status::PENDING] } }
+  describe '#search_with_events_status' do
+    let(:search_options) { { with_events_status: [Event::Status::FREE, Event::Status::PENDING] } }
     let!(:event) { create(:event, status: Event::Status::FREE, service: service) }
+    let!(:event_2) { create(:event, status: Event::Status::FREE, service: service) }
     let!(:non_matching_event) do
       create(:event, status: Event::Status::BOOKED, service: non_matching_service)
     end
