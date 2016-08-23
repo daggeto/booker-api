@@ -3,7 +3,13 @@ class Api::V1::EventsController < Api::V1::BaseController
   before_action :check_event_owner, only: [:update, :destroy]
 
   def create
-    render json: { success: Event::Create.for(events_params) }
+    result = Event::Validate.for(current_user, events_params)
+
+    return render_conflict(message: result[:message]) unless result[:valid]
+
+    Event::Create.for(events_params)
+
+    render_success(message: result[:message])
   end
 
   def show
