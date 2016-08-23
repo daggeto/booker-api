@@ -4,7 +4,7 @@ describe Event::Validate do
     let(:user) { create(:user, service: service) }
     let(:start_at) { 30.minutes.since }
     let(:end_at) { start_at + 1.hour }
-    let(:params) { { start_at: start_at, end_at: end_at } }
+    let(:params) { { start_at: start_at.to_s, end_at: end_at.to_s } }
 
     subject { described_class.for(user, params) }
 

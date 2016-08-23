@@ -30,10 +30,10 @@ class Event::Validate
   end
 
   def start_at
-    params[:start_at]
+    DateTime.parse(params[:start_at])
   end
 
   def end_at
-    params[:end_at]
+    DateTime.parse(params[:end_at])
   end
 end
