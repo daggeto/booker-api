@@ -1,5 +1,6 @@
 class Reservation::Validate
   include Interactor::Initializer
+  include Validator
 
   SUCCESS = 'Event booked. You will get answer in 1 hour!'
   CANT_BOOK = "Event can't be booked."
@@ -9,13 +10,13 @@ class Reservation::Validate
   initialize_with :event, :user
 
   def run
-    return { valid: false, message: CANT_BOOK} unless event.free?
+    return fail_with CANT_BOOK unless event.free?
 
-    return { valid: false, message: RESERVED_OVERLAPS } if find_user_reservations.any?
+    return fail_with RESERVED_OVERLAPS if find_user_reservations.any?
 
-    return { valid: false, message: OWNED_OVERLAPS } if find_service_events.any?
+    return fail_with OWNED_OVERLAPS if find_service_events.any?
 
-    { valid: true, message: SUCCESS }
+    success_with SUCCESS
   end
 
   private
