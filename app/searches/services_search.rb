@@ -27,7 +27,7 @@ class ServicesSearch < Searchlight::Search
     prefix = "(^|\s)#{words.shift}"
 
     reg_exp = words.reduce(prefix) do |memo, word|
-      memo << ".+\s#{word}"
+      memo << ".*\s#{word}"
     end
 
     search.where("LOWER(TRIM(name)) REGEXP '#{reg_exp}'")
