@@ -20,6 +20,10 @@ Rails.application.routes.draw do
         post :publish
         post :unpublish
 
+        collection do
+          get :search
+        end
+
         scope module: :services do
           resources :events, only: [:index] do
             collection do

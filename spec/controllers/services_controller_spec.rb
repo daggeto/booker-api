@@ -69,4 +69,20 @@ describe Api::V1::ServicesController do
       subject
     end
   end
+
+  describe '#search' do
+    let(:term) { 'service' }
+    let(:name) { 'Your Service' }
+    let!(:service) { create(:service, name: name, published: true) }
+
+    subject { get :search, term: term }
+
+    it_behaves_like 'success response'
+
+    it 'returns services' do
+      subject
+
+      expect(json['services']).to contain_exactly(hash_including('id' => service.id))
+    end
+  end
 end

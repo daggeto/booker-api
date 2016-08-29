@@ -49,4 +49,23 @@ describe ServicesSearch do
 
     it_behaves_like 'service finder'
   end
+
+  describe '#term' do
+    let(:term) { 'Haircut' }
+    let(:name) { 'Service with haircut' }
+    let(:non_matching_name) { 'Service with name yourhaircut' }
+    let(:service_options) { { name: name} }
+    let(:non_matching_service_options) { { name: non_matching_name } }
+    let(:search_options) { { term: term} }
+
+    it_behaves_like 'service finder'
+
+    context 'when term is sentence' do
+      let(:term) { 'car wash' }
+      let(:name) { 'Car will be washed ' }
+      let(:non_matching_name) { 'Jou carwash service' }
+
+      it_behaves_like 'service finder'
+    end
+  end
 end

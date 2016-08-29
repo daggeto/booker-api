@@ -12,6 +12,12 @@ class Api::V1::ServicesController < Api::V1::BaseController
            each_serializer: ServiceSerializer
   end
 
+  def search
+    serialized = serialize_all(search_services, ServiceSerializer)
+
+    render_success(services: ServicePersonalizer.for_all(serialized.as_json))
+  end
+
   def create
     Service::Create.for(current_user)
 
@@ -61,6 +67,14 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def paginate_params
     params.permit(:page, :per_page)
+  end
+
+  def search_services
+    ServicesSearch.new(
+        term: params[:term],
+        published: true,
+        without_user: current_user
+    ).results
   end
 
   def update_params

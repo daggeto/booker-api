@@ -1,7 +1,7 @@
 class ServicesSearch < Searchlight::Search
   search_on Service.all
 
-  searches :published, :with_future_events, :with_events_status, :without_user
+  searches :published, :with_future_events, :with_events_status, :without_user, :term
 
   def search_published
     search.where(published: true)
@@ -19,5 +19,17 @@ class ServicesSearch < Searchlight::Search
 
   def search_without_user
     search.where.not(user: without_user)
+  end
+
+  def search_term
+    words = term.downcase.strip.split(' ')
+
+    prefix = "(^|\s)#{words.shift}"
+
+    reg_exp = words.reduce(prefix) do |memo, word|
+      memo << ".+\s#{word}"
+    end
+
+    search.where("LOWER(TRIM(name)) REGEXP '#{reg_exp}'")
   end
 end
