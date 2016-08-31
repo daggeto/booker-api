@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817170244) do
+ActiveRecord::Schema.define(version: 20160830122751) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160817170244) do
     t.integer "user_id",   limit: 4
   end
 
+  add_index "devices", ["client_id"], name: "index_devices_on_client_id", using: :btree
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
@@ -32,7 +33,9 @@ ActiveRecord::Schema.define(version: 20160817170244) do
     t.datetime "updated_at"
   end
 
+  add_index "events", ["end_at"], name: "index_events_on_end_at", using: :btree
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
+  add_index "events", ["start_at"], name: "index_events_on_start_at", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
 
   create_table "profile_images", force: :cascade do |t|
@@ -56,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160817170244) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "reservations", ["created_at"], name: "index_reservations_on_created_at", using: :btree
   add_index "reservations", ["event_id"], name: "index_reservations_on_event_id", using: :btree
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
@@ -72,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160817170244) do
   end
 
   add_index "service_photos", ["service_id"], name: "index_service_photos_on_service_id", using: :btree
+  add_index "service_photos", ["slot"], name: "index_service_photos_on_slot", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "My Activity", null: false
@@ -85,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160817170244) do
     t.boolean  "published",              default: false,         null: false
   end
 
+  add_index "services", ["name"], name: "index_services_on_name", using: :btree
   add_index "services", ["user_id"], name: "index_services_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
