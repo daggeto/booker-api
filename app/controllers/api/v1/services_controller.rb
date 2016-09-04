@@ -78,7 +78,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   def update_params
-    params.permit(:name, :duration, :price, :phone, :address)
+    params.permit(:name, :duration, :price, :phone, :address, :description)
   end
 
   def publish_error_response(check_result)
