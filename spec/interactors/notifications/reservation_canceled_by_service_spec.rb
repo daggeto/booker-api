@@ -9,7 +9,7 @@ describe Notifications::ReservationCanceledByService do
       let(:notification_params) do
         hash_including(
           title: 'Reservation canceled',
-          message: match(reservation.event.service.name).and(match('canceled your registration')),
+          message: match(reservation.event.service.name),
           payload: hash_including(state: AppStates::App::MAIN)
         )
       end

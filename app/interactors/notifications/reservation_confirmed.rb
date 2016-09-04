@@ -13,8 +13,8 @@ class Notifications::ReservationConfirmed
 
   def notification_params
     {
-      title: event.service.name,
-      message: "Booking confirmed. You are welcome at #{booking_at}",
+      title: 'Booking confirmed',
+      message: "#{event.service.name} waiting you at #{booking_at}",
       payload: { state: AppStates::App::Main::RESERVATIONS }
     }
   end

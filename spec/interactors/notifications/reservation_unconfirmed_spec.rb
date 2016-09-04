@@ -8,8 +8,8 @@ describe Notifications::ReservationUnconfirmed do
       let(:receiver) { reservation.user }
       let(:notification_params) do
         hash_including(
-          title: reservation.event.service.name,
-          message: match('are not confirmed'),
+          title: match('Reservation not confirmed'),
+          message: match(reservation.event.service.name),
           payload: hash_including(state: AppStates::App::MAIN)
         )
       end

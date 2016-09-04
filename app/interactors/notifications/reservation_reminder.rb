@@ -11,8 +11,8 @@ class Notifications::ReservationReminder
 
   def notification_params
     {
-      title: service.name,
-      message: "You have reservation at #{booking_at}",
+      title: 'Reservation reminder',
+      message: "#{service.name} at #{booking_at}",
       payload: { state: AppStates::App::Main::RESERVATIONS }
     }
   end

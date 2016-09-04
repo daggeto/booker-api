@@ -11,8 +11,8 @@ class Notifications::CanceledWithoutResponse
 
   def notification_params
     {
-      title: service.name,
-      message: "Booking at #{booking_at} canceled due to no response",
+      title: "#{service.name} at #{booking_at} ",
+      message: 'Canceled due to no response',
       payload: { state: AppStates::App::MAIN }
     }
   end

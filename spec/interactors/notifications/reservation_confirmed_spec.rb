@@ -8,8 +8,8 @@ describe Notifications::ReservationConfirmed do
       let(:receiver) { reservation.user }
       let(:notification_params) do
         hash_including(
-          title: match(reservation.event.service.name),
-          message: match('Booking confirmed'),
+          title: match('Booking confirmed'),
+          message:match(reservation.event.service.name),
           payload: hash_including(state: AppStates::App::Main::RESERVATIONS)
         )
       end
