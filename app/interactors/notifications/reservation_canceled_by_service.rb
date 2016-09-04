@@ -20,4 +20,8 @@ class Notifications::ReservationCanceledByService
       payload: { state: AppStates::App::MAIN }
     }
   end
+
+  def android_params
+    { notId: reservation.id }
+  end
 end

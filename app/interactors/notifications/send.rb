@@ -3,7 +3,7 @@ class Notifications::Send
 
   API_URI = 'https://api.ionic.io/push/notifications'
 
-  initialize_with :receivers, :notification_params
+  initialize_with :receivers, :params
 
   def run
     send_request
@@ -27,7 +27,7 @@ class Notifications::Send
   end
 
   def request_params
-    { tokens: tokens, profile: IONIC_SECURITY_PROFILE }.merge(notification: notification_params)
+    { tokens: tokens, profile: IONIC_SECURITY_PROFILE }.merge(params)
   end
 
   def tokens

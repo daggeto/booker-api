@@ -16,4 +16,8 @@ class Notifications::ReservationReminder
       payload: { state: AppStates::App::Main::RESERVATIONS }
     }
   end
+
+  def android_params
+    { notId: reservation.id }
+  end
 end

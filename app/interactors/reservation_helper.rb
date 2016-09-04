@@ -8,6 +8,6 @@ module ReservationHelper
   end
 
   def booking_at
-    event.start_at.strftime('%B %d %H:%M')
+    event.start_at.strftime('%H:%M %B %-d ')
   end
 end

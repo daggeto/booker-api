@@ -25,4 +25,8 @@ class Notifications::ReservationCanceledByClient
         }
     }
   end
+
+  def android_params
+    { notId: reservation.id }
+  end
 end
