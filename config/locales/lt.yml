@@ -1,0 +1,7 @@
+lt:
+  hello: "Sveiki"
+
+  time:
+    formats:
+      notification: '%B %d %H:%M'
+

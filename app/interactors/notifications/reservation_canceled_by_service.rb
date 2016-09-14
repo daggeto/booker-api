@@ -16,7 +16,7 @@ class Notifications::ReservationCanceledByService
   def notification_params
     {
       title: 'Reservation canceled',
-      message: "#{reservation.event.service.name}  at #{booking_at}",
+      message: "#{reservation.event.service.name} #{booking_at}",
       payload: { state: AppStates::App::MAIN }
     }
   end

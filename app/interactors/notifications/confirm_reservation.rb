@@ -10,7 +10,7 @@ class Notifications::ConfirmReservation
   def notification_params
     {
       title: 'New reservation',
-      message: "#{reservation.user.email}  at #{booking_at}",
+      message: "#{reservation.user.email} #{booking_at}",
       payload: {
         state: AppStates::Service::CALENDAR,
         stateParams: {

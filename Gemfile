@@ -13,6 +13,7 @@ gem 'paperclip', '~> 4.3'
 gem 'will_paginate', '~> 3.1.0'
 gem 'interactor-initializer', '~> 0.1.1'
 gem 'searchlight', '~> 3.1.1'
+gem 'rails-i18n', '~> 4.0.0'
 
 gem 'devise_token_auth', '~> 0.1.38'
 

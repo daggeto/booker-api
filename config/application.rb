@@ -24,5 +24,14 @@ module BookerApi
     config.autoload_paths += %W(
       #{config.root}/lib
     )
+
+    config.i18n.available_locales = ['es-US', :lt]
+    I18n.config.enforce_available_locales = false
+    I18n.default_locale = 'en-US'
+    I18n.locale = ENV['APP_LOCALE']
+
+    config.time_zone = 'Vilnius'
+    config.active_record.default_timezone = :utc
+
   end
 end

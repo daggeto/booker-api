@@ -8,6 +8,6 @@ module ReservationHelper
   end
 
   def booking_at
-    event.start_at.strftime('%H:%M %B %-d ')
+    I18n.l event.start_at, format: :notification
   end
 end

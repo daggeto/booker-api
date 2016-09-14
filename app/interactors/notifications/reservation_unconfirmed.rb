@@ -14,7 +14,7 @@ class Notifications::ReservationUnconfirmed
   def notification_params
     {
       title: 'Reservation not confirmed',
-      message: "#{service.name} at #{booking_at}",
+      message: "#{service.name} #{booking_at}",
       payload: { state: AppStates::App::MAIN }
     }
   end
