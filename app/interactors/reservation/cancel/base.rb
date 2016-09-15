@@ -1,8 +1,4 @@
-class Reservation::Cancel
-  include Interactor::Initializer
-
-  initialize_with :reservation
-
+module Reservation::Cancel::Base
   def run
     update_event
 
@@ -15,9 +11,5 @@ class Reservation::Cancel
     reservation.event.status = Event::Status::FREE
 
     reservation.event.save
-  end
-
-  def notify_user
-    Notifications::ReservationCanceledByClient.for(reservation)
   end
 end

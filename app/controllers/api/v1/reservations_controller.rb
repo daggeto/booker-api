@@ -1,6 +1,6 @@
 class Api::V1::ReservationsController < Api::V1::BaseController
-  before_action :check_event_owner, only: [:approve, :disapprove]
-  before_action :check_reservation_owner, only: [:cancel]
+  before_action :check_event_owner, only: [:approve, :disapprove, :cancel_by_service]
+  before_action :check_reservation_owner, only: [:cancel_by_client]
 
   def create
     result = Reservation::Validate.for(event, current_user)
@@ -24,8 +24,12 @@ class Api::V1::ReservationsController < Api::V1::BaseController
     render json: { success: Reservation::Disapprove.for(reservation) }
   end
 
-  def cancel
-    render json: { success: Reservation::Cancel.for(reservation) }
+  def cancel_by_client
+    render json: { success: Reservation::Cancel::ByClient.for(reservation) }
+  end
+
+  def cancel_by_service
+    render json: { success: Reservation::Cancel::ByService.for(reservation) }
   end
 
   private

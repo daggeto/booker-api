@@ -51,16 +51,27 @@ describe Api::V1::ReservationsController do
     end
   end
 
-  describe '#cancel' do
+  describe '#cancel_by_client' do
     let(:user) { reservation.user }
     let(:reservation) { create(:full_reservation) }
 
-    subject { post :cancel, reservation_id: reservation.id }
-
-    before { allow(Reservation::Cancel).to receive(:for) }
+    subject { post :cancel_by_client, reservation_id: reservation.id }
 
     it 'cancel reservation' do
-      expect(Reservation::Cancel).to receive(:for).with(reservation)
+      expect(Reservation::Cancel::ByClient).to receive(:for).with(reservation)
+
+      subject
+    end
+  end
+
+  describe '#cancel_by_service' do
+    let(:user) { reservation.event.service.user }
+    let(:reservation) { create(:full_reservation) }
+
+    subject { post :cancel_by_service, reservation_id: reservation.id }
+
+    it 'cancel reservation' do
+      expect(Reservation::Cancel::ByService).to receive(:for).with(reservation)
 
       subject
     end
