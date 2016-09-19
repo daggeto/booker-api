@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   has_one :reservation, dependent: :destroy
 
   scope :in_range, lambda { |query_start_at, query_end_at|
-    where('start_at <= ? AND end_at >= ?', query_end_at, query_start_at)
+    where('start_at < ? AND end_at > ?', query_end_at, query_start_at)
   }
 
   scope :after, lambda { |current_date|
