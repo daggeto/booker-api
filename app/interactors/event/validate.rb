@@ -19,7 +19,7 @@ class Event::Validate
   private
 
   def find_service_event
-    user.service.events.in_range(start_at, end_at)
+    user.service.events.in_range(start_at, end_at).where.not(id: params[:excluded_id])
   end
 
   def find_user_reservations

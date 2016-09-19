@@ -2,22 +2,29 @@ class Api::V1::EventsController < Api::V1::BaseController
   before_action :check_service_owner, only: [:create]
   before_action :check_event_owner, only: [:update, :destroy]
 
+
+  def show
+    render json: event
+  end
+
   def create
     result = Event::Validate.for(current_user, events_params)
 
-    return render_conflict(message: result[:message]) unless result[:valid]
+    return render_conflict(errors: errors(result)) unless result[:valid]
 
     Event::Create.for(events_params)
 
     render_success(message: result[:message])
   end
 
-  def show
-    render json: event
-  end
-
   def update
-    render json: { success: Event::Update.for(event, events_params) }
+    result = Event::Validate.for(current_user, events_params.merge(excluded_id: params[:id]))
+
+    return render_conflict(errors: errors(result)) unless result[:valid]
+
+    Event::Update.for(event, events_params)
+
+    render_success(message: result[:message])
   end
 
   def destroy
@@ -28,6 +35,10 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def events_params
     params.permit(:description, :service_id, :status, :start_at, :end_at)
+  end
+
+  def errors(result)
+    { start_at: [result[:message]] }
   end
 
   def event

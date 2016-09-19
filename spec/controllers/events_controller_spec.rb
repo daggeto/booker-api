@@ -16,6 +16,7 @@ describe Api::V1::EventsController do
     end
     let!(:service) { create(:service, user: user) }
     let(:valid) { true }
+
     subject { post :create, params }
 
     before do
@@ -50,15 +51,26 @@ describe Api::V1::EventsController do
     let(:event_id) { event.id }
     let(:params) { { id: event_id, status: Event::Status::PENDING } }
     let!(:service) { create(:service, events: [event], user: user) }
+    let(:valid) { true }
 
     subject { put :update, params }
 
+    before { allow(Event::Validate).to receive(:for).and_return(valid: valid) }
+
     it_behaves_like 'success response'
 
-    it 'creates event' do
+    it 'updates event' do
       expect(Event::Update).to receive(:for)
 
       subject
+    end
+
+    context 'when params is not valid' do
+      let(:valid) { false }
+
+      before { allow(Event::Create).to receive(:for) }
+
+      it_behaves_like 'conflict response'
     end
 
     context 'when current user is not owner of service' do
