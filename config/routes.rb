@@ -31,6 +31,7 @@ Rails.application.routes.draw do
             end
           end
           resources :service_photos, only: [:index, :create, :update]
+          resources :reservations, only: [:index]
         end
       end
 

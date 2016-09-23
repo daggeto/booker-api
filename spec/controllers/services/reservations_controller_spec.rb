@@ -1,20 +1,23 @@
-RSpec.describe Api::V1::Users::ReservationsController do
+describe Api::V1::Services::ReservationsController do
   let(:user) { create(:user) }
 
   before { sign_in(user) }
 
   describe '#index' do
-    let(:params) { { user_id: user.id } }
+    let(:client) { create(:user) }
 
     let(:start_at) { Time.now + 1.minute }
-
     let(:old_event) { create(:event, start_at: start_at - 1.hour) }
     let(:today_event) { create(:event, :with_service, start_at: start_at) }
     let(:tomorrow_event) { create(:event, :with_service, start_at: start_at + 1.day) }
+    let!(:old_reservation) { create(:reservation, user: client, event: old_event) }
+    let!(:today_reservation) { create(:reservation, user: client , event: today_event) }
+    let!(:tomorrow_reservation) { create(:reservation, user: client , event: tomorrow_event) }
 
-    let!(:old_reservation) { create(:reservation, user: user, event: old_event) }
-    let!(:today_reservation) { create(:reservation, user: user , event: today_event) }
-    let!(:tomorrow_reservation) { create(:reservation, user: user , event: tomorrow_event) }
+    let(:service) do
+      create(:service, user: user, events: [old_event, today_event, tomorrow_event])
+    end
+    let(:params) { { service_id: service.id } }
 
     subject { get :index, params }
 
@@ -27,7 +30,7 @@ RSpec.describe Api::V1::Users::ReservationsController do
     end
 
     context 'when grouped param passed' do
-      let(:params) { { user_id: user.id, group: true } }
+      let(:params) { { service_id: service.id, group: true } }
       let(:formatted_date) do
         start_at.strftime(Api::V1::BaseReservationsController::DATE_FORMAT)
       end
@@ -36,7 +39,7 @@ RSpec.describe Api::V1::Users::ReservationsController do
         subject
 
         expect(json['reservations'][formatted_date])
-          .to include(hash_including('id' => today_reservation.id))
+            .to include(hash_including('id' => today_reservation.id))
       end
     end
   end

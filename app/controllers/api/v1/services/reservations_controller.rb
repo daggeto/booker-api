@@ -1,6 +1,4 @@
-class Api::V1::Users::ReservationsController < Api::V1::BaseReservationsController
-  before_action :check_owner
-
+class Api::V1::Services::ReservationsController < Api::V1::BaseReservationsController
   def index
     reservations = serialize_all(find_reservations, ReservationSerializer).as_json
 
@@ -12,13 +10,10 @@ class Api::V1::Users::ReservationsController < Api::V1::BaseReservationsControll
   private
 
   def find_reservations
-    user.reservations
+    Reservation
       .joins(:event)
+      .where(events: { service_id: params[:service_id] } )
       .where('events.start_at > ?', Time.zone.now)
       .order('events.start_at ASC')
-  end
-
-  def user
-    @user ||= User.find(params[:user_id])
   end
 end
