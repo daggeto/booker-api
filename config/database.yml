@@ -25,7 +25,7 @@ test:
 
 production:
   <<: *default
-  database: booker_api_production
-  username: rails
-  password: flameliquid
+  database: <%= ENV['BOOKER_DATABASE_NAME'] %>
+  username: <%= ENV['BOOKER_DATABASE_USER'] %>
+  password: <%= ENV['BOOKER_DATABASE_PASSWORD'] %>
   socket: /var/run/mysqld/mysqld.sock
