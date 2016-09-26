@@ -25,10 +25,10 @@ module BookerApi
       #{config.root}/lib
     )
 
-    config.i18n.available_locales = ['es-US', 'lt']
+    config.i18n.available_locales = ['en-US', 'lt']
     I18n.config.enforce_available_locales = false
-    I18n.default_locale = ENV.fetch('APP_LOCALE', 'es-US')
-    I18n.locale = ENV.fetch('APP_LOCALE', 'es-US')
+    I18n.default_locale = ENV.fetch('APP_LOCALE', 'en-US')
+    I18n.locale = ENV.fetch('APP_LOCALE', 'en-US')
 
     config.time_zone = 'Vilnius'
     config.active_record.default_timezone = :utc
