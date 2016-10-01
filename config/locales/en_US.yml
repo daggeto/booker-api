@@ -1,0 +1,30 @@
+en_US:
+  event:
+    created: Created
+    overlaps_with_service: This date overlaps with your existing events
+    overlaps_with_reservation: Šis laikas sutampa su jau egzistuojančia rezervacija
+  reservation:
+    success: Event booked. You will get answer in 1 hour!
+    cant_book: Event can't be booked
+    reserved_overlaps: It overlaps with your current reservations
+    owned_overlaps: It overlaps with your service events
+  publish:
+    no_events: You don't have any visible events in future
+  notification:
+    cancel_without_response: Canceled due to no response
+    confirm_reservation: New reservation
+    reservation_canceled: Reservation canceled
+    reservation_confirmed:
+      title: Reservation confirmed
+      message: "%{service} waiting you #{time}"
+    reservation_reminder: Reservation reminder
+    reservation_not_confirmed: Reservation not confirmed
+  service:
+    new_service_name: Nauja paslauga
+  status:
+    free: Free
+    pending: Pending
+    booked: Booked
+time:
+  formats:
+    notification: '%B %d %H:%M'

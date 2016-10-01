@@ -3,6 +3,8 @@ class Notifications::ReservationConfirmed
   include Notifications::Sender
   include ReservationHelper
 
+  TITLE = I18n.t('notification.reservation_confirmed.title')
+
   initialize_with :reservation
 
   private
@@ -13,8 +15,12 @@ class Notifications::ReservationConfirmed
 
   def notification_params
     {
-      title: 'Booking confirmed',
-      message: "#{event.service.name} waiting you #{booking_at}",
+      title: TITLE,
+      message: I18n.t(
+          'notification.reservation_confirmed.message',
+          service: event.service.name,
+          time: booking_at
+      ),
       payload: { state: AppStates::App::Main::RESERVATIONS }
     }
   end

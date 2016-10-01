@@ -2,9 +2,9 @@ class Event::Validate
   include Interactor::Initializer
   include Validator
 
-  SUCCESS = 'Event created.'
-  OVERLAPS_WITH_SERVICE = 'This date overlaps with your existing events.'
-  OVERLAPS_WITH_RESERVATION = 'This date overlaps with your reservations.'
+  SUCCESS = I18n.t('event.created')
+  OVERLAPS_WITH_SERVICE = I18n.t('event.overlaps_with_service')
+  OVERLAPS_WITH_RESERVATION = I18n.t('event.overlaps_with_reservation')
 
   initialize_with :user, :params
 

@@ -2,7 +2,7 @@ class Service::CheckPublication
   include Interactor::Initializer
 
   NO_ERRORS = 0
-  NO_VISIBLE_EVENTS = "You don't have any visible events in future"
+  NO_VISIBLE_EVENTS = I18n.t('publish.no_events')
 
   initialize_with :service
 

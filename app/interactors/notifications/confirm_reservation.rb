@@ -3,13 +3,15 @@ class Notifications::ConfirmReservation
   include Notifications::Sender
   include ReservationHelper
 
+  TITLE = I18n.t('notification.confirm_reservation')
+
   initialize_with :reservation
 
   private
 
   def notification_params
     {
-      title: 'New reservation',
+      title: TITLE,
       message: "#{reservation.user.email} #{booking_at}",
       payload: {
         state: AppStates::Service::CALENDAR,

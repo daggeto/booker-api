@@ -8,7 +8,7 @@ describe Notifications::CanceledWithoutResponse do
     let(:notification_params) do
       hash_including(
         title: match(reservation.event.service.name),
-        message: match('Canceled'),
+        message: eq(described_class::MESSAGE),
         payload: hash_including(state: AppStates::App::MAIN)
       )
     end

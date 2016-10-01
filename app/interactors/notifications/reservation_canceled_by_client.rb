@@ -3,6 +3,8 @@ class Notifications::ReservationCanceledByClient
   include Notifications::Sender
   include ReservationHelper
 
+  TITLE = I18n.t('notification.reservation_canceled')
+
   initialize_with :reservation
 
   private
@@ -13,7 +15,7 @@ class Notifications::ReservationCanceledByClient
 
   def notification_params
     {
-      title: 'Reservation canceled',
+      title: TITLE,
       message: "#{reservation.user.email} #{booking_at}",
       payload:
         {

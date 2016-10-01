@@ -3,6 +3,8 @@ class Notifications::ReservationUnconfirmed
   include Notifications::Sender
   include ReservationHelper
 
+  TITLE = I18n.t('notification.reservation_not_confirmed')
+
   initialize_with :reservation
 
   private
@@ -13,7 +15,7 @@ class Notifications::ReservationUnconfirmed
 
   def notification_params
     {
-      title: 'Reservation not confirmed',
+      title: TITLE,
       message: "#{service.name} #{booking_at}",
       payload: { state: AppStates::App::MAIN }
     }

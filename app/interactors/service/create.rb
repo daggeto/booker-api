@@ -1,5 +1,5 @@
 class Service::Create
-  DEFAULT_NAME = 'Your Activity'
+  DEFAULT_NAME = I18n.t('service.new_service_name')
   DEFAULT_PRICE = 0
   DEFAULT_DURATION = 15
 

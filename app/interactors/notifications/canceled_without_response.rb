@@ -3,6 +3,8 @@ class Notifications::CanceledWithoutResponse
   include Notifications::Sender
   include ReservationHelper
 
+  MESSAGE = I18n.t('notification.cancel_without_response')
+
   initialize_with :reservation
 
   def receiver
@@ -12,7 +14,7 @@ class Notifications::CanceledWithoutResponse
   def notification_params
     {
       title: "#{service.name} #{booking_at} ",
-      message: 'Canceled due to no response',
+      message: MESSAGE,
       payload: { state: AppStates::App::MAIN }
     }
   end

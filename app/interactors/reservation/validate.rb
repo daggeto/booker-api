@@ -2,10 +2,10 @@ class Reservation::Validate
   include Interactor::Initializer
   include Validator
 
-  SUCCESS = 'Event booked. You will get answer in 1 hour!'
-  CANT_BOOK = "Event can't be booked."
-  RESERVED_OVERLAPS = 'It overlaps with your current reservations.'
-  OWNED_OVERLAPS = 'It overlaps with your service events.'
+  SUCCESS = I18n.t('reservation.success')
+  CANT_BOOK = I18n.t('reservation.cant_book')
+  RESERVED_OVERLAPS = I18n.t('reservation.reserved_overlaps')
+  OWNED_OVERLAPS = I18n.t('reservation.owned_overlaps')
 
   initialize_with :event, :user
 

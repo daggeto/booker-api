@@ -3,6 +3,8 @@ class Notifications::ReservationReminder
   include Notifications::Sender
   include ReservationHelper
 
+  TITLE = I18n.t('notification.reservation_reminder')
+
   initialize_with :reservation
 
   def receiver
@@ -11,7 +13,7 @@ class Notifications::ReservationReminder
 
   def notification_params
     {
-      title: 'Reservation reminder',
+      title: TITLE,
       message: "#{service.name} #{booking_at}",
       payload: { state: AppStates::App::Main::RESERVATIONS }
     }

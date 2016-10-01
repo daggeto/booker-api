@@ -10,7 +10,7 @@ describe Notifications::ConfirmReservation do
       let(:receiver) { provider }
       let(:notification_params) do
         hash_including(
-          title: match('New reservation'),
+          title: eq(described_class::TITLE),
           message: match(client.email),
           payload: hash_including(state: AppStates::Service::CALENDAR, stateParams: anything)
         )
