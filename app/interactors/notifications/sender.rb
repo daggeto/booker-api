@@ -37,7 +37,7 @@ module Notifications::Sender
   end
 
   def ios
-    { data: default_ios_params.merge(ios_params) }.merge(notification_params)
+    default_ios_params.merge(ios_params).merge(notification_params)
   end
 
   def default_android_params
@@ -45,6 +45,6 @@ module Notifications::Sender
   end
 
   def default_ios_params
-    {}
+    { sound: 'default' }
   end
 end

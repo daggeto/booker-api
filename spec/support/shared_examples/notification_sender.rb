@@ -27,7 +27,7 @@ shared_examples 'notification sender' do
           notification:
             {
               android: hash_including(data: android_params),
-              ios: hash_including(data: ios_params)
+              ios: ios_params
             }
       }
     }
