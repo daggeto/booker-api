@@ -1,4 +1,4 @@
-en_US:
+en-US:
   event:
     created: Created
     overlaps_with_service: This date overlaps with your existing events
