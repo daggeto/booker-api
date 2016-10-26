@@ -8,7 +8,7 @@ describe Reservation::Validate do
 
     subject { described_class.for(event, user) }
 
-    it { is_expected.to eq(valid: true, message: Reservation::Validate::TEST) }
+    it { is_expected.to eq(valid: true, message: Reservation::Validate::SUCCESS) }
 
     context 'when event is not free' do
       let(:status) { Event::Status::PENDING }

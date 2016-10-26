@@ -6,7 +6,6 @@ class Reservation::Validate
   CANT_BOOK = I18n.t('reservation.cant_book')
   RESERVED_OVERLAPS = I18n.t('reservation.reserved_overlaps')
   OWNED_OVERLAPS = I18n.t('reservation.owned_overlaps')
-  TEST = 'Jeee updated text!'
 
   initialize_with :event, :user
 
@@ -17,7 +16,7 @@ class Reservation::Validate
 
     return fail_with OWNED_OVERLAPS if find_service_events.any?
 
-    success_with TEST
+    success_with SUCCESS
   end
 
   private
