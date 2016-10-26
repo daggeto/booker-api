@@ -2,6 +2,7 @@ module AppStates
   module Service
     CALENDAR = 'service.calendar'
     SHOW = 'service.show'
+    RESERVATIONS = 'service.reservations'
   end
 
   module App

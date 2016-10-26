@@ -14,7 +14,7 @@ class Notifications::ConfirmReservation
       title: TITLE,
       message: "#{reservation.user.email} #{booking_at}",
       payload: {
-        state: AppStates::Service::CALENDAR,
+        state: AppStates::Service::RESERVATIONS,
         stateParams: {
           id: event.service.id,
           selectedDate: event.start_at
