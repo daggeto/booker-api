@@ -20,7 +20,7 @@ en_US:
     reservation_reminder: Reservation reminder
     reservation_not_confirmed: Reservation not confirmed
   service:
-    new_service_name: Nauja paslauga
+    new_service_name: New Service
   status:
     free: Free
     pending: Pending
