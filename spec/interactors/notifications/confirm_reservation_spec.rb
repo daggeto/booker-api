@@ -12,7 +12,7 @@ describe Notifications::ConfirmReservation do
         hash_including(
           title: eq(described_class::TITLE),
           message: match(client.email),
-          payload: hash_including(state: AppStates::Service::RESERVATIONS, stateParams: anything)
+          payload: hash_including(state: AppStates::Service::CALENDAR, stateParams: anything)
         )
       end
     end
