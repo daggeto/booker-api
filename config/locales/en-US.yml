@@ -21,6 +21,7 @@ en-US:
     reservation_not_confirmed: Reservation not confirmed
   service:
     new_service_name: New Service
+    report_created: Report created
   status:
     free: Free
     pending: Pending

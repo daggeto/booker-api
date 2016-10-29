@@ -21,6 +21,7 @@ lt:
     reservation_not_confirmed: Rezervacija nepatvirtinta
   service:
     new_service_name: Nauja paslauga
+    report_created: Pranešimas sukurtas
   status:
     free: Laisva
     pending: Laukia
