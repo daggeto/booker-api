@@ -3,6 +3,8 @@ describe Reservation::Create do
     let(:event) { create(:event, :with_service) }
     let(:user) { create(:user) }
 
+   before { allow(Notifications::ConfirmReservation).to receive(:for) }
+
     subject { described_class.for(event, user) }
 
     it_behaves_like 'event status changer' do
