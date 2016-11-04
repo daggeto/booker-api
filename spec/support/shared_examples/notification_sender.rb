@@ -11,11 +11,16 @@ shared_examples 'notification sender' do
         }
     }
   }
+  let(:uuid) { '123' }
 
-  before { allow(Notifications::Send).to receive(:for) }
+  before do
+    allow(Notifications::Send).to receive(:for).and_return(uuid)
+    allow(Ionic::Notification::Save).to receive(:for)
+  end
 
   it 'sends notification' do
     expect(Notifications::Send).to receive(:for).with([receiver], expected_notification_params)
+    expect(Ionic::Notification::Save).to receive(:for).with(uuid, reservation)
 
     subject
   end

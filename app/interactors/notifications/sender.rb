@@ -1,12 +1,22 @@
 module Notifications::Sender
   def run
-    Notifications::Send.for([receiver], params) if send? && receiver
+    send if send? && receiver
   end
 
   private
 
+  def send
+    uuid = Notifications::Send.for([receiver], params)
+
+    Ionic::Notification::Save.for(uuid, reservation)
+  end
+
   def send?
     true
+  end
+
+  def reservation
+    raise StandardError, '#reservation should be present'
   end
 
   def receiver

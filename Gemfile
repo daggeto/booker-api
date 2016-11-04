@@ -14,6 +14,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'interactor-initializer', '~> 0.1.1'
 gem 'searchlight', '~> 3.1.1'
 gem 'rails-i18n', '~> 4.0.0'
+gem 'rest-client', '~> 2.0.0'
+gem 'active_type', '~> 0.3.4'
 
 gem 'devise_token_auth', '~> 0.1.38'
 
@@ -38,6 +40,7 @@ group :development, :test do
   gem 'faker', '~> 1.4.3'
   gem 'rspec-rails', '~> 3.4'
   gem 'rspec-has', '~> 0.1.1'
+  gem 'rspec-its', '~> 1.2.0'
 end
 
 group :development do

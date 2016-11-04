@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028062310) do
+ActiveRecord::Schema.define(version: 20161104093301) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -37,6 +37,30 @@ ActiveRecord::Schema.define(version: 20161028062310) do
   add_index "events", ["service_id"], name: "index_events_on_service_id", using: :btree
   add_index "events", ["start_at"], name: "index_events_on_start_at", using: :btree
   add_index "events", ["status"], name: "index_events_on_status", using: :btree
+
+  create_table "notification_messages", force: :cascade do |t|
+    t.datetime "created"
+    t.string   "uuid",              limit: 255
+    t.string   "notification_uuid", limit: 255
+    t.string   "status",            limit: 255
+    t.string   "error",             limit: 255
+    t.integer  "notification_id",   limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "notification_messages", ["notification_id"], name: "index_notification_messages_on_notification_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "uuid",           limit: 255
+    t.string   "profile",        limit: 255
+    t.text     "tokens",         limit: 65535
+    t.integer  "reservation_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "notifications", ["reservation_id"], name: "index_notifications_on_reservation_id", using: :btree
 
   create_table "profile_images", force: :cascade do |t|
     t.string   "image_file_name",    limit: 255
@@ -136,6 +160,8 @@ ActiveRecord::Schema.define(version: 20161028062310) do
 
   add_foreign_key "devices", "users"
   add_foreign_key "events", "services"
+  add_foreign_key "notification_messages", "notifications"
+  add_foreign_key "notifications", "reservations"
   add_foreign_key "profile_images", "users"
   add_foreign_key "reports", "services"
   add_foreign_key "reports", "users"

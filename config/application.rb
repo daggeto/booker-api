@@ -20,7 +20,7 @@ module BookerApi
 
     config.secret_key_base = Rails.application.secrets.secret_key_base
 
-    config.autoload_paths << Rails.root.join('interactors', 'personalizers', 'searches')
+    config.autoload_paths << Rails.root.join('interactors', 'personalizers', 'searches', 'domain')
     config.autoload_paths += %W(
       #{config.root}/lib
     )
