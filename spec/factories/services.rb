@@ -7,5 +7,11 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
 
     user
+
+    trait :with_photos do
+      after(:create) do |service, _|
+        service.service_photos << create(:service_photo)
+      end
+    end
   end
 end

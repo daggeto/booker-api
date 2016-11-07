@@ -9,7 +9,8 @@ lt:
     reserved_overlaps: Sutampa su jau egzistuojančia rezervacija
     owned_overlaps: Sutampa su egzistuojančiu paslaugos įvykiu
   publish:
-    no_events: Neturite nei vieno sukurto įvykio
+    no_events: Neturite nei vieno sukurto įvykio. Įvykiai kuriami kalendoriuje.
+    no_photos: Neturite pridėje nei vienos nuotraukos.
   notification:
     cancel_without_response: Atmesta. Tiekėjas neatsakė į rezervaciją
     confirm_reservation: Patvirtinkite rezervaciją

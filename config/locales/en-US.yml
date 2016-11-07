@@ -9,7 +9,8 @@ en-US:
     reserved_overlaps: It overlaps with your current reservations
     owned_overlaps: It overlaps with your service events
   publish:
-    no_events: You don't have any visible events in future
+    no_events: You don't have any visible events in future. Go to calendara to add it.
+    no_photos: You don't have any uploaded photos. Please add it.
   notification:
     cancel_without_response: Canceled due to no response
     confirm_reservation: New reservation
