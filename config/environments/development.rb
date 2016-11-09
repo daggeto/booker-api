@@ -43,5 +43,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_controller.asset_host = ENV.fetch('HOST_URL', 'http://192.168.1.69:3000')
 
-  config.assets.precompile += ["*.ttf", "*.woff", "*.svg", "*.eot"]
+  config.assets.precompile += ["*.ttf", "*.woff", "*.svg", "*.eot", "*.js"]
 end

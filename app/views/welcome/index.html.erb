@@ -30,8 +30,16 @@
             <h2 class="section-heading"><%= t('welcome.download.title') %></h2>
             <p><%= t('welcome.download.subtitle') %></p>
             <div class="badges">
-              <a class="badge-link" href="https://play.google.com/store/apps/details?id=com.daggeto.timebooker&hl=en"><img src="assets/google-play-badge.svg" alt=""></a>
-              <a class="badge-link" href="https://itunes.apple.com/us/app/time-reservations/id1168950341?ls=1&mt=8"><img src="assets/app-store-badge.svg" alt=""></a>
+              <a
+                class="badge-link"
+                href="https://play.google.com/store/apps/details?id=com.daggeto.timebooker&hl=en">
+                  <%= image_tag 'google-play-badge.svg' %>
+              </a>
+              <a
+                class="badge-link"
+                href="https://itunes.apple.com/us/app/time-reservations/id1168950341?ls=1&mt=8">
+                  <%= image_tag 'app-store-badge.svg' %>
+              </a>
             </div>
           </div>
         </div>
@@ -42,7 +50,7 @@
             <div class="device">
               <div class="screen" style="margin-top: -1px; margin-right: -1px;">
                 <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                <img src="assets/demo-screen-1.jpg" class="img-responsive" alt="">
+                <%= image_tag 'demo-screen-1.jpg', class: 'img-responsive' %>
               </div>
               <div class="button">
                 <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -73,7 +81,8 @@
             <div class="device">
               <div class="screen" style="margin-top: -1px; margin-right: -1px;">
                 <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                <img src="assets/second_screen.jpg" class="img-responsive" alt=""> </div>
+                <%= image_tag 'second_screen.jpg', class: 'img-responsive' %>
+              </div>
               <div class="button">
                 <!-- You can hook the "home button" to some JavaScript events or just remove it -->
               </div>
@@ -125,4 +134,4 @@
     <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
   </div>
 </footer>
-<script src="assets/new-age.js"></script>
+<%= javascript_include_tag 'new-age.js' %>
