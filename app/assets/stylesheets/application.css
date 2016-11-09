@@ -17,5 +17,5 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'simple-line-icons.scss';
-@import 'new-age.css';
-@import 'device-mockups.min.css';
+@import 'new-age.css.scss';
+@import 'device-mockups.min.css.scss';
