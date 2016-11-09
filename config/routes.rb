@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  root 'welcome#index'
+
+  get 'welcome/index'
+
   mount_devise_token_auth_for 'User', at: 'user', controllers: {
     sessions: 'overrides/sessions'
   }

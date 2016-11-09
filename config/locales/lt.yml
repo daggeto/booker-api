@@ -27,7 +27,32 @@ lt:
     free: Laisva
     pending: Laukia
     booked: Rezervuota
+  welcome:
+    navigation:
+      toggle: Išskleisti
+      menu: Meniu
+    header:
+      name: Time Booker
+      fetures: Paslaugos
+      contact: Kontatkai
+    download:
+      title: Rezervuok paslaugos arba tegu klientai rezervuojasi pas tave.
+      subtitle: Musų aplikacija yra pasiekiama android ir iOS platformose! Atsisiųsk dabar!
+    features:
+      title: Paslaugos
+      subtitle: Šioje aplikacijoje rasi šias funkcijas
+      feed:
+        title: Paslaugų srautas
+        subtitle: Rasi tau reikalingą paslaugą kurią galėsi rezervuoti tau tinkamu laiku!
+      notifications:
+        title: Pranešimai
+        subtitle: Gauk priminimus apie rezervaciją!
+      calendar:
+        title: Kalendorius
+        subtitle: Sukurk kalendorių savo paslaugai. Užpildyk laikus kada esi laisvas. Lauk klientu!
+      free:
+        title: Nemokama
+        subtitle: Paslauga yra visiškai nemokama!
   time:
     formats:
       notification: '%B %d %H:%M'
-

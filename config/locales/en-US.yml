@@ -27,6 +27,34 @@ en-US:
     free: Free
     pending: Pending
     booked: Booked
+  welcome:
+    navigation:
+      toggle: Expand
+      menu: Menu
+    header:
+      name: Time Booker
+      fetures: Features
+      contact: Contact
+    download:
+      title: Find new activities. Book. Enjoy great service.
+      subtitle: Our app is available on any mobile device! Download now to get started!
+    features:
+      title: Unlimited Features, Unlimited Fun
+      subtitle: Check out what you can do with this app!
+      feed:
+        title: Feed with Services
+        subtitle: Find awsome services that you can book!
+      notifications:
+        title: Reminders
+        subtitle: Get notifications about booked services!
+      calendar:
+        title: Calendar
+        subtitle: Create your own calendar for your service. Create events when you are free. Wait for customers!
+      free:
+        title: Free for Use
+        subtitle: As always good apps are free!
+
+
 time:
   formats:
     notification: '%B %d %H:%M'

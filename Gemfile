@@ -32,6 +32,10 @@ gem 'sinatra', '~> 1.4.7'
 gem 'dotenv-rails'
 gem 'unicorn'
 
+gem 'therubyracer'
+gem 'font-awesome-rails', '~> 4.5.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+
 group :development, :test do
   gem 'pry-rails', '~> 0.3.4'
   gem 'pry-nav', '~> 0.2.4'

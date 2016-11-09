@@ -1,0 +1,128 @@
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only"><%= t('welcome.navigation.toggle') %></span> <%= t('welcome.navigation.menu') %> <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand page-scroll" href="#page-top"><%= t('welcome.header.name') %></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="page-scroll" href="#features"><%= t('welcome.header.fetures') %></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+
+<header>
+  <div id="page-top" class="container">
+    <div class="row">
+      <div class="col-sm-7 download text-center">
+        <div class="header-content">
+          <div class="header-content-inner">
+            <h2 class="section-heading"><%= t('welcome.download.title') %></h2>
+            <p><%= t('welcome.download.subtitle') %></p>
+            <div class="badges">
+              <a class="badge-link" href="https://play.google.com/store/apps/details?id=com.daggeto.timebooker&hl=en"><img src="assets/google-play-badge.svg" alt=""></a>
+              <a class="badge-link" href="https://itunes.apple.com/us/app/time-reservations/id1168950341?ls=1&mt=8"><img src="assets/app-store-badge.svg" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="device-container">
+          <div class="device-mockup iphone6_plus portrait white">
+            <div class="device">
+              <div class="screen" style="margin-top: -1px; margin-right: -1px;">
+                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                <img src="assets/demo-screen-1.jpg" class="img-responsive" alt="">
+              </div>
+              <div class="button">
+                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features" class="features">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="section-heading">
+          <h2><%= t('welcome.features.title') %></h2>
+          <p class="text-muted"><%= t('welcome.features.subtitle') %></p>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="device-container">
+          <div class="device-mockup iphone6_plus portrait white">
+            <div class="device">
+              <div class="screen" style="margin-top: -1px; margin-right: -1px;">
+                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                <img src="assets/second_screen.jpg" class="img-responsive" alt=""> </div>
+              <div class="button">
+                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="feature-item">
+                <i class="icon-screen-smartphone text-primary"></i>
+                <h3><%= t('welcome.features.feed.title') %></h3>
+                <p class="text-muted"><%= t('welcome.features.feed.subtitle') %></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-item">
+                <i class="fa fa-flag-o text-primary" aria-hidden="true"></i>
+                <h3><%= t('welcome.features.notifications.title') %></h3>
+                <p class="text-muted"><%= t('welcome.features.notifications.subtitle') %></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="feature-item">
+                <i class="fa fa-calendar text-primary" aria-hidden="true"></i>
+                <h3><%= t('welcome.features.calendar.title') %></h3>
+                <p class="text-muted"><%= t('welcome.features.calendar.subtitle') %></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-item">
+                <i class="icon-present text-primary"></i>
+                <h3><%= t('welcome.features.free.title') %></h3>
+                <p class="text-muted"><%= t('welcome.features.free.subtitle') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="assets/new-age.js"></script>
