@@ -2,22 +2,22 @@ lt:
   event:
     created: Sukurta
     overlaps_with_service: Šis laikas sutampa su jau egzistuojančiu paslaugos laiku
-    overlaps_with_reservation: Šis laikas sutampa su jau egzistuojančia rezervacija
+    overlaps_with_reservation: Šis laikas sutampa su jau egzistuojančia paslaugos rezervacija
   reservation:
     success: Rezervuota. Atsakymą gausite valandos bėgyje!
     cant_book: Negalima rezervuoti
-    reserved_overlaps: Sutampa su jau egzistuojančia rezervacija
+    reserved_overlaps: Sutampa su jau egzistuojančia paslaugos rezervacija
     owned_overlaps: Sutampa su egzistuojančiu paslaugos įvykiu
   publish:
-    no_events: Neturite nei vieno sukurto įvykio. Įvykiai kuriami kalendoriuje.
-    no_photos: Neturite pridėje nei vienos nuotraukos.
+    no_events: Neturite nei vieno sukurto įvykio. Įvykiai kuriami kalendoriuje
+    no_photos: Neturite pridėję nei vienos nuotraukos
   notification:
     cancel_without_response: Atmesta. Tiekėjas neatsakė į rezervaciją
     confirm_reservation: Patvirtinkite rezervaciją
     reservation_canceled: Rezervacija atmesta
     reservation_confirmed:
       title: Rezervacija patvirtinta
-      message: "%{service} laukia Jūsų %{time}"
+      message: "%{service} laukia Jūsų %and{time}"
     reservation_reminder: Priminimas apie rezervaciją
     reservation_not_confirmed: Rezervacija nepatvirtinta
   service:
@@ -36,14 +36,14 @@ lt:
       fetures: Paslaugos
       contact: Kontatkai
     download:
-      title: Rezervuok paslaugas arba tegul klientai rezervuojasi pas tave.
+      title: Rezervuok paslaugas arba tegul klientai rezervuojasi pas tave
       subtitle: Musų aplikacija yra pasiekiama android ir iOS platformose! Atsisiųsk dabar!
     features:
       title: Paslaugos
-      subtitle: Šioje aplikacijoje rasi šias funkcijas
+      subtitle: Šioje aplikacijoje rasi šias funkcijas:
       feed:
         title: Paslaugų srautas
-        subtitle: Rasi tau reikalingą paslaugą kurią galėsi rezervuoti tau tinkamu laiku!
+        subtitle: Rasi tau reikalingą paslaugą, kurią galėsi rezervuoti tau tinkamu laiku!
       notifications:
         title: Pranešimai
         subtitle: Gauk priminimus apie rezervaciją!
