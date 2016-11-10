@@ -151,11 +151,11 @@ header {
   width: 100%;
   min-height: auto;
   overflow-y: hidden;
-  background: url("../assets/bg-pattern.png"), #3ea6ee;
+  background: image-url("bg-pattern.png"), #3ea6ee;
   /* fallback for old browsers */
-  background: url("../assets/bg-pattern.png"), -webkit-linear-gradient(to left, #3ea6ee, #4F53F1);
+  background: image-url("bg-pattern.png"), -webkit-linear-gradient(to left, #3ea6ee, #4F53F1);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: url("../assets/bg-pattern.png"), linear-gradient(to left, #3ea6ee, #4F53F1);
+  background: image-url("bg-pattern.png"), linear-gradient(to left, #3ea6ee, #4F53F1);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
 }
