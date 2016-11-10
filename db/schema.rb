@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104093301) do
+ActiveRecord::Schema.define(version: 20161110110552) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20161104093301) do
     t.integer  "price",       limit: 4,     default: 0,             null: false
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
-    t.integer  "phone",       limit: 4
+    t.string   "phone",       limit: 255
     t.string   "address",     limit: 255
     t.integer  "user_id",     limit: 4
     t.boolean  "published",                 default: false,         null: false
