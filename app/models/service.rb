@@ -3,9 +3,8 @@ class Service < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :service_photos
-  has_many :events
-  has_many :reservations
+  has_many :service_photos, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   def to_dto
     serialized = ServiceSerializer.new(self).as_json
