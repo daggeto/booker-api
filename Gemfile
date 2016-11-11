@@ -16,10 +16,11 @@ gem 'searchlight', '~> 3.1.1'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'rest-client', '~> 2.0.0'
 gem 'active_type', '~> 0.3.4'
+gem 'unread', '~> 0.7.1'
 
 gem 'devise_token_auth', '~> 0.1.38'
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.1.1'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -29,10 +30,10 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'sidekiq', '~> 4.1.4'
 gem 'sidekiq-cron', '~> 0.4.2'
 gem 'sinatra', '~> 1.4.7'
-gem 'dotenv-rails'
-gem 'unicorn'
+gem 'dotenv-rails', '~> 2.1.1'
+gem 'unicorn', '~> 5.1.0'
 
-gem 'therubyracer'
+gem 'therubyracer', '~> 0.12.2'
 gem 'font-awesome-rails', '~> 4.5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 
