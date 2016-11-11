@@ -3,8 +3,8 @@ describe Ionic::Notification::Fetch do
     let(:uuid) { '123' }
     let(:path) { "notifications/#{uuid}" }
     let(:body) { { data: { uuid: uuid } }.to_json }
-    let(:message) { create(:notification_message) }
-    let(:notification) { create(:notification, uuid: uuid) }
+    let(:message) { { status: 'status' } }
+    let(:notification) { { uuid: uuid } }
     let(:response) { instance_double(RestClient::Response, body: body) }
 
     before do
@@ -15,9 +15,6 @@ describe Ionic::Notification::Fetch do
 
     subject { described_class.for(uuid) }
 
-    its(:uuid) { is_expected.to eq(uuid) }
-    it 'includes messages' do
-      expect(subject.messages.size).to eq(1)
-    end
+    it { is_expected.to include(:uuid, :messages) }
   end
 end

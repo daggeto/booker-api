@@ -7,8 +7,7 @@ module Notifications::Sender
 
   def send
     uuid = Notifications::Send.for([receiver], params)
-
-    Ionic::Notification::Save.for(uuid, reservation)
+    Ionic::Notification::Update.for(notification, uuid)
   end
 
   def send?
@@ -56,5 +55,9 @@ module Notifications::Sender
 
   def default_ios_params
     { sound: 'default' }
+  end
+
+  def notification
+    @notification  ||= Notifications::Create.for(receiver, reservation, notification_params)
   end
 end

@@ -4,10 +4,7 @@ class NotificationMessage < ActiveRecord::Base
   def self.parse(json)
     symbolized_params = json.deep_symbolize_keys
 
-    params =
-      symbolized_params.slice(:uuid, :status, :created, :error)
+    symbolized_params.slice(:uuid, :status, :created, :error)
       .reverse_merge(notification_uuid: symbolized_params[:notification])
-
-    self.new(params)
   end
 end

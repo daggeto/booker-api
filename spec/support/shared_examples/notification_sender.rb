@@ -15,12 +15,12 @@ shared_examples 'notification sender' do
 
   before do
     allow(Notifications::Send).to receive(:for).and_return(uuid)
-    allow(Ionic::Notification::Save).to receive(:for)
+    allow(Ionic::Notification::Update).to receive(:for)
   end
 
   it 'sends notification' do
     expect(Notifications::Send).to receive(:for).with([receiver], expected_notification_params)
-    expect(Ionic::Notification::Save).to receive(:for).with(uuid, reservation)
+    expect(Ionic::Notification::Update).to receive(:for).with(anything, uuid)
 
     subject
   end

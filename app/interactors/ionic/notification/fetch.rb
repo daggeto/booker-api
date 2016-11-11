@@ -6,7 +6,7 @@ class Ionic::Notification::Fetch
   def run
     notification = ::Notification.parse(response['data'])
 
-    notification.messages = messages
+    notification[:messages] = messages
 
     notification
   end

@@ -7,8 +7,6 @@ describe Notification do
 
     subject { described_class.parse(json) }
 
-    its(:uuid) { is_expected.to eq(uuid) }
-    its(:profile) { is_expected.to eq(profile) }
-    its(:tokens) { is_expected.to eq(tokens.to_s) }
+    it { is_expected .to include(:uuid, :profile, :tokens) }
   end
 end

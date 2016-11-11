@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  acts_as_reader
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable
@@ -7,7 +9,8 @@ class User < ActiveRecord::Base
   has_one :service
   has_one :profile_image
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :devices
 
   # def valid_token?(token, client_id='default')

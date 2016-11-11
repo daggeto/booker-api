@@ -10,6 +10,6 @@ describe Ionic::Notification::Messages::FetchAll do
 
     before { allow(Ionic::Request).to receive(:get).with(path).and_return(response) }
 
-    its(:first) { is_expected.to be_a NotificationMessage }
+    its(:first) { is_expected.to include(:uuid, :notification_uuid) }
   end
 end
