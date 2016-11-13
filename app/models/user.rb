@@ -55,4 +55,7 @@ class User < ActiveRecord::Base
   #   super
   # end
 
+  def setup_new_reader
+    #overrides unread gem method which clears all notifications for new user
+  end
 end

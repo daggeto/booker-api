@@ -5,6 +5,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     render json: user
   end
 
+  def current
+    render_success UserSerializer.new(current_user, info: true)
+  end
+
   private
 
   def user

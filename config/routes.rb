@@ -18,6 +18,9 @@ Rails.application.routes.draw do
             resource :profile_image, only: [:create, :update]
           end
         end
+        collection do
+          get :current
+        end
       end
 
       resources :services, only: [:index, :create, :show, :update] do
@@ -47,6 +50,13 @@ Rails.application.routes.draw do
         post :disapprove
         post :cancel_by_client
         post :cancel_by_service
+      end
+
+      resources :notifications, only: [:index] do
+        post :mark_as_read
+        collection do
+          post :mark_all_as_read
+        end
       end
 
       resources :service_photos, only: [:destroy]
