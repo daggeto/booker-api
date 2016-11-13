@@ -11,6 +11,10 @@ class Notifications::CanceledWithoutResponse
     reservation.user
   end
 
+  def sender
+    service
+  end
+
   def notification_params
     {
       title: "#{service.name} #{booking_at} ",

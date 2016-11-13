@@ -10,7 +10,11 @@ class Notifications::ReservationCanceledByClient
   private
 
   def receiver
-    event.service.user
+    service.user
+  end
+
+  def sender
+    reservation.user
   end
 
   def notification_params

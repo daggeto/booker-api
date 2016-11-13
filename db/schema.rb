@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111095225) do
+ActiveRecord::Schema.define(version: 20161113185125) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -62,9 +62,12 @@ ActiveRecord::Schema.define(version: 20161111095225) do
     t.string   "title",          limit: 255
     t.text     "message",        limit: 65535
     t.text     "payload",        limit: 65535
+    t.integer  "sender_id",      limit: 4
+    t.string   "sender_type",    limit: 255
   end
 
   add_index "notifications", ["reservation_id"], name: "index_notifications_on_reservation_id", using: :btree
+  add_index "notifications", ["sender_type", "sender_id"], name: "index_notifications_on_sender_type_and_sender_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "profile_images", force: :cascade do |t|

@@ -27,6 +27,10 @@ class Notifications::ConfirmReservation
     service.user
   end
 
+  def sender
+    reservation.user
+  end
+
   def android_params
     { notId: reservation.id }
   end

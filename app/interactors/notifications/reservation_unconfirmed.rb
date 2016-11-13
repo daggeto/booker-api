@@ -13,6 +13,10 @@ class Notifications::ReservationUnconfirmed
     reservation.user
   end
 
+  def sender
+    service
+  end
+
   def notification_params
     {
       title: TITLE,

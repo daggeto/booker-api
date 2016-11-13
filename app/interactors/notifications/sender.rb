@@ -19,7 +19,11 @@ module Notifications::Sender
   end
 
   def receiver
-    raise StandardError, '#receivers should be implemented'
+    raise StandardError, '#receiver should be implemented'
+  end
+
+  def sender
+    raise StandardError, '#sender should be implemented'
   end
 
   def notification_params
@@ -68,6 +72,7 @@ module Notifications::Sender
   end
 
   def notification
-    @notification  ||= Notifications::Create.for(receiver, reservation, notification_params)
+    @notification  ||=
+      Notifications::Create.for(receiver, sender, reservation, notification_params)
   end
 end

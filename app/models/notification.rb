@@ -9,6 +9,7 @@ class Notification < ActiveRecord::Base
            dependent: :destroy
 
   belongs_to :receiver, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :sender, polymorphic: true
   belongs_to :reservation
 
   def self.parse(json)

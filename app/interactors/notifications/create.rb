@@ -1,7 +1,7 @@
 class Notifications::Create
   include Interactor::Initializer
 
-  initialize_with :receiver, :reservation, :params
+  initialize_with :receiver, :sender, :reservation, :params
 
   def run
     Notification.create(attributes)
@@ -10,6 +10,8 @@ class Notifications::Create
   private
 
   def attributes
-    params.slice(:title, :message, :payload).merge(receiver: receiver, reservation: reservation)
+    params
+      .slice(:title, :message, :payload)
+      .merge(receiver: receiver, sender: sender, reservation: reservation)
   end
 end
