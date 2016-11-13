@@ -37,24 +37,34 @@ module Notifications::Sender
   private
 
   def params
-    { notification: { android: android, ios: ios } }
+    @params ||= { notification: { android: android, ios: ios } }
   end
 
   def android
-    { data: default_android_params.merge(android_params) }.merge(notification_params)
-
+    @android ||= { data: default_android_params.merge(android_params) }
+      .merge(final_notification_params)
   end
 
   def ios
-    default_ios_params.merge(ios_params).merge(notification_params)
+    @ios ||= default_ios_params
+      .merge(ios_params)
+      .merge(final_notification_params)
   end
 
   def default_android_params
-    {  style: 'inbox' }
+    @default_android_params ||= {  style: 'inbox' }
   end
 
   def default_ios_params
-    { sound: 'default' }
+    @default_ios_params ||= { sound: 'default' }
+  end
+
+  def final_notification_params
+    @final_notification_params ||= notification_params.deep_merge(payload: default_payload)
+  end
+
+  def default_payload
+    @default_payload ||= { notification_id: notification.id }
   end
 
   def notification
