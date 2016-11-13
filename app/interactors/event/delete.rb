@@ -4,9 +4,9 @@ class Event::Delete
   initialize_with :event
 
   def run
-    event.destroy
-
     notify_user unless event.free?
+
+    event.destroy
   end
 
   private

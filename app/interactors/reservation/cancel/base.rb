@@ -2,9 +2,9 @@ module Reservation::Cancel::Base
   def run
     update_event
 
-    reservation.destroy
-
     notify_user
+
+    reservation.destroy
   end
 
   def update_event

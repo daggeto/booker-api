@@ -6,7 +6,7 @@ describe Api::V1::NotificationsController do
   describe '#index' do
     let(:other_user) { create(:user) }
     let!(:other_user_notification) { create(:notification, receiver: other_user) }
-    let!(:notification) { create(:notification, receiver: user) }
+    let!(:notification) { create(:notification, receiver: user, sender: other_user) }
 
     subject { get :index }
 
