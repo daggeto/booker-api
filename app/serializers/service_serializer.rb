@@ -11,7 +11,7 @@ class ServiceSerializer < ActiveModel::Serializer
   def main_photo
     return random_photo_json if object.service_photos.empty?
 
-    ServicePhotoSerializer.new(object.service_photos.first)
+    ServicePhotoSerializer.new(object.service_photos.first).as_json
   end
 
   private
