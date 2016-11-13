@@ -16,7 +16,7 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   private
 
   def notifications
-    current_user.notifications.order(:created_at)
+    current_user.notifications.order(created_at: :desc)
   end
 
   def check_owner
