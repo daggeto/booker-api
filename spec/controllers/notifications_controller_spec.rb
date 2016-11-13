@@ -23,24 +23,24 @@ describe Api::V1::NotificationsController do
 
     subject { post :mark_as_read, params }
 
-    it 'marks as read only one notification' do
-      subject
+    it_behaves_like 'success response'
 
-      expect(notification.unread?(user)).to be_falsey
+    it 'marks as read only one notification' do
+      expect(Notifications::MarkAsRead).to receive(:for).with(notification)
+
+      subject
     end
   end
 
   describe '#mark_all_as_read' do
-    let!(:notification) { create(:notification, receiver: user) }
-    let!(:second_notification) { create(:notification, receiver: user) }
-
     subject { post :mark_all_as_read }
 
-    it 'marks as all current user notifications' do
-      subject
+    it_behaves_like 'success response'
 
-      expect(notification.unread?(user)).to be_falsey
-      expect(second_notification.unread?(user)).to be_falsey
+    it 'marks all user notifications as read' do
+      expect(Notifications::MarkAllAsRead).to receive(:for).with(user)
+
+      subject
     end
   end
 end

@@ -6,11 +6,11 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   end
 
   def mark_as_read
-    notification.mark_as_read! for: current_user
+    Notifications::MarkAsRead.for(notification)
   end
 
   def mark_all_as_read
-    current_user.notifications.mark_as_read! :all, for: current_user
+    Notifications::MarkAllAsRead.for(current_user)
   end
 
   private
@@ -25,5 +25,9 @@ class Api::V1::NotificationsController < Api::V1::BaseController
 
   def notification
     @notification ||= Notification.find(params[:notification_id])
+  end
+
+  def left_unread
+    current_user.notifications.unread_by(current_user).size
   end
 end
