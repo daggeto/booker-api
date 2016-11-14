@@ -14,7 +14,7 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
   def find_events
     Event
       .where(events_query_params)
-      .where('start_at >= ? AND end_at <= ?', start_at, end_at)
+      .where('start_at >= ? AND start_at <= ?', start_at, end_at)
       .order(:start_at)
   end
 
@@ -22,7 +22,7 @@ class Api::V1::Services::EventsController < Api::V1::BaseController
     Event
       .after(Event::VISIBLE_FROM_TIME.since)
       .where(events_query_params)
-      .where('start_at >= ? AND end_at <= ?', start_at, end_at)
+      .where('start_at >= ? AND start_at <= ?', start_at, end_at)
       .order(:start_at)
   end
 
