@@ -17,7 +17,7 @@ en-US:
     reservation_canceled: Reservation canceled
     reservation_confirmed:
       title: Reservation confirmed
-      message: "%{service} waiting you #{time}"
+      message: "%{service} waiting you %{time}"
     reservation_reminder: Reservation reminder
     reservation_not_confirmed: Reservation not confirmed
   service:
@@ -57,4 +57,4 @@ en-US:
 
 time:
   formats:
-    notification: '%B %d %H:%M'
+    notification: '%B %d, at  %H:%M'

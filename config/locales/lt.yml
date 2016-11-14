@@ -17,7 +17,7 @@ lt:
     reservation_canceled: Rezervacija atmesta
     reservation_confirmed:
       title: Rezervacija patvirtinta
-      message: "%{service} laukia Jūsų %and{time}"
+      message: "%{service} laukia Jūsų %{time}"
     reservation_reminder: Priminimas apie rezervaciją
     reservation_not_confirmed: Rezervacija nepatvirtinta
   service:
@@ -55,4 +55,4 @@ lt:
         subtitle: Paslauga yra visiškai nemokama!
   time:
     formats:
-      notification: '%B %d %H:%M'
+      notification: '%B %d, %H:%M val.'
