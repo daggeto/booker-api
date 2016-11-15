@@ -1,4 +1,7 @@
 lt:
+  errors:
+    messages:
+      already_in_use: Toks vartotojas jau egzistuoja
   event:
     created: Sukurta
     overlaps_with_service: Šis laikas sutampa su jau egzistuojančiu paslaugos laiku
