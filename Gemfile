@@ -37,7 +37,7 @@ gem 'therubyracer', '~> 0.12.2'
 gem 'font-awesome-rails', '~> 4.5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 
-group :development, :test do
+group :development, :test, :e2e do
   gem 'pry-rails', '~> 0.3.4'
   gem 'pry-nav', '~> 0.2.4'
   gem 'pry-stack_explorer'

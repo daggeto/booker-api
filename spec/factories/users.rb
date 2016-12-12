@@ -1,10 +1,12 @@
 FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
-    password { Faker::Lorem.characters(10) }
+    password { TEST_PASSWORD }
 
     trait :with_service do
-      service
+      after(:create) do |user, _|
+        create(:service, user: user)
+      end
     end
   end
 end

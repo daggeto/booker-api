@@ -17,10 +17,10 @@ class NotificationSerializer < ActiveModel::Serializer
   private
 
   def service_photo
-    ServiceSerializer.new(object.sender).as_json[:main_photo]
+    ServiceSerializer.new(object.sender).as_json[:main_photo] if object.sender
   end
 
   def user_photo
-    UserSerializer.new(object.sender).as_json[:profile_image]
+    UserSerializer.new(object.sender).as_json[:profile_image] if object.sender
   end
 end

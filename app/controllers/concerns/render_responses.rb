@@ -15,11 +15,11 @@ module RenderResponses
     render_api_response(ApiCodes::NOT_ALLOWED, StatusCodes::FORBIDDEN)
   end
 
-  def render_success(params)
+  def render_success(params = {})
     render_api_response(ApiCodes::SUCCESS, StatusCodes::OK, params)
   end
 
-  def render_conflict(params)
+  def render_conflict(params = {})
     render_api_response(ApiCodes::IMPOSSIBLE_ACTION, StatusCodes::CONFLICT, params)
   end
 

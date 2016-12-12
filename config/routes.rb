@@ -62,6 +62,14 @@ Rails.application.routes.draw do
       resources :service_photos, only: [:destroy]
       resource :device, only: [:create, :destroy]
     end
+
+    if Rails.env.e2e? || Rails.env.test?
+      resources :seeds, only: [:create] do
+        collection do
+          delete :destroy
+        end
+      end
+    end
   end
 
   namespace :admin do

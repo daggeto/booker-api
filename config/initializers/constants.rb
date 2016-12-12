@@ -9,3 +9,8 @@ GCM_API_KEY = ENV['GCM_API_KEY']
 
 SIDEKIQ_USERNAME = ENV.fetch('SIDEKIQ_USERNAME', 'sidekiqadmin')
 SIDEKIQ_PASSWORD = ENV.fetch('SIDEKIQ_PASSWORD', 'sidekiqpassword')
+
+
+if Rails.env.e2e? || Rails.env.test?
+  TEST_PASSWORD = '123123123'
+end

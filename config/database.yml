@@ -24,8 +24,8 @@ test:
   database: booker_api_test
 
 e2e:
- <<: *default
- database: booker_api_e2e_test
+  <<: *default
+  database: booker_api_e2e_test
 
 production:
   <<: *default
