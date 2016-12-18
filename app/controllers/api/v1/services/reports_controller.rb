@@ -1,4 +1,4 @@
-class Api::V1::Services::ReportsController < Api::V1::BaseController
+class Api::V1::Services::ReportsController < Api::BaseController
   def create
     Report::Create.for(service, current_user, report_params[:message])
 

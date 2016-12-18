@@ -1,4 +1,4 @@
-class Api::V1::ServicePhotosController < Api::V1::BaseController
+class Api::V1::ServicePhotosController < Api::BaseController
   before_action :check_service_owner, only: [:destroy]
 
   def destroy

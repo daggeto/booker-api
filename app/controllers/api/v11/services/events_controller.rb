@@ -1,12 +1,18 @@
-class Api::V1::Services::EventsController < Api::BaseController
+class Api::V11::Services::EventsController < Api::BaseController
   before_action :check_service_owner, only: [:index]
 
   def index
-    render json: find_events
+    render json: {
+      events: serialize_all(find_events, EventSerializer),
+      available_days: available_days
+    }
   end
 
   def future
-    render json: future_events
+    render json: {
+      events: serialize_all(future_events, EventSerializer),
+      available_days: available_days
+    }
   end
 
   private
@@ -26,8 +32,12 @@ class Api::V1::Services::EventsController < Api::BaseController
       .order(:start_at)
   end
 
+  def available_days
+    @available_days ||= Event::AvailableDays.for(service, start_at)
+  end
+
   def events_query_params
-    params.permit(:service_id, status: [])
+    params.permit(:service_id,  status: [])
   end
 
   def start_at

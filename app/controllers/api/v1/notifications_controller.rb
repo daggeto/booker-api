@@ -1,4 +1,4 @@
-class Api::V1::NotificationsController < Api::V1::BaseController
+class Api::V1::NotificationsController < Api::BaseController
   before_action :check_owner, only: [:mark_as_read]
 
   def index

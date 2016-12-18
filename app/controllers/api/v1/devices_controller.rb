@@ -1,4 +1,4 @@
-class Api::V1::DevicesController < Api::V1::BaseController
+class Api::V1::DevicesController < Api::BaseController
   def create
     current_user.devices.create(device_params)
   end

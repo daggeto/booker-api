@@ -1,4 +1,4 @@
-class Api::V1::Users::ProfileImagesController < Api::V1::BaseController
+class Api::V1::Users::ProfileImagesController < Api::BaseController
   include Api::V1::FileUploadable
 
   def create

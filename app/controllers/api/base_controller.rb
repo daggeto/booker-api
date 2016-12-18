@@ -1,4 +1,4 @@
-class Api::V1::BaseController < ApplicationController
+class Api::BaseController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::RequestForgeryProtection
   include ActionController::Serialization

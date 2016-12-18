@@ -1,4 +1,4 @@
-class Api::V1::ServicesController < Api::V1::BaseController
+class Api::V1::ServicesController < Api::BaseController
   before_action :check_service_owner, only: [:update, :publish, :unpublish]
 
   def index

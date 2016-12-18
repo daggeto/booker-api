@@ -62,13 +62,25 @@ Rails.application.routes.draw do
       resources :service_photos, only: [:destroy]
       resource :device, only: [:create, :destroy]
     end
-  end
 
-  namespace :admin do
-    Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-      username == SIDEKIQ_USERNAME && password == SIDEKIQ_PASSWORD
+    namespace :v11 do
+      resources :services do
+        scope module: :services do
+          resources :events, only: [:index] do
+            collection do
+              get :future
+            end
+          end
+        end
+      end
     end
 
-    mount Sidekiq::Web => '/sidekiq'
+    namespace :admin do
+      Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+        username == SIDEKIQ_USERNAME && password == SIDEKIQ_PASSWORD
+      end
+
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
 end

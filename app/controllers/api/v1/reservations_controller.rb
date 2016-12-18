@@ -1,4 +1,4 @@
-class Api::V1::ReservationsController < Api::V1::BaseController
+class Api::V1::ReservationsController < Api::BaseController
   before_action :check_event_owner, only: [:approve, :disapprove, :cancel_by_service]
   before_action :check_reservation_owner, only: [:cancel_by_client]
 

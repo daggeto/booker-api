@@ -1,4 +1,4 @@
-class Api::V1::EventsController < Api::V1::BaseController
+class Api::V1::EventsController < Api::BaseController
   before_action :check_service_owner, only: [:create]
   before_action :check_event_owner, only: [:update, :destroy]
 

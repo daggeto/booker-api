@@ -1,4 +1,4 @@
-class Api::V1::BaseReservationsController < Api::V1::BaseController
+class Api::V1::BaseReservationsController < Api::BaseController
   DATE_FORMAT = '%Y-%m-%d'
 
   def group_reservations(reservations)

@@ -1,7 +1,7 @@
-class Event::WeekAvailability
+class Event::AvailableDays
   include Interactor::Initializer
 
-  initialize_with :date
+  initialize_with :service, :date
 
   def run
     result = {}
@@ -34,7 +34,8 @@ class Event::WeekAvailability
 
   def grouped_events
     @grouped_events ||=
-      Event
+      service
+        .events
         .free
         .start_in_range(date.beginning_of_week, date.end_of_week)
         .group_by { |event| event.start_at.yday }

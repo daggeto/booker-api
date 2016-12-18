@@ -27,6 +27,12 @@ class Event < ActiveRecord::Base
     where('start_at > ?', current_date)
   }
 
+  scope :start_in_range, lambda { |query_from, query_to|
+    where('start_at > ? AND start_at < ?', query_from, query_to)
+  }
+
+  scope :group_by_day_of_year, -> { group('DATE_FORMAT(start_at, \'%j\' )') }
+
   scope :visible, -> { where(status: Status::VISIBLE) }
   scope :free, -> { where(status: Event::Status::FREE) }
 
