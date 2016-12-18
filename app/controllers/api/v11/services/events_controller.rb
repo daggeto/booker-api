@@ -29,6 +29,7 @@ class Api::V11::Services::EventsController < Api::BaseController
       .after(Event::VISIBLE_FROM_TIME.since)
       .where(events_query_params)
       .where('start_at >= ? AND start_at <= ?', start_at, end_at)
+      .where(status: Event::Status::VISIBLE)
       .order(:start_at)
   end
 
@@ -37,7 +38,7 @@ class Api::V11::Services::EventsController < Api::BaseController
   end
 
   def events_query_params
-    params.permit(:service_id,  status: [])
+    params.permit(:service_id)
   end
 
   def start_at
