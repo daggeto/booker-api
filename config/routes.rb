@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         end
         collection do
           get :current
+          put :update
         end
       end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113185125) do
+ActiveRecord::Schema.define(version: 20161218163710) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -170,22 +170,24 @@ ActiveRecord::Schema.define(version: 20161113185125) do
     t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
-  add_foreign_key "devices", "users"
-  add_foreign_key "events", "services"
-  add_foreign_key "notification_messages", "notifications"
-  add_foreign_key "notifications", "reservations"
-  add_foreign_key "notifications", "users"
-  add_foreign_key "profile_images", "users"
-  add_foreign_key "reports", "services"
-  add_foreign_key "reports", "users"
-  add_foreign_key "reservations", "events"
-  add_foreign_key "reservations", "users"
-  add_foreign_key "service_photos", "services"
-  add_foreign_key "services", "users"
+  add_foreign_key "devices", "users", on_delete: :cascade
+  add_foreign_key "events", "services", on_delete: :cascade
+  add_foreign_key "notification_messages", "notifications", on_delete: :cascade
+  add_foreign_key "notifications", "reservations", on_delete: :nullify
+  add_foreign_key "notifications", "users", on_delete: :cascade
+  add_foreign_key "profile_images", "users", on_delete: :cascade
+  add_foreign_key "reports", "services", on_delete: :nullify
+  add_foreign_key "reports", "users", on_delete: :nullify
+  add_foreign_key "reservations", "events", on_delete: :cascade
+  add_foreign_key "reservations", "users", on_delete: :cascade
+  add_foreign_key "service_photos", "services", on_delete: :cascade
+  add_foreign_key "services", "users", on_delete: :cascade
 end
