@@ -55,7 +55,6 @@ class Api::V1::ServicesController < Api::BaseController
       published: true,
       with_future_events: true,
       with_events_status: [Event::Status::FREE, Event::Status::PENDING],
-      without_user: current_user
     )
 
     search.results.order(updated_at: :desc).paginate(paginate_params)
@@ -73,7 +72,6 @@ class Api::V1::ServicesController < Api::BaseController
     ServicesSearch.new(
         term: params[:term],
         published: true,
-        without_user: current_user
     ).results
   end
 
