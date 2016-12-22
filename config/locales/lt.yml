@@ -4,13 +4,13 @@ lt:
       already_in_use: Toks vartotojas jau egzistuoja
   event:
     created: Sukurta
-    overlaps_with_service: Šis laikas sutampa su jau egzistuojančiu paslaugos laiku
-    overlaps_with_reservation: Šis laikas sutampa su jau egzistuojančia paslaugos rezervacija
+    overlaps_with_service: Šis laikas sutampa su jau egzistuojančiu Jūsų paslaugos laiku
+    overlaps_with_reservation: Šis laikas sutampa su jau egzistuojančia Jūsų rezervacija
   reservation:
     success: Rezervuota. Atsakymą gausite valandos bėgyje!
     cant_book: Negalima rezervuoti
-    reserved_overlaps: Sutampa su jau egzistuojančia paslaugos rezervacija
-    owned_overlaps: Sutampa su egzistuojančiu paslaugos įvykiu
+    reserved_overlaps: Sutampa su jau egzistuojančia Jūsų rezervacija
+    owned_overlaps: Sutampa su egzistuojančiu Jūsų paslaugos įvykiu
   publish:
     no_events: Neturite nei vieno sukurto įvykio. Įvykiai kuriami kalendoriuje
     no_photos: Neturite pridėję nei vienos nuotraukos
