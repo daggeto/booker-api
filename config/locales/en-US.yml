@@ -25,7 +25,7 @@ en-US:
     report_created: Report created
   status:
     free: Free
-    pending: Pending
+    pending: Pending Approval
     booked: Booked
   welcome:
     navigation:

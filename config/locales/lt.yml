@@ -28,7 +28,7 @@ lt:
     report_created: Pranešimas sukurtas
   status:
     free: Laisva
-    pending: Laukia
+    pending: Laukia Atsakymo
     booked: Rezervuota
   welcome:
     navigation:
