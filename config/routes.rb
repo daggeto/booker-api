@@ -65,7 +65,11 @@ Rails.application.routes.draw do
     end
 
     namespace :v11 do
-      resources :services do
+      resources :services, only: [:index] do
+        collection do
+          get :search
+        end
+
         scope module: :services do
           resources :events, only: [:index] do
             collection do
