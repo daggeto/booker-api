@@ -1,4 +1,6 @@
 class EventSerializer < ActiveModel::Serializer
+  delegate :reservation, to: :object
+
   attributes %i(id label description status status_label start_at end_at past user service_id)
 
   has_one :service
@@ -7,7 +9,9 @@ class EventSerializer < ActiveModel::Serializer
   def label
     return object.description unless object.reservation && object.reservation.user
 
-    object.reservation.user.email
+    return object.reservation.user.email unless personal_info_exist?
+
+    "#{reservation.user.first_name} #{reservation.user.last_name}"
   end
 
   def past
@@ -23,5 +27,11 @@ class EventSerializer < ActiveModel::Serializer
     return unless object.reservation.user
 
     UserSerializer.new(object.reservation.user).as_json
+  end
+
+  private
+
+  def personal_info_exist?
+    true if reservation.user.first_name || reservation.user.last_name
   end
 end

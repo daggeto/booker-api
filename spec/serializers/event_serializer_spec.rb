@@ -9,9 +9,16 @@ describe EventSerializer do
     subject { serialized.label }
 
     context 'when reservation has user' do
-      let(:user_email) { event.reservation.user.email }
+      let(:user_name) { "#{user.first_name} #{user.last_name}" }
 
-      it { is_expected.to be(user_email) }
+      it { is_expected.to eq(user_name) }
+
+      context 'when user does not have firs and last name' do
+        let(:user) { create(:user, first_name: nil, last_name: nil) }
+        let(:user_email) { user.email }
+
+        it { is_expected.to eq(user_email) }
+      end
     end
 
     context 'when reservation has no user' do
