@@ -28,6 +28,24 @@ describe Api::V1::ServicesController do
     end
   end
 
+  describe '#show_selected' do
+    let(:service_one) { create(:service) }
+    let(:service_two) { create(:service) }
+    let(:ids) { [service_one.id, service_two.id] }
+
+    subject { get :show_selected, ids: ids }
+
+    it_behaves_like 'success response'
+
+    it 'return services by ids' do
+      subject
+
+      expect(json['services'][service_one.id.to_s]).to be_present
+      expect(json['services'][service_two.id.to_s]).to be_present
+      expect(json['services'].size).to eq(2)
+    end
+  end
+
   describe '#publish' do
     let(:check_result) { { valid: true } }
     let(:service) { create(:service, user: user) }

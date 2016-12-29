@@ -2,20 +2,15 @@ class Api::V1::ServicesController < Api::BaseController
   before_action :check_service_owner, only: [:update, :publish, :unpublish]
 
   def index
-    serialized = serialize_all(services(paginate_params), ServiceSerializer)
+    personalized = personalize(services(paginate_params))
 
-    render json:
-             {
-               services: ServicePersonalizer.for_all(serialized.as_json),
-               more: any_more?
-             },
-           each_serializer: ServiceSerializer
+    render_success(services: personalized, more: any_more?)
   end
 
   def search
-    serialized = serialize_all(search_services, ServiceSerializer)
+    personalized = personalize(search_services)
 
-    render_success(services: ServicePersonalizer.for_all(serialized.as_json))
+    render_success(services: personalized)
   end
 
   def create
@@ -26,6 +21,16 @@ class Api::V1::ServicesController < Api::BaseController
 
   def show
     render json: service
+  end
+
+  def show_selected
+    selected_services = personalize(services_by_ids).reduce({}) do |result, service|
+      result[service[:id]] = service
+
+      result
+    end
+
+    render_success(services: selected_services)
   end
 
   def update
@@ -50,6 +55,12 @@ class Api::V1::ServicesController < Api::BaseController
 
   private
 
+  def personalize(services)
+    serialized = serialize_all(services, ServiceSerializer).as_json
+
+    ServicePersonalizer.for_all(serialized)
+  end
+
   def services(paginate_params)
     search = ServicesSearch.new(
       published: true,
@@ -60,12 +71,12 @@ class Api::V1::ServicesController < Api::BaseController
     search.results.order(updated_at: :desc).paginate(paginate_params)
   end
 
-  def any_more?
-    services(page: paginate_params[:page].to_i + 1, per_page: paginate_params[:per_page]).any?
-  end
-
   def paginate_params
     params.permit(:page, :per_page)
+  end
+
+  def any_more?
+    services(page: paginate_params[:page].to_i + 1, per_page: paginate_params[:per_page]).any?
   end
 
   def search_services
@@ -85,5 +96,9 @@ class Api::V1::ServicesController < Api::BaseController
 
   def service
     @service ||= Service.find(params[:id] || params[:service_id])
+  end
+
+  def services_by_ids
+    @services_by_ids ||= Service.where(id: params[:ids])
   end
 end

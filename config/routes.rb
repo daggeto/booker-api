@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
         collection do
           get :search
+          get :show_selected
         end
 
         scope module: :services do
