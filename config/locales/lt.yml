@@ -26,6 +26,8 @@ lt:
   service:
     new_service_name: Nauja paslauga
     report_created: Pranešimas sukurtas
+  support_issue:
+    message_sent: Ačiū. Pranešimą gavome. Atsakymą gausite į e. paštą.
   status:
     free: Laisva
     pending: Laukia Atsakymo

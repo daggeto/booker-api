@@ -27,6 +27,8 @@ en-US:
     free: Free
     pending: Pending Approval
     booked: Booked
+  support_issue:
+    message_sent: Thanks. We got your question and will answer to your email.
   welcome:
     navigation:
       toggle: Expand

@@ -1,6 +1,8 @@
 class Api::V1::SupportIssuesController < Api::BaseController
   def create
-    render_success data: { created: SupportIssue::Create.for(current_user, issue_params) }
+    SupportIssue::Create.for(current_user, issue_params)
+
+    render_success message: I18n.t('support_issue.message_sent')
   end
 
   private
