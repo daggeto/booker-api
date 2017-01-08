@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :reservations, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :support_issues, dependent: :destroy
   has_many :devices
 
   # def valid_token?(token, client_id='default')

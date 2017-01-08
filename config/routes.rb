@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       end
 
       resources :service_photos, only: [:destroy]
+      resources :support_issues, only: [:create]
       resource :device, only: [:create, :destroy]
     end
 

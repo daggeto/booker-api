@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218163710) do
+ActiveRecord::Schema.define(version: 20170108160754) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -147,6 +147,19 @@ ActiveRecord::Schema.define(version: 20161218163710) do
   add_index "services", ["name"], name: "index_services_on_name", using: :btree
   add_index "services", ["user_id"], name: "index_services_on_user_id", using: :btree
 
+  create_table "support_issues", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.text     "message",        limit: 65535, null: false
+    t.string   "platform",       limit: 255
+    t.string   "version",        limit: 255
+    t.string   "app_version",    limit: 255
+    t.text     "device_details", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "support_issues", ["user_id"], name: "index_support_issues_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "provider",               limit: 255,   default: "email", null: false
     t.string   "uid",                    limit: 255,   default: "",      null: false
@@ -190,4 +203,5 @@ ActiveRecord::Schema.define(version: 20161218163710) do
   add_foreign_key "reservations", "users", on_delete: :cascade
   add_foreign_key "service_photos", "services", on_delete: :cascade
   add_foreign_key "services", "users", on_delete: :cascade
+  add_foreign_key "support_issues", "users"
 end
