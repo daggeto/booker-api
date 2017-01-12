@@ -4,7 +4,7 @@ describe Api::V1::ReservationsController do
   before { sign_in(user) }
 
   describe '#create' do
-    let(:event) { create(:event) }
+    let(:event) { create(:event, :with_service) }
     let(:params) { { event_id: event.id } }
 
     subject { post :create, params }
@@ -14,10 +14,18 @@ describe Api::V1::ReservationsController do
       allow(Reservation::Validate).to receive(:for).and_return(valid: true, message: 'OK')
     end
 
+    it_behaves_like 'success response'
+
     it 'creates reservation' do
       expect(Reservation::Create).to receive(:for).with(event, user)
 
       subject
+    end
+
+    it 'respondes with personalized service' do
+      subject
+
+      expect(json['service']).to include('nearest_event')
     end
   end
 

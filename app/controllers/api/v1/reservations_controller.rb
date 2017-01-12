@@ -9,7 +9,7 @@ class Api::V1::ReservationsController < Api::BaseController
 
     Reservation::Create.for(event, current_user) if result[:valid]
 
-    render_success(message: result[:message], service: event.service)
+    render_success(message: result[:message], service: event.service.to_dto)
   end
 
   def approve
