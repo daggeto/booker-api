@@ -1,7 +1,7 @@
 describe Event::AvailableDays do
   describe '.for' do
-    let(:date) { Time.now.beginning_of_day }
-    let(:beginning_of_week) { date.beginning_of_week }
+    let(:beginning_of_week) { Time.now.beginning_of_week }
+    let(:date) { beginning_of_week + 3.days }
     let(:day_number) { beginning_of_week.yday }
     let(:available_days) do
       {
@@ -14,8 +14,12 @@ describe Event::AvailableDays do
         day_number + 6 => 0
       }
     end
+
     let(:service) { create(:service) }
+
     let!(:other_service_event) { create(:event, start_at: beginning_of_week) }
+
+    let!(:past_event) { create(:event, service: service, start_at: date - 1.day) }
     let!(:day_one_event) { create(:event, :booked, service: service, start_at: beginning_of_week) }
     let!(:day_three_event) do
       create(:event, :pending, service: service, start_at: beginning_of_week + 2.days)

@@ -37,7 +37,7 @@ class Event::AvailableDays
       service
         .events
         .free
-        .start_in_range(date.beginning_of_week, date.end_of_week)
+        .start_in_range(date, date.end_of_week)
         .group_by { |event| event.start_at.yday }
   end
 end
