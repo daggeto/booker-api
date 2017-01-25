@@ -24,11 +24,12 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def show_selected
-    selected_services = service_ids.reduce({}) do |result, id|
-      result[id] = ServicePersonalizer.for(id: id)
+    selected_services =
+      Event::Nearest.for(service_ids).reduce({}) do |result, (service_id, nearest_event)|
+        result[service_id] = { nearest_event: nearest_event }
 
-      result
-    end
+        result
+      end
 
     render_success(services: selected_services)
   end

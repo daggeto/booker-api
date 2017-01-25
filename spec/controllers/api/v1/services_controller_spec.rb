@@ -29,20 +29,21 @@ describe Api::V1::ServicesController do
   end
 
   describe '#show_selected' do
-    let(:service_one) { create(:service) }
-    let(:service_two) { create(:service) }
-    let(:ids) { [service_one.id, service_two.id] }
+    let(:service) { create(:service) }
+    let(:service_id) { service.id.to_s }
+    let(:ids) { [service_id] }
+    let(:nearest) { { service_id => build(:event) } }
 
     subject { get :show_selected, ids: ids }
 
     it_behaves_like 'success response'
 
-    it 'return services by ids' do
-      subject
+    before { expect(Event::Nearest).to receive(:for).with(ids).and_return(nearest) }
 
-      expect(json['services'][service_one.id.to_s]).to be_present
-      expect(json['services'][service_two.id.to_s]).to be_present
-      expect(json['services'].size).to eq(2)
+    it 'return events by services ids' do
+      subject
+      
+      expect(json['services'][service_id]['nearest_event']).to be_present
     end
   end
 
