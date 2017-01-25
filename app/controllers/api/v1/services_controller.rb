@@ -24,8 +24,8 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def show_selected
-    selected_services = personalize(services_by_ids).reduce({}) do |result, service|
-      result[service[:id]] = service
+    selected_services = service_ids.reduce({}) do |result, id|
+      result[id] = ServicePersonalizer.for(id: id)
 
       result
     end
@@ -98,7 +98,7 @@ class Api::V1::ServicesController < Api::BaseController
     @service ||= Service.find(params[:id] || params[:service_id])
   end
 
-  def services_by_ids
-    @services_by_ids ||= Service.where(id: params[:ids])
+  def service_ids
+    @service_ids ||= params[:ids] || []
   end
 end
