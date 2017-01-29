@@ -66,7 +66,7 @@ class Api::V1::ServicesController < Api::BaseController
     search = ServicesSearch.new(
       published: true,
       with_future_events: true,
-      with_events_status: [Event::Status::FREE, Event::Status::PENDING],
+      with_events_status: [Event::Status::FREE],
     )
 
     search.results.order(updated_at: :desc).paginate(paginate_params)
