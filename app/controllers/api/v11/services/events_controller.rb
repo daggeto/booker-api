@@ -11,7 +11,7 @@ class Api::V11::Services::EventsController < Api::BaseController
   def future
     render json: {
       events: serialize_all(future_events, EventSerializer),
-      available_days: available_days(Event::VISIBLE_FROM_TIME.since)
+      available_days: available_days(future_available_date)
     }
   end
 
@@ -33,8 +33,18 @@ class Api::V11::Services::EventsController < Api::BaseController
       .order(:start_at)
   end
 
+
+
+  def future_available_date
+    from_date = start_at.beginning_of_week
+
+    return Event::VISIBLE_FROM_TIME.since if Event::VISIBLE_FROM_TIME.since > from_date
+
+    from_date
+  end
+
   def available_days(from_date)
-    @available_days ||= Event::AvailableDays.for(service, from_date)
+    Event::AvailableDays.for(service, from_date)
   end
 
   def events_query_params

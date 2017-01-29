@@ -11,8 +11,8 @@ describe Api::V11::Services::EventsController do
   end
 
   shared_examples 'includes available days' do
-    it 'return available days for week' do
-      expect(Event::AvailableDays).to receive(:for).with(service, available_from)
+    it 'calls available days interactor' do
+      expect(Event::AvailableDays).to receive(:for).with(event.service, available_from)
 
       subject
 
@@ -51,13 +51,16 @@ describe Api::V11::Services::EventsController do
   describe '#future' do
     let(:user) { create(:user) }
     let(:current_date) { Time.now }
-    let(:start_at) { Event::VISIBLE_FROM_TIME.since(current_date) + 1.minute }
-    let(:end_at) { start_at + 10.minutes }
+
+    let(:event_start_at) { Event::VISIBLE_FROM_TIME.since(current_date) + 1.minute }
+    let(:event_end_at) { event_start_at + 10.minutes }
     let(:event) do
-      create(:event, :with_service, start_at: start_at, end_at: end_at)
+      create(:event, :with_service, start_at: event_start_at, end_at: event_end_at)
     end
-    let(:service) { event.service }
-    let(:params) { { service_id: event.service.id, start_at: start_at.beginning_of_day } }
+
+    let(:request_start_at) { current_date.beginning_of_day }
+    let(:params) { { service_id: event.service.id, start_at: request_start_at} }
+
     let!(:past_event) do
       create(
         :event,
@@ -73,13 +76,23 @@ describe Api::V11::Services::EventsController do
 
     it_behaves_like 'events finder'
 
-    it_behaves_like 'includes available days' do
-      let(:available_from) { Event::VISIBLE_FROM_TIME.since(current_date) }
+    context 'when start_at param is in current week' do
+      it_behaves_like 'includes available days' do
+        let(:available_from) { Event::VISIBLE_FROM_TIME.since(current_date) }
+      end
+    end
+
+    context 'when start_at param is in next week' do
+      let(:request_start_at) { current_date + 1.week }
+
+      it_behaves_like 'includes available days' do
+        let(:available_from) { request_start_at.beginning_of_week }
+      end
     end
 
     context 'when event start before midnight and ends after' do
-      let(:start_at) { Time.zone.now.end_of_day - 10.minutes }
-      let(:end_at) { start_at + 20.minutes }
+      let(:event_start_at) { Time.zone.now.end_of_day - 10.minutes }
+      let(:event_end_at) { event_start_at + 20.minutes }
 
       it_behaves_like 'events finder'
     end
