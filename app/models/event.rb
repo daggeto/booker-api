@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
 
   VISIBLE_FROM_TIME = 15.minutes
 
+  module Duration
+    MINUTES_15 = 15.minutes
+  end
+
   belongs_to :service
 
   has_one :reservation, dependent: :destroy

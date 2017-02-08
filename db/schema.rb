@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108160754) do
+ActiveRecord::Schema.define(version: 20170208205714) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -132,15 +132,15 @@ ActiveRecord::Schema.define(version: 20170108160754) do
   add_index "service_photos", ["slot"], name: "index_service_photos_on_slot", using: :btree
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",        limit: 255,   default: "My Activity", null: false
-    t.integer  "duration",    limit: 4,     default: 60,            null: false
-    t.integer  "price",       limit: 4,     default: 0,             null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "name",        limit: 255
+    t.integer  "duration",    limit: 4,     default: 60,    null: false
+    t.integer  "price",       limit: 4,     default: 0,     null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "phone",       limit: 255
     t.string   "address",     limit: 255
     t.integer  "user_id",     limit: 4
-    t.boolean  "published",                 default: false,         null: false
+    t.boolean  "published",                 default: false, null: false
     t.text     "description", limit: 65535
   end
 
