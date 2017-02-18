@@ -37,27 +37,27 @@ lt:
       toggle: Išskleisti
       menu: Meniu
     header:
-      name: Time Booker
-      fetures: Paslaugos
+      name: TimeSpex
+      fetures: Privalumai
       contact: Kontatkai
     download:
-      title: Rezervuok paslaugas arba tegul klientai rezervuojasi pas tave
+      title: Laikas - pinigia. Dar niekada nebuvo taip paprasta pirkit ir parduodi laiką!
       subtitle: Musų aplikacija yra pasiekiama android ir iOS platformose! Atsisiųsk dabar!
     features:
-      title: Paslaugos
-      subtitle: "Šioje aplikacijoje rasi šias funkcijas:"
+      title: Privalumai
+      subtitle: "Pagrindiniai TimeSpex privalumai:"
       feed:
         title: Paslaugų srautas
-        subtitle: Rasi tau reikalingą paslaugą, kurią galėsi rezervuoti tau tinkamu laiku!
+        subtitle: Galimybė atrasti naujų paslaugų ir rezervuoti jas iškarto.
       notifications:
         title: Pranešimai
-        subtitle: Gauk priminimus apie rezervaciją!
+        subtitle: Nesirūpink kada ir kur turi būti. Gausi priminimus prieš rezervacijos laiką.
       calendar:
         title: Kalendorius
-        subtitle: Sukurk kalendorių savo paslaugai. Užpildyk laikus kada esi laisvas. Lauk klientu!
+        subtitle: Ate, kalendoriai ir smulkus rašteliai! Organizuok savo laiką kalendoriuje.
       free:
-        title: Nemokama
-        subtitle: Paslauga yra visiškai nemokama!
+        title: Programa nemokama
+        subtitle: Naudokis programa ir nieko nemokėk. 
   time:
     formats:
       notification: '%B %d, %H:%M val.'
