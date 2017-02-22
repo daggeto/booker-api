@@ -41,7 +41,7 @@ lt:
       fetures: Privalumai
       contact: Kontatkai
     download:
-      title: Laikas - pinigia. Dar niekada nebuvo taip paprasta pirkit ir parduodi laiką!
+      title: Laikas - pinigai. Dar niekada nebuvo taip paprasta pirkit ir parduodi laiką!
       subtitle: Musų aplikacija yra pasiekiama android ir iOS platformose! Atsisiųsk dabar!
     features:
       title: Privalumai
@@ -54,10 +54,10 @@ lt:
         subtitle: Nesirūpink kada ir kur turi būti. Gausi priminimus prieš rezervacijos laiką.
       calendar:
         title: Kalendorius
-        subtitle: Ate, kalendoriai ir smulkus rašteliai! Organizuok savo laiką kalendoriuje.
+        subtitle: Ate, darbo kalendoriai ir smulkus rašteliai! Organizuok savo laiką programėlė kalendoriuje.
       free:
         title: Programa nemokama
-        subtitle: Naudokis programa ir nieko nemokėk. 
+        subtitle: Naudokis programa ir nieko nemokėk.
   time:
     formats:
       notification: '%B %d, %H:%M val.'
