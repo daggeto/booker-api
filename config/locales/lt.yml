@@ -58,6 +58,10 @@ lt:
       free:
         title: Programa nemokama
         subtitle: Naudokis programa ir nieko nemokėk.
+    tutorials:
+      create_user: Kaip sukurti naują vartotoją?
+      book_event: Kaip rezervuoti laiką?
+      create_service: Kaip sukurti paslaugą?
   time:
     formats:
       notification: '%B %d, %H:%M val.'

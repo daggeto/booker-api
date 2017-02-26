@@ -55,8 +55,10 @@ en-US:
       free:
         title: Free for Use
         subtitle: As always good apps are free!
-
-
+    tutorials:
+      create_user: How create new user?
+      book_event: How to book?
+      create_service: How to create service?
 time:
   formats:
     notification: '%B %d, at  %H:%M'
