@@ -16,6 +16,6 @@
 !/log/.keep
 /tmp
 /shared
-/public
+/public/*
 /.env
 /.env.local
