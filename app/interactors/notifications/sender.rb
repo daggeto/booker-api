@@ -6,8 +6,7 @@ module Notifications::Sender
   private
 
   def send
-    uuid = Notifications::Send.for([receiver], params)
-    Ionic::Notification::Update.for(notification, uuid)
+    NotificationSender.perform_in(Time.now, [receiver.id], notification.id, params)
   end
 
   def send?

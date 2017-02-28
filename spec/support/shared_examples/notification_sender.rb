@@ -1,5 +1,6 @@
 shared_examples 'notification sender' do
-  let(:receiver) { anything }
+  let(:receiver_id) { anything }
+  let(:notification_id) { anything }
   let(:notification_params) { anything }
   let(:android_params) { anything }
   let(:ios_params) { anything }
@@ -12,15 +13,17 @@ shared_examples 'notification sender' do
     }
   }
   let(:uuid) { '123' }
+  let(:current_time) { Time.now }
 
   before do
-    allow(Notifications::Send).to receive(:for).and_return(uuid)
-    allow(Ionic::Notification::Update).to receive(:for)
+    allow(NotificationSender).to receive(:perform_in)
+    allow(Time).to receive(:now).and_return(current_time)
   end
 
   it 'sends notification' do
-    expect(Notifications::Send).to receive(:for).with([receiver], expected_notification_params)
-    expect(Ionic::Notification::Update).to receive(:for).with(anything, uuid)
+    expect(NotificationSender)
+      .to receive(:perform_in)
+      .with(current_time, [receiver_id], notification_id, expected_notification_params)
 
     subject
   end
@@ -38,7 +41,9 @@ shared_examples 'notification sender' do
     }
 
     it 'sends default params' do
-      expect(Notifications::Send).to receive(:for).with([receiver], expected_default_params)
+      expect(NotificationSender)
+        .to receive(:perform_in)
+        .with(current_time, [receiver_id], notification_id, expected_default_params)
 
       subject
     end

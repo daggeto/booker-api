@@ -1,7 +1,7 @@
 class Notifications::Send
   include Interactor::Initializer
 
-  initialize_with :receivers, :params
+  initialize_with :receivers, :notification, :notification_params
 
   def run
     send_request
@@ -10,10 +10,11 @@ class Notifications::Send
   private
 
   def send_request
-    response = Ionic::Request.post('notifications', { tokens: tokens }.merge(params))
-    Rails.logger.debug(response.body.as_json)
+    response = Ionic::Request.post('notifications', { tokens: tokens }.merge(notification_params))
 
-    uuid(response)
+    uuid = uuid(response)
+
+    Ionic::Notification::Update.for(notification, uuid)
   end
 
   def tokens
