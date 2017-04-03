@@ -42,3 +42,30 @@
           </div>
         </div>
 </section>
+<script>
+  $.screentime({
+    fields: [
+      {
+        selector: '#create_user',
+        name: 'Create User Video',
+        percentOnScreen: '100%'
+      },
+      {
+        selector: '#book_event',
+        name: 'Book Event Video',
+        percentOnScreen: '100%'
+      },
+      {
+        selector: '#create_service',
+        name: 'Create Service Video',
+        percentOnScreen: '100%'
+      },
+    ],
+    reportInterval: 30,
+    callback: function(data) {
+      for(var element in data) {
+        ga('send', 'event', 'Video Tutorial', 'Watching ' + element, 'Spent 30s');
+      }
+    }
+  });
+</script>

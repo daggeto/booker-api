@@ -43,13 +43,14 @@
             <div class="badges">
               <a
                 class="badge-link"
-                href="https://play.google.com/store/apps/details?id=com.daggeto.timespex&hl=en">
-                  <%= image_tag 'google-play-badge.svg' %>
+                href="https://play.google.com/store/apps/details?id=com.daggeto.timespex&hl=en"
+                >
+                  <%= image_tag 'google-play-badge.svg', onclick: 'trackAndroidClick()' %>
               </a>
               <a
                 class="badge-link"
                 href="https://itunes.apple.com/us/app/timespex/id1205301374?ls=1&mt=8">
-                  <%= image_tag 'app-store-badge.svg' %>
+                  <%= image_tag 'app-store-badge.svg', onclick: 'trackIosClick()' %>
               </a>
             </div>
           </div>
@@ -145,3 +146,12 @@
     <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
   </div>
 </footer>
+<script>
+  function trackAndroidClick() {
+    ga('send', 'event', 'NavigationTo', 'Android', 'Viewer opened google play');
+  }
+
+  function trackIosClick() {
+    ga('send', 'event', 'NavigationTo', 'Ios', 'Viewer opened itunes');
+  }
+</script>
