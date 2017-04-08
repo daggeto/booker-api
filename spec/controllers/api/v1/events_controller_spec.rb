@@ -7,11 +7,11 @@ describe Api::V1::EventsController do
     let(:service_id) { service.id }
     let(:params) do
       {
-        description: 'Description',
-        service_id: service_id,
-        status: Event::Status::FREE,
-        start_at: Time.now,
-        end_at: Time.now + 1.hour
+        'description': 'Description',
+        'service_id': service_id.to_s,
+        'status': Event::Status::FREE,
+        'start_at': Time.now.to_s,
+        'end_at': (Time.now + 1.hour).to_s
       }
     end
     let!(:service) { create(:service, user: user) }
@@ -27,7 +27,7 @@ describe Api::V1::EventsController do
     it_behaves_like 'success response'
 
     it 'creates event' do
-      expect(Event::Create).to receive(:for)
+      expect(Event::Create).to receive(:for).with(user, params)
 
       subject
     end

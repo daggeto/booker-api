@@ -8,6 +8,13 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def search
+    GoogleAnalytics::Event::Send.for(
+      GoogleAnalytics::Events::SEARCH.merge(
+        user_id: current_user.id,
+        label: params[:term]
+      )
+    )
+
     personalized = personalize(search_services)
 
     render_success(services: personalized)

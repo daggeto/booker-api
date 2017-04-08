@@ -12,7 +12,7 @@ class Api::V1::EventsController < Api::BaseController
 
     return render_conflict(errors: errors(result)) unless result[:valid]
 
-    Event::Create.for(events_params)
+    Event::Create.for(current_user, events_params)
 
     render_success(message: result[:message])
   end

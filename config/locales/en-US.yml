@@ -62,3 +62,4 @@ en-US:
 time:
   formats:
     notification: '%B %d, at  %H:%M'
+    ga_event: '%Y-%m-%d %H:%M'

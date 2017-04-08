@@ -42,7 +42,7 @@ describe Api::V1::ServicesController do
 
     it 'return events by services ids' do
       subject
-      
+
       expect(json['services'][service_id]['nearest_event']).to be_present
     end
   end
@@ -94,11 +94,15 @@ describe Api::V1::ServicesController do
     let(:name) { 'Your Service' }
     let!(:service) { create(:service, name: name, published: true) }
 
+    before { allow(GoogleAnalytics::Event::Send).to receive(:for) }
+
     subject { get :search, term: term }
 
     it_behaves_like 'success response'
 
     it 'returns services' do
+      expect(GoogleAnalytics::Event::Send).to receive(:for)
+
       subject
 
       expect(json['services']).to contain_exactly(hash_including('id' => service.id))

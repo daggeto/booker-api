@@ -6,7 +6,9 @@ describe Event::Delete do
       it { has.to change(Event, :count).to(0) }
     end
 
-    before { allow(Notifications::ReservationCanceledByService).to receive(:for) }
+    before do
+      allow(Notifications::ReservationCanceledByService).to receive(:for)
+    end
 
     context 'when event is free' do
       let!(:event) { create(:event) }

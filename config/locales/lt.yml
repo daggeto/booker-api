@@ -65,3 +65,4 @@ lt:
   time:
     formats:
       notification: '%B %d, %H:%M val.'
+      ga_event: '%Y-%m-%d %H:%M'
