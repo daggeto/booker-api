@@ -5,6 +5,7 @@ class GoogleAnalytics::Request
 
   module Type
     EVENT = 'event'
+    PAGE_VIEW = 'pageview'
   end
 
   class << self

@@ -4,7 +4,10 @@ class Api::BaseController < ApplicationController
   include ActionController::Serialization
   include RenderResponses
 
+  UNTRACKABLE_REQUESTS = ['show_selected', 'current']
+
   before_action :authenticate_user!
+  before_action :track_requests
 
   respond_to :json
 
@@ -34,6 +37,17 @@ class Api::BaseController < ApplicationController
 
   def event
     nil
+  end
+
+  def track_requests
+    return if UNTRACKABLE_REQUESTS.include?(params[:action])
+
+    GoogleAnalytics::PageView::Send.for(
+      user_id: current_user.id,
+      host: 'timespex.com',
+      page: URI.unescape(request.original_fullpath),
+      title: request.query_parameters
+    )
   end
 
   rescue_from Exceptions::AccessDenied, with: :render_forbidden

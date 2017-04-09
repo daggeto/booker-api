@@ -1,27 +1,24 @@
-describe GoogleAnalytics::Event::Send do
+describe GoogleAnalytics::PageView::Send do
   describe '.for' do
     let(:user_id) { 1 }
-    let(:category) { 'Category' }
-    let(:action) { 'Action' }
-    let(:label) { 'Label' }
-    let(:value) { '123' }
+    let(:host) { 'www.timespex.com' }
+    let(:page) { 'Page' }
+    let(:title) { 'Title' }
     let(:params) do
       {
         user_id: user_id,
-        category: category,
-        action: action,
-        label: label,
-        value: value
+        host: host,
+        page: page,
+        title: title
       }
     end
     let(:expected_params) do
       {
-        t: GoogleAnalytics::Request::Type::EVENT,
+        t: GoogleAnalytics::Request::Type::PAGE_VIEW,
         cid: user_id,
-        ec: category,
-        ea: action,
-        el: label,
-        ev: value
+        dh: host,
+        dp: page,
+        dt: title
       }
     end
 

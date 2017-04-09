@@ -1,12 +1,11 @@
-class GoogleAnalytics::Event::Send
+class GoogleAnalytics::PageView::Send
   include Interactor::Initializer
 
   PARAM_MAPPING = {
     user_id: 'cid',
-    category: 'ec',
-    action: 'ea',
-    label: 'el',
-    value: 'ev'
+    host: 'dh',
+    page: 'dp',
+    title: 'dt'
   }
 
   initialize_with :params
@@ -24,6 +23,6 @@ class GoogleAnalytics::Event::Send
   private
 
   def default_params
-    { t: GoogleAnalytics::Request::Type::EVENT }
+    { t: GoogleAnalytics::Request::Type::PAGE_VIEW }
   end
 end
