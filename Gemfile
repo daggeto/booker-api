@@ -31,6 +31,7 @@ gem 'sidekiq-cron', '~> 0.4.2'
 gem 'sinatra', '~> 1.4.7'
 gem 'dotenv-rails', '~> 2.1.1'
 gem 'unicorn', '~> 5.1.0'
+gem 'sentry-raven', '~> 2.4.0'
 
 gem 'therubyracer', '~> 0.12.2'
 gem 'font-awesome-rails', '~> 4.5.0'
