@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422142526) do
+ActiveRecord::Schema.define(version: 20170422144332) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -52,18 +52,18 @@ ActiveRecord::Schema.define(version: 20170422142526) do
   add_index "notification_messages", ["notification_id"], name: "index_notification_messages_on_notification_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
-    t.string   "uuid",           limit: 255
-    t.string   "profile",        limit: 255
+    t.string   "uuid",           limit: 191
+    t.string   "profile",        limit: 191
     t.text     "tokens",         limit: 65535
     t.integer  "reservation_id", limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "user_id",        limit: 4
-    t.string   "title",          limit: 255
+    t.string   "title",          limit: 191
     t.text     "message",        limit: 65535
     t.text     "payload",        limit: 65535
     t.integer  "sender_id",      limit: 4
-    t.string   "sender_type",    limit: 255
+    t.string   "sender_type",    limit: 191
   end
 
   add_index "notifications", ["reservation_id"], name: "index_notifications_on_reservation_id", using: :btree
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170422142526) do
   create_table "reports", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "service_id", limit: 4
-    t.string   "message",    limit: 255, null: false
+    t.string   "message",    limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -132,13 +132,13 @@ ActiveRecord::Schema.define(version: 20170422142526) do
   add_index "service_photos", ["slot"], name: "index_service_photos_on_slot", using: :btree
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",        limit: 191
     t.integer  "duration",    limit: 4,     default: 60,    null: false
     t.integer  "price",       limit: 4,     default: 0,     null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.string   "phone",       limit: 255
-    t.string   "address",     limit: 255
+    t.string   "phone",       limit: 191
+    t.string   "address",     limit: 191
     t.integer  "user_id",     limit: 4
     t.boolean  "published",                 default: false, null: false
     t.text     "description", limit: 65535
