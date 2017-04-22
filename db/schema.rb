@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208205714) do
+ActiveRecord::Schema.define(version: 20170422063012) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170208205714) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "description", limit: 255
+    t.text     "description", limit: 65535
     t.string   "status",      limit: 255
     t.datetime "start_at"
     t.datetime "end_at"
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(version: 20170208205714) do
   create_table "notifications", force: :cascade do |t|
     t.string   "uuid",           limit: 255
     t.string   "profile",        limit: 255
-    t.text     "tokens",         limit: 65535
+    t.text     "tokens",         limit: 16777215
     t.integer  "reservation_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "user_id",        limit: 4
-    t.string   "title",          limit: 255
-    t.text     "message",        limit: 65535
-    t.text     "payload",        limit: 65535
+    t.string   "title",          limit: 191
+    t.string   "message",        limit: 191
+    t.text     "payload",        limit: 16777215
     t.integer  "sender_id",      limit: 4
     t.string   "sender_type",    limit: 255
   end
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170208205714) do
   create_table "reports", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "service_id", limit: 4
-    t.string   "message",    limit: 255, null: false
+    t.string   "message",    limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20170208205714) do
   add_index "service_photos", ["slot"], name: "index_service_photos_on_slot", using: :btree
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",        limit: 191
     t.integer  "duration",    limit: 4,     default: 60,    null: false
     t.integer  "price",       limit: 4,     default: 0,     null: false
     t.datetime "created_at",                                null: false
@@ -149,25 +149,25 @@ ActiveRecord::Schema.define(version: 20170208205714) do
 
   create_table "support_issues", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
-    t.text     "message",        limit: 65535, null: false
+    t.text     "message",        limit: 65535
     t.string   "platform",       limit: 255
     t.string   "version",        limit: 255
     t.string   "app_version",    limit: 255
-    t.text     "device_details", limit: 65535
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.text     "device_details", limit: 16777215
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "support_issues", ["user_id"], name: "index_support_issues_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               limit: 255,   default: "email", null: false
-    t.string   "uid",                    limit: 255,   default: "",      null: false
-    t.string   "encrypted_password",     limit: 255,   default: "",      null: false
+    t.string   "provider",               limit: 255,      default: "email", null: false
+    t.string   "uid",                    limit: 255,      default: "",      null: false
+    t.string   "encrypted_password",     limit: 255,      default: "",      null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,       null: false
+    t.integer  "sign_in_count",          limit: 4,        default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -180,28 +180,28 @@ ActiveRecord::Schema.define(version: 20170208205714) do
     t.string   "nickname",               limit: 255
     t.string   "image",                  limit: 255
     t.string   "email",                  limit: 255
-    t.text     "tokens",                 limit: 65535
+    t.text     "tokens",                 limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
+    t.string   "first_name",             limit: 191
+    t.string   "last_name",              limit: 191
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
-  add_foreign_key "devices", "users", on_delete: :cascade
-  add_foreign_key "events", "services", on_delete: :cascade
-  add_foreign_key "notification_messages", "notifications", on_delete: :cascade
-  add_foreign_key "notifications", "reservations", on_delete: :nullify
-  add_foreign_key "notifications", "users", on_delete: :cascade
-  add_foreign_key "profile_images", "users", on_delete: :cascade
-  add_foreign_key "reports", "services", on_delete: :nullify
-  add_foreign_key "reports", "users", on_delete: :nullify
-  add_foreign_key "reservations", "events", on_delete: :cascade
-  add_foreign_key "reservations", "users", on_delete: :cascade
-  add_foreign_key "service_photos", "services", on_delete: :cascade
-  add_foreign_key "services", "users", on_delete: :cascade
+  add_foreign_key "devices", "users"
+  add_foreign_key "events", "services"
+  add_foreign_key "notification_messages", "notifications"
+  add_foreign_key "notifications", "reservations"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "profile_images", "users"
+  add_foreign_key "reports", "services"
+  add_foreign_key "reports", "users"
+  add_foreign_key "reservations", "events"
+  add_foreign_key "reservations", "users"
+  add_foreign_key "service_photos", "services"
+  add_foreign_key "services", "users"
   add_foreign_key "support_issues", "users"
 end
