@@ -10,4 +10,4 @@ GCM_API_KEY = ENV['GCM_API_KEY']
 SIDEKIQ_USERNAME = ENV.fetch('SIDEKIQ_USERNAME', 'sidekiqadmin')
 SIDEKIQ_PASSWORD = ENV.fetch('SIDEKIQ_PASSWORD', 'sidekiqpassword')
 
-GA_ID = ENV.fetch('GA_ID', 'UA-93256916-2')
+GA_ID = ENV.fetch('GA_ID', 'UA-93256916-1')

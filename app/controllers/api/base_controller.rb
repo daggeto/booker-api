@@ -45,8 +45,8 @@ class Api::BaseController < ApplicationController
     GoogleAnalytics::PageView::Send.for(
       user_id: current_user.id,
       host: 'timespex.com',
-      page: "#{request.method} : #{URI.unescape(request.original_fullpath)}",
-      title: params[:action]
+      page: URI.unescape(request.original_fullpath),
+      title: request.query_parameters
     )
   end
 
