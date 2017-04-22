@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422063012) do
+ActiveRecord::Schema.define(version: 20170422141722) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -149,13 +149,13 @@ ActiveRecord::Schema.define(version: 20170422063012) do
 
   create_table "support_issues", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
-    t.text     "message",        limit: 65535, null: false
-    t.string   "platform",       limit: 255
-    t.string   "version",        limit: 255
-    t.string   "app_version",    limit: 255
-    t.text     "device_details", limit: 65535
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.text     "message",        limit: 65535
+    t.string   "platform",       limit: 191
+    t.string   "version",        limit: 191
+    t.string   "app_version",    limit: 191
+    t.text     "device_details", limit: 16777215
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "support_issues", ["user_id"], name: "index_support_issues_on_user_id", using: :btree
