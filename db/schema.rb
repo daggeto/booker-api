@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422063012) do
+ActiveRecord::Schema.define(version: 20170208205714) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170422063012) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "description", limit: 191
+    t.string   "description", limit: 255
     t.string   "status",      limit: 255
     t.datetime "start_at"
     t.datetime "end_at"
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(version: 20170422063012) do
   create_table "notifications", force: :cascade do |t|
     t.string   "uuid",           limit: 255
     t.string   "profile",        limit: 255
-    t.text     "tokens",         limit: 16777215
+    t.text     "tokens",         limit: 65535
     t.integer  "reservation_id", limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id",        limit: 4
-    t.string   "title",          limit: 191
-    t.string   "message",        limit: 191
-    t.text     "payload",        limit: 16777215
+    t.string   "title",          limit: 255
+    t.text     "message",        limit: 65535
+    t.text     "payload",        limit: 65535
     t.integer  "sender_id",      limit: 4
     t.string   "sender_type",    limit: 255
   end
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170422063012) do
   create_table "reports", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "service_id", limit: 4
-    t.string   "message",    limit: 191
+    t.string   "message",    limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -132,16 +132,16 @@ ActiveRecord::Schema.define(version: 20170422063012) do
   add_index "service_photos", ["slot"], name: "index_service_photos_on_slot", using: :btree
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",        limit: 191
-    t.integer  "duration",    limit: 4,   default: 60,    null: false
-    t.integer  "price",       limit: 4,   default: 0,     null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "name",        limit: 255
+    t.integer  "duration",    limit: 4,     default: 60,    null: false
+    t.integer  "price",       limit: 4,     default: 0,     null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "phone",       limit: 255
     t.string   "address",     limit: 255
     t.integer  "user_id",     limit: 4
-    t.boolean  "published",               default: false, null: false
-    t.string   "description", limit: 191
+    t.boolean  "published",                 default: false, null: false
+    t.text     "description", limit: 65535
   end
 
   add_index "services", ["name"], name: "index_services_on_name", using: :btree
@@ -149,25 +149,25 @@ ActiveRecord::Schema.define(version: 20170422063012) do
 
   create_table "support_issues", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
-    t.string   "message",        limit: 191
+    t.text     "message",        limit: 65535, null: false
     t.string   "platform",       limit: 255
     t.string   "version",        limit: 255
     t.string   "app_version",    limit: 255
-    t.text     "device_details", limit: 16777215
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "device_details", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "support_issues", ["user_id"], name: "index_support_issues_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               limit: 255,      default: "email", null: false
-    t.string   "uid",                    limit: 255,      default: "",      null: false
-    t.string   "encrypted_password",     limit: 255,      default: "",      null: false
+    t.string   "provider",               limit: 255,   default: "email", null: false
+    t.string   "uid",                    limit: 255,   default: "",      null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",      null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,        default: 0,       null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -180,11 +180,11 @@ ActiveRecord::Schema.define(version: 20170422063012) do
     t.string   "nickname",               limit: 255
     t.string   "image",                  limit: 255
     t.string   "email",                  limit: 255
-    t.text     "tokens",                 limit: 16777215
+    t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name",             limit: 191
-    t.string   "last_name",              limit: 191
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
