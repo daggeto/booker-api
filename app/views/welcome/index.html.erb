@@ -149,9 +149,11 @@
 <script>
   function trackAndroidClick() {
     ga('send', 'event', 'NavigationTo', 'Android', 'Viewer opened google play');
+    fbq('trackCustom', 'NavigateToAndroid' });
   }
 
   function trackIosClick() {
     ga('send', 'event', 'NavigationTo', 'Ios', 'Viewer opened itunes');
+    fbq('trackCustom', 'NavigateToIos');
   }
 </script>
