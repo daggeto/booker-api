@@ -70,10 +70,7 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def services(paginate_params)
-    search = ServicesSearch.new(
-      published: true,
-      with_events_status: [Event::Status::FREE],
-    )
+    search = ServicesSearch.new(published: true)
 
     search.results.order(updated_at: :desc).paginate(paginate_params)
   end
