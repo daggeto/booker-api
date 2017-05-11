@@ -72,7 +72,6 @@ class Api::V1::ServicesController < Api::BaseController
   def services(paginate_params)
     search = ServicesSearch.new(
       published: true,
-      with_future_events: true,
       with_events_status: [Event::Status::FREE],
     )
 
