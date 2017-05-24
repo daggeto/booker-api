@@ -36,9 +36,7 @@ class Event::CreateByTemplate
 
       event_params = default_event_params.merge(start_at: start_at, end_at: end_at)
 
-      return unless valid?(event_params)
-
-      Event::Create.for(user, event_params)
+      Event::Create.for(user, event_params) if valid?(event_params)
     end
   end
 

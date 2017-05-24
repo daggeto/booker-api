@@ -37,15 +37,18 @@ describe Event::CreateByTemplate do
       [
         { start_at: '11:00', end_at: '11:30' },
         { start_at: '11:30', end_at: '12:00' },
+        { start_at: '12:30', end_at: '13:00' }
       ]
     end
 
     before do
-      allow(Event::Validate).to receive(:for).and_return({ valid: true }, { valid: false })
+      allow(Event::Validate).to receive(:for).and_return(
+        { valid: true }, { valid: false }, { valid: true }
+      )
     end
 
     it 'skips creation of invalid event' do
-      expect(Event::Create).to receive(:for).once
+      expect(Event::Create).to receive(:for).twice
 
       subject
     end
