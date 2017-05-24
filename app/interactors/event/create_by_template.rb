@@ -1,6 +1,12 @@
 class Event::CreateByTemplate
   include Interactor::Initializer
 
+  module DAYS
+    ALL = [:sunday, :monday, :tuesday, :wednesday, :thursday, :saturday]
+
+    WEEKEND = [:saturday, :sunday]
+  end
+
   STEP = 1.day
 
   initialize_with :params
@@ -22,7 +28,7 @@ class Event::CreateByTemplate
   end
 
   def create_by_template_for(day)
-    return unless !(day.saturday? || day.sunday?) || weekends?
+    return if exclude_days.include?(DAYS::ALL[day.wday])
 
     template.each do |time_range|
       start_at = combine_date_time(day, time_range[:start_at])
@@ -36,8 +42,8 @@ class Event::CreateByTemplate
     end
   end
 
-  def weekends?
-    params[:weekends]
+  def exclude_days
+    @exclude_days ||= params[:exclude_days] || []
   end
 
   def combine_date_time(day, time)

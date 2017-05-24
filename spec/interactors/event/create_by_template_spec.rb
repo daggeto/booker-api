@@ -2,7 +2,7 @@ describe Event::CreateByTemplate do
   let(:user) { create(:user, :with_service) }
   let(:from) { '2017-01-01' }
   let(:to) { '2017-01-08' }
-  let(:weekends) { true }
+  let(:exclude_days) { nil }
   let(:template) do
     [
       { start_at: '11:00', end_at: '11:30' },
@@ -16,7 +16,7 @@ describe Event::CreateByTemplate do
       template: template,
       from: from,
       to: to,
-      weekends: weekends
+      exclude_days: exclude_days
     }
   end
 
@@ -52,7 +52,7 @@ describe Event::CreateByTemplate do
   end
 
   context 'when weekend is excluded' do
-    let(:weekends) { false }
+    let(:exclude_days) { Event::CreateByTemplate::DAYS::WEEKEND }
 
     it 'does not create events for weekend' do
       expect(Event::Create).to receive(:for).exactly(10).times
