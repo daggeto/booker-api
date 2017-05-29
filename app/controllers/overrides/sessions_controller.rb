@@ -1,5 +1,7 @@
 module Overrides
   class SessionsController < DeviseTokenAuth::SessionsController
+    include RenderResponses
+
     before_action :destroy_device, only: [:destroy]
 
     def create

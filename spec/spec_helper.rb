@@ -27,4 +27,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.example_status_persistence_file_path = 'tmp/rspec/failures.txt'
+
+  # ActiveRecord::Base.logger = Logger.new(STDOUT)
 end

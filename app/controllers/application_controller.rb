@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::API
-  before_filter :add_allow_credentials_headers
   skip_before_filter :verify_authenticity_token
+
   before_filter :cors_preflight_check
+  before_filter :set_raven_context
+  before_filter :add_allow_credentials_headers
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
   after_filter :cors_set_access_control_headers
-  before_action :set_raven_context
 
   def serialize_all(collection, serializer_class)
       collection.map do |item|
@@ -37,6 +40,13 @@ class ApplicationController < ActionController::API
     # the browser will not reject the response
     response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [ :email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :email, :password, :password_confirmation])
   end
 
   private

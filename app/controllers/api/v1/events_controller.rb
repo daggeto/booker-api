@@ -1,13 +1,14 @@
 class Api::V1::EventsController < Api::BaseController
-  before_action :check_service_owner, only: [:create]
-  before_action :check_event_owner, only: [:update, :destroy]
-
+  load_resource :service, only: [:create]
+  load_and_authorize_resource :event, only: [:update, :destroy]
 
   def show
     render json: event
   end
 
   def create
+    authorize! :manage_service, @service
+
     result = Event::Validate.for(current_user, events_params)
 
     return render_conflict(errors: errors(result)) unless result[:valid]
@@ -43,9 +44,5 @@ class Api::V1::EventsController < Api::BaseController
 
   def event
     @event ||= Event.find(params[:id] || params[:event_id])
-  end
-
-  def service
-    @service ||= Service.find(params[:service_id])
   end
 end

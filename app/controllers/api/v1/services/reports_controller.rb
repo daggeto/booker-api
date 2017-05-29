@@ -1,6 +1,8 @@
 class Api::V1::Services::ReportsController < Api::BaseController
+  skip_before_filter :authenticate_user!
+
   def create
-    Report::Create.for(service, current_user, report_params[:message])
+    Report::Create.for(service, user, report_params[:message])
 
     render_success(message: I18n.t('service.report_created'))
   end
@@ -13,5 +15,9 @@ class Api::V1::Services::ReportsController < Api::BaseController
 
   def service
     @service ||= Service.find(params[:service_id])
+  end
+
+  def user
+    current_user || User::guest
   end
 end

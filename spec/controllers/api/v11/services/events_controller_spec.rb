@@ -1,6 +1,4 @@
 describe Api::V11::Services::EventsController do
-  before { sign_in(user) }
-
   shared_examples 'events finder' do
     it 'finds events' do
       subject
@@ -22,6 +20,7 @@ describe Api::V11::Services::EventsController do
 
   describe '#index' do
     let(:user) { create(:user, :with_service) }
+    let(:current_user) { user }
     let(:start_at) { Time.zone.now }
     let(:end_at) { start_at + 10.minutes }
     let(:service) { user.service }
@@ -31,6 +30,8 @@ describe Api::V11::Services::EventsController do
     let!(:event) do
       create(:event, service: service, start_at: start_at, end_at: end_at)
     end
+
+    before { sign_in(current_user) }
 
     subject { get :index, params }
 
@@ -46,10 +47,15 @@ describe Api::V11::Services::EventsController do
 
       it_behaves_like 'events finder'
     end
+
+    context 'when current_user is not service owner' do
+      let(:current_user) { create(:user) }
+
+      it_behaves_like 'forbidden response'
+    end
   end
 
   describe '#future' do
-    let(:user) { create(:user) }
     let(:current_date) { Time.now }
 
     let(:event_start_at) { Event::VISIBLE_FROM_TIME.since(current_date) + 1.minute }

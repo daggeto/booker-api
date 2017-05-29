@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422144332) do
+ActiveRecord::Schema.define(version: 20170501102944) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20170422144332) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "description", limit: 255
-    t.string   "status",      limit: 255
+    t.string   "description", limit: 191
+    t.string   "status",      limit: 191
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer  "service_id",  limit: 4
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20170422144332) do
     t.datetime "updated_at"
     t.string   "first_name",             limit: 191
     t.string   "last_name",              limit: 191
+    t.integer  "roles_mask",             limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

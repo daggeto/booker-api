@@ -2,6 +2,7 @@ class Api::BaseController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::RequestForgeryProtection
   include ActionController::Serialization
+  include CanCan::ControllerAdditions
   include RenderResponses
 
   UNTRACKABLE_REQUESTS = ['show_selected', 'current']
@@ -16,6 +17,7 @@ class Api::BaseController < ApplicationController
   end
 
   def check_event_owner
+    binding.pry
     raise Exceptions::AccessDenied if event.service.try(:user) != current_user
   end
 
@@ -25,10 +27,6 @@ class Api::BaseController < ApplicationController
 
   def check_reservation_owner
     raise Exceptions::AccessDenied if reservation.user != current_user
-  end
-
-  def current_user
-    super
   end
 
   def service
@@ -43,12 +41,19 @@ class Api::BaseController < ApplicationController
     return if UNTRACKABLE_REQUESTS.include?(params[:action])
 
     GoogleAnalytics::PageView::Send.for(
-      user_id: current_user.id,
+      user_id: SecureRandom.uuid,
       host: 'timespex.com',
       page: "#{request.method} : #{URI.unescape(request.original_fullpath)}",
       title: params[:action]
     )
   end
 
+  def google_analytics_user_id
+    return unless current_user
+
+    current_user.id
+  end
+
   rescue_from Exceptions::AccessDenied, with: :render_forbidden
+  rescue_from CanCan::AccessDenied, with: :render_forbidden
 end

@@ -1,9 +1,16 @@
 class User < ActiveRecord::Base
+  include RoleModel
+
+  before_create :set_default_role
+
+  roles :standard, :guest
+
   acts_as_reader
 
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable
+
   include DeviseTokenAuth::Concerns::User
 
   has_one :service, dependent: :destroy
@@ -14,49 +21,30 @@ class User < ActiveRecord::Base
   has_many :support_issues, dependent: :destroy
   has_many :devices, dependent: :destroy
 
-  # def valid_token?(token, client_id='default')
-  #   super
-  # end
-  #
-  # def create_new_auth_token(client_id=nil)
-  #   super
-  # end
-  #
-  # def token_can_be_reused?(token, client_id)
-  #   updated_at = self.tokens[client_id]['updated_at'] || self.tokens[client_id][:updated_at]
-  #
-  #   res = Time.parse(updated_at) > Time.now - DeviseTokenAuth.batch_request_buffer_throttle
-  #   result = {
-  #     res: res,
-  #     token: token,
-  #     updated_at: Time.parse(self.tokens[client_id]['updated_at']),
-  #     current_token_hash: self.tokens[client_id]['token'],
-  #     last_token: self.tokens[client_id]['last_token']
-  #   }
-  #   logger.debug("[token_can_be_reused?] - #{result.inspect}")
-  #
-  #   super
-  # end
-  #
-  # def token_is_current?(token, client_id)
-  #   token_hash = self.tokens[client_id]['token'] || self.tokens[client_id][:token]
-  #
-  #   res = ::BCrypt::Password.new(token_hash) == token
-  #
-  #   result = {
-  #     res: res,
-  #     token: token,
-  #     updated_at: Time.parse(self.tokens[client_id]['updated_at']),
-  #     current_token_hash: self.tokens[client_id]['token'],
-  #     last_token: self.tokens[client_id]['last_token']
-  #   }
-  #
-  #   logger.debug("[token_is_current?] - #{result.inspect}")
-  #
-  #   super
-  # end
+  def self.guest
+    User.new(roles: [:guest])
+  end
 
   def setup_new_reader
     #overrides unread gem method which clears all notifications for new user
+  end
+
+  def standard?
+    has_role? :standard
+  end
+
+  def guest?
+    roles.empty? || has_role?(:guest)
+  end
+
+  # Overides devise auth token
+  def token_validation_response
+    UserSerializer.new(self, info: true)
+  end
+
+  private
+
+  def set_default_role
+    self.roles = [:standard]
   end
 end
