@@ -1,13 +1,13 @@
 class Api::V1::DevicesController < Api::BaseController
+  skip_before_filter :authenticate_user!, only: [:create]
+
   def create
-    current_user.devices.create(device_params)
+    current_device.update(device_params)
   end
 
   private
 
   def device_params
-    request_params = params.permit(:token, :platform)
-
-    request_params.merge(client_id: @client_id)
+    @device_params ||= params.permit(:token, :platform)
   end
 end

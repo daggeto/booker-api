@@ -1,6 +1,7 @@
 module Overrides
   class SessionsController < DeviseTokenAuth::SessionsController
     include RenderResponses
+    include DeviceHelper
 
     before_action :destroy_device, only: [:destroy]
 
@@ -9,13 +10,15 @@ module Overrides
         GoogleAnalytics::Event::Send.for(
           GoogleAnalytics::Events::LOGIN.merge(user_id: resource.id, label: resource.email)
         )
+
+        Device::AssignUser.for(current_device, resource)
       end
     end
 
     private
 
     def destroy_device
-      current_user.devices.where(client_id: @client_id).destroy_all
+      Device::UnassignUser.for(current_device)
     end
   end
 end
