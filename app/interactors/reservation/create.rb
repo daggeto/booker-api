@@ -2,7 +2,7 @@ class Reservation::Create
   include Interactor::Initializer
   include GoogleAnalyticsHelper
 
-  initialize_with :event, :user
+  initialize_with :params
 
   def run
     reservation
@@ -28,10 +28,22 @@ class Reservation::Create
   end
 
   def reservation
-    @reservation ||= Reservation.create(event: event, user: user)
+    @reservation ||= Reservation.create(params)
   end
 
   def notify_provider
     Notifications::ConfirmReservation.for(reservation)
+  end
+
+  def event
+    @event ||= params[:event]
+  end
+
+  def user
+    @user ||= params[:user]
+  end
+
+  def message
+    @message ||= params[:message]
   end
 end

@@ -24,7 +24,13 @@ describe EventSerializer do
     context 'when reservation has no user' do
       let(:user) { nil }
 
-      it { is_expected.to be(event.description) }
+      it { is_expected.to be_nil }
+    end
+
+    context 'when event has no reservation' do
+      let(:reservation) { nil }
+
+      it { is_expected.to be_nil }
     end
   end
 

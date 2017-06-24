@@ -7,7 +7,7 @@ class Api::V1::ReservationsController < Api::BaseController
 
     return render_conflict(message: result[:message], service: event.service) unless result[:valid]
 
-    Reservation::Create.for(event, current_user) if result[:valid]
+    Reservation::Create.for(reservation_params) if result[:valid]
 
     render_success(message: result[:message], service: event.service.to_dto)
   end
@@ -33,6 +33,17 @@ class Api::V1::ReservationsController < Api::BaseController
   end
 
   private
+
+  def reservation_params
+    @reservation_params ||= permited_reservation_params.merge(
+      event: event,
+      user: current_user
+    )
+  end
+
+  def permited_reservation_params
+    params.permit(:message)
+  end
 
   def check_event_owner
     raise Exceptions::AccessDenied if reservation.event.service.user != current_user

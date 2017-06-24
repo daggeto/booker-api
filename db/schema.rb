@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422144332) do
+ActiveRecord::Schema.define(version: 20170619193237) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20170422144332) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "description", limit: 255
-    t.string   "status",      limit: 255
+    t.string   "description", limit: 191
+    t.string   "status",      limit: 191
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer  "service_id",  limit: 4
@@ -106,10 +106,11 @@ ActiveRecord::Schema.define(version: 20170422144332) do
   create_table "reservations", force: :cascade do |t|
     t.integer  "event_id",    limit: 4
     t.integer  "user_id",     limit: 4
+    t.string   "message",     limit: 191
     t.datetime "approved_at"
     t.datetime "reminded_at"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "reservations", ["created_at"], name: "index_reservations_on_created_at", using: :btree
@@ -185,6 +186,7 @@ ActiveRecord::Schema.define(version: 20170422144332) do
     t.datetime "updated_at"
     t.string   "first_name",             limit: 191
     t.string   "last_name",              limit: 191
+    t.integer  "roles_mask",             limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
