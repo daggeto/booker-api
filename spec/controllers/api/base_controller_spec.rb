@@ -116,7 +116,7 @@ describe DummyApiController do
       let(:token) { 'asd' }
       let!(:device) { create(:device, token: token) }
 
-      it { is_expected.not_to eq(device) }
+      it { is_expected.to be_nil }
     end
   end
 end

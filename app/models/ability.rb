@@ -35,5 +35,7 @@ class Ability
     can :manage_reservation, Reservation do |reservation|
       reservation.event.service.user === user
     end
+
+    can [:create, :update, :destroy], ServicePhoto
   end
 end

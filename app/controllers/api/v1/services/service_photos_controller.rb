@@ -1,19 +1,25 @@
 class Api::V1::Services::ServicePhotosController < Api::BaseController
-  before_action :check_service_owner, only: [:create, :update]
+  load_resource :service
+  authorize_resource :service, only: [:create, :update]
+  load_and_authorize_resource(
+    :service_photo,
+    only: [:create, :update],
+    through: :service
+  )
 
   def index
-    render json: service.service_photos.order_by_slot,
+    render json: @service.service_photos.order_by_slot,
            each_serializer: ServicePhotoSerializer
   end
 
   def create
-    new_photo = ServicePhoto::Add.for(service, uploaded_photo)
+    new_photo = ServicePhoto::Add.for(@service, uploaded_photo)
 
     render json: new_photo
   end
 
   def update
-    new_photo = ServicePhoto::Replace.for(service, photo, uploaded_photo)
+    new_photo = ServicePhoto::Replace.for(@service, @service_photo, uploaded_photo)
 
     render json: new_photo
   end
@@ -26,17 +32,7 @@ class Api::V1::Services::ServicePhotosController < Api::BaseController
 
     @resource.with_lock do
       @resource.extend_batch_buffer(@token, @client_id)
-    end # end lock
-  end
-
-  private
-
-  def photo
-    @photo ||= ServicePhoto.find(params[:id])
-  end
-
-  def service
-    @service ||= Service.find(params[:service_id])
+    end
   end
 
   def uploaded_photo
