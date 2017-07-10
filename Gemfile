@@ -18,6 +18,8 @@ gem 'active_type', '~> 0.3.4'
 gem 'unread', '~> 0.7.1'
 
 gem 'devise_token_auth', '~> 0.1.38'
+gem 'cancancan', '~> 1.10'
+gem 'role_model', '~> 0.8.2'
 
 gem 'jquery-rails', '~> 4.1.1'
 gem 'turbolinks'

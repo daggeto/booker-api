@@ -5,9 +5,15 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     uid { email }
     password { Faker::Lorem.characters(10) }
+    provider { 'email' }
+    roles { [:standard] }
 
     trait :with_service do
       service
+    end
+
+    trait :guest do
+      roles { [:guest] }
     end
   end
 end

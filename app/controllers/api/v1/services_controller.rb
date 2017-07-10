@@ -1,5 +1,7 @@
 class Api::V1::ServicesController < Api::BaseController
-  before_action :check_service_owner, only: [:update, :publish, :unpublish]
+  load_and_authorize_resource id_param: :service_id
+
+  skip_before_filter :authenticate_user!, only: [:index, :show, :search, :show_selected]
 
   def index
     personalized = personalize(services(paginate_params))
@@ -8,26 +10,11 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def search
-    GoogleAnalytics::Event::Send.for(
-      GoogleAnalytics::Events::SEARCH.merge(
-        user_id: current_user.id,
-        label: params[:term]
-      )
-    )
+    track_search_event
 
     personalized = personalize(search_services)
 
     render_success(services: personalized)
-  end
-
-  def create
-    Service::Create.for(current_user)
-
-    render json: current_user.service.to_dto
-  end
-
-  def show
-    render json: service
   end
 
   def show_selected
@@ -39,6 +26,16 @@ class Api::V1::ServicesController < Api::BaseController
       end
 
     render_success(services: selected_services)
+  end
+
+  def create
+    Service::Create.for(current_user)
+
+    render json: current_user.service.to_dto
+  end
+
+  def show
+    render json: service
   end
 
   def update
@@ -81,6 +78,12 @@ class Api::V1::ServicesController < Api::BaseController
 
   def any_more?
     services(page: paginate_params[:page].to_i + 1, per_page: paginate_params[:per_page]).any?
+  end
+
+  def track_search_event
+    GoogleAnalytics::Event::Send.for(
+      GoogleAnalytics::Events::SEARCH.merge(user_id: current_user.try(:id), label: params[:term])
+    )
   end
 
   def search_services

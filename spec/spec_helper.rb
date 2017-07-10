@@ -10,6 +10,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include ControllerHelpers, :type => :controller
 
+  config.include Devise::Test::ControllerHelpers, scope: :devise
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -27,4 +28,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.example_status_persistence_file_path = 'tmp/rspec/failures.txt'
+
+  # ActiveRecord::Base.logger = Logger.new(STDOUT)
 end

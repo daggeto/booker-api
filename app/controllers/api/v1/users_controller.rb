@@ -1,5 +1,7 @@
 class Api::V1::UsersController < Api::BaseController
-  skip_before_filter :authenticate_user!, only: [:show]
+  load_and_authorize_resource only: [:update]
+
+  skip_before_filter :authenticate_user!, only: [:show, :current]
 
   def show
     render json: user
@@ -12,7 +14,7 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def current
-    render_success UserSerializer.new(current_user, info: true)
+    render_success UserSerializer.new(current_user || User::guest, info: true)
   end
 
   private

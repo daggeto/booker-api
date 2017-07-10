@@ -1,7 +1,14 @@
 describe Api::V1::ServicesController do
   let(:user) { create(:user) }
 
-  before { sign_in(user) }
+  shared_examples 'owner authorizer' do
+    context 'when user is not owner' do
+      let(:other_user) { create(:user) }
+      let(:service) { create(:service, user: other_user) }
+
+      it_behaves_like 'forbidden response'
+    end
+  end
 
   describe '#index' do
     let(:service) { create(:service, published: true) }
@@ -28,6 +35,26 @@ describe Api::V1::ServicesController do
     end
   end
 
+  describe '#search' do
+    let(:term) { 'service' }
+    let(:name) { 'Your Service' }
+    let!(:service) { create(:service, name: name, published: true) }
+
+    before { allow(GoogleAnalytics::Event::Send).to receive(:for) }
+
+    subject { get :search, term: term }
+
+    it_behaves_like 'success response'
+
+    it 'returns services' do
+      expect(GoogleAnalytics::Event::Send).to receive(:for)
+
+      subject
+
+      expect(json['services']).to contain_exactly(hash_including('id' => service.id))
+    end
+  end
+
   describe '#show_selected' do
     let(:service) { create(:service) }
     let(:service_id) { service.id.to_s }
@@ -47,6 +74,18 @@ describe Api::V1::ServicesController do
     end
   end
 
+  describe '#show' do
+    let(:service) { create(:service) }
+
+    subject do
+      get :show, id: service.id
+
+      json
+    end
+
+    its(['id']) { is_expected.to eq(service.id) }
+  end
+
   describe '#publish' do
     let(:check_result) { { valid: true } }
     let(:service) { create(:service, user: user) }
@@ -54,11 +93,15 @@ describe Api::V1::ServicesController do
     subject { post :publish, service_id: service.id }
 
     before do
+      sign_in(user)
+
       allow(Service::CheckPublication).to receive(:for).with(service).and_return(check_result)
+
       allow(Service::Publish).to receive(:for)
     end
 
     it_behaves_like 'success response'
+    it_behaves_like 'owner authorizer'
 
     it 'publishes service' do
       expect(Service::Publish).to receive(:for)
@@ -78,34 +121,19 @@ describe Api::V1::ServicesController do
 
     subject { post :unpublish, service_id: service.id }
 
-    before { allow(Service::Unpublish).to receive(:for) }
+    before do
+      sign_in(user)
+
+      allow(Service::Unpublish).to receive(:for)
+    end
 
     it_behaves_like 'success response'
+    it_behaves_like 'owner authorizer'
 
     it 'unpublishes service' do
       expect(Service::Unpublish).to receive(:for)
 
       subject
-    end
-  end
-
-  describe '#search' do
-    let(:term) { 'service' }
-    let(:name) { 'Your Service' }
-    let!(:service) { create(:service, name: name, published: true) }
-
-    before { allow(GoogleAnalytics::Event::Send).to receive(:for) }
-
-    subject { get :search, term: term }
-
-    it_behaves_like 'success response'
-
-    it 'returns services' do
-      expect(GoogleAnalytics::Event::Send).to receive(:for)
-
-      subject
-
-      expect(json['services']).to contain_exactly(hash_including('id' => service.id))
     end
   end
 end

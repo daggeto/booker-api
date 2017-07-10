@@ -1,5 +1,5 @@
 class Api::V1::ServicePhotosController < Api::BaseController
-  before_action :check_service_owner, only: [:destroy]
+  load_and_authorize_resource :service_photo, only: [:destroy]
 
   def destroy
     render json: { success: ServicePhoto::Destroy.for(service_photo, recalculate_slots: true) }
