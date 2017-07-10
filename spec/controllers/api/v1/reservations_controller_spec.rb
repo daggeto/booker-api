@@ -2,7 +2,9 @@ describe Api::V1::ReservationsController do
   describe '#create' do
     let(:user) { create(:user) }
     let(:event) { create(:event, :with_service) }
-    let(:params) { { event_id: event.id } }
+    let(:message) { 'Reservation message' }
+    let(:params) { { event_id: event.id, message: message } }
+    let(:expected_params) { { event: event, user: user, message: message } }
 
     subject { post :create, params }
 
@@ -17,7 +19,7 @@ describe Api::V1::ReservationsController do
     it_behaves_like 'success response'
 
     it 'creates reservation' do
-      expect(Reservation::Create).to receive(:for).with(event, user)
+      expect(Reservation::Create).to receive(:for).with(expected_params)
 
       subject
     end

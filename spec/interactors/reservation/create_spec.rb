@@ -4,13 +4,15 @@ describe Reservation::Create do
     let(:start_at_label) { '2017-01-01 13:00' }
     let(:event) { create(:event, :with_service, start_at: start_at) }
     let(:user) { create(:user) }
+    let(:message) { 'Reservation message' }
+    let(:params) { { event: event, user: user, message: message } }
 
     before do
       allow(Notifications::ConfirmReservation).to receive(:for)
       allow(GoogleAnalytics::Event::Send).to receive(:for)
     end
 
-    subject { described_class.for(event, user) }
+    subject { described_class.for(params) }
 
     it 'sends Google Analytics event' do
       expect(GoogleAnalytics::Event::Send)

@@ -30,7 +30,7 @@ lt:
     message_sent: Ačiū. Pranešimą gavome. Atsakymą gausite į e. paštą.
   status:
     free: Laisva
-    pending: Laukia Atsakymo
+    pending: Nepatvirtinta
     booked: Rezervuota
   welcome:
     navigation:

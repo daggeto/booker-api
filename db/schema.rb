@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501102944) do
+ActiveRecord::Schema.define(version: 20170619193237) do
 
   create_table "devices", force: :cascade do |t|
     t.string  "token",     limit: 255
@@ -106,10 +106,11 @@ ActiveRecord::Schema.define(version: 20170501102944) do
   create_table "reservations", force: :cascade do |t|
     t.integer  "event_id",    limit: 4
     t.integer  "user_id",     limit: 4
+    t.string   "message",     limit: 191
     t.datetime "approved_at"
     t.datetime "reminded_at"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "reservations", ["created_at"], name: "index_reservations_on_created_at", using: :btree
