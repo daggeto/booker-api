@@ -2,7 +2,15 @@ class Event::CreateByTemplate
   include Interactor::Initializer
 
   module DAYS
-    ALL = [:sunday, :monday, :tuesday, :wednesday, :thursday, :saturday]
+    ALL = [
+      :sunday,
+      :monday, 
+      :tuesday,
+      :wednesday,
+      :thursday,
+      :friday,
+      :saturday
+    ]
 
     WEEKEND = [:saturday, :sunday]
   end
