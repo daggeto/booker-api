@@ -4,7 +4,7 @@ en-US:
     overlaps_with_service: This date overlaps with your existing events
     overlaps_with_reservation: This date overlaps with your existing reservation
   reservation:
-    success: Event booked. You will get answer in 1 hour!
+    success: Event booked. Wait for approvement!
     cant_book: Event can't be booked
     reserved_overlaps: It overlaps with your current reservations
     owned_overlaps: It overlaps with your service events

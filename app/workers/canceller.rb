@@ -1,7 +1,7 @@
 class Canceller
   include Sidekiq::Worker
 
-  CANCEL_PERIOD = 2.hour
+  CANCEL_PERIOD = 8.hour
 
   def perform(*)
     pending_reservations.find_each do |reservation|
